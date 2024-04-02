@@ -52,7 +52,7 @@ def christopher():
     if (choice == "1" or choice == "01"):
         clearScr()
         time.sleep(0.4)
-        print(Banner.christopher_banner)
+        print(Banner.classic_banner)
         select = input("""
 ┌───(christopher)─[~/christopher/Classic]
 └─"""+color_banner[1]+"""$ """+Color.End)
@@ -64,10 +64,12 @@ def christopher():
     if (choice == "2" or choice == "02"):
         clearScr()
         time.sleep(0.4)
-        print(Banner.christopher_banner)
+        print(Banner.modern_banner)
         select = input("""
 ┌───(christopher)─[~/christopher/Modern]
 └─"""+color_banner[1]+"""$ """+Color.End)
+        if select == "99":
+            christopher()
         again()
 
 
@@ -75,10 +77,12 @@ def christopher():
     if (choice == "3" or choice == "03"):
         clearScr()
         time.sleep(0.4)
-        print(Banner.christopher_banner)
+        print(Banner.quantum_banner)
         select = input("""
 ┌───(christopher)─[~/christopher/Quantum]
 └─"""+color_banner[1]+"""$ """+Color.End)
+        if select == "99":
+            christopher()
         again()
 
     #::::: Exit :::::
