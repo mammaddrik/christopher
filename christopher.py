@@ -21,6 +21,7 @@ from src.atbash import atbash
 from src.caesar import caesar_cipher_encrypt, caesar_brute_force_decrypt
 
 #::::: Default Library :::::
+import os
 import sys
 import time
 
@@ -38,18 +39,6 @@ def again():
         time.sleep(0.4)
         clearScr()
         sys.exit()
-    else:
-        clearScr()
-        christopher()
-
-def printf():
-    printf = input(Color.BCyan+"""\nDo you want to create a text file?"""+Color.End+"""\n    ┌───(christopher)─[~/file]─[Y/n]
-    └─"""+color_banner[0]+"""$ """+Color.End)
-    if (printf.upper() == "Y" or printf == ""):
-        file_name = input("Enter the name of the file: ")
-        with open(file_name, 'w') as file:
-            file.write("This is a new text file.")
-        print(f"Text file '{file_name}' has been created. on /out")
     else:
         clearScr()
         christopher()
@@ -72,8 +61,8 @@ def christopher():
         select = input("""
 ┌───(christopher)─[~/christopher/Classic]
 └─"""+color_banner[1]+"""$ """+Color.End)
-        
-        #::::: Atbash :::::
+
+        #::::: Atbash Cipher :::::
         if (select == "1" or select == "01"):
             clearScr()
             time.sleep(0.4)
@@ -91,35 +80,73 @@ def christopher():
                 print(f"└─[Output: {atbash(message)}]")
                 again()
 
+        #::::: Caesar Cipher :::::
         elif (select == "2" or select == "02"):
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            text = input("""
+            print("""    [1]Encryption     [2]Decryption
+    [3]Go Back to Main Menu""")
+            pick = input("""
 ┌───(christopher)─[~/christopher/Classic/Caesar Cipher]
-├─[Enter your message]"""+color_banner[1]+"""$ """+Color.End).lower()
-            if len(text) == 0:
-                slowprint("└─["+Color.BRed+"Message cannot be empty"+Color.End+"]")
-                again()
-            elif text.isdigit():
-                slowprint("└─["+Color.BRed+"Message cannot be only number"+Color.End+"]")
-                again()
-            try:
-                shift = int(input("├─[Enter your shift number]"""+color_banner[1]+"$ "+Color.End))
-                if shift >= 1 and shift <= 25:
-                    print(f"└─[Output: {caesar_cipher_encrypt(text,shift)}]")
+└─"""+color_banner[1]+"""$ """+Color.End).lower()
+
+            #::::: Encryption :::::
+            if (pick == "1" or pick == "01"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                text = input("""
+┌───(christopher)─[~/christopher/Classic/Caesar Cipher]
+├─[Enter your Text]"""+color_banner[1]+"""$ """+Color.End).lower()
+                if len(text) == 0:
+                    slowprint("└─["+Color.BRed+"Message cannot be empty"+Color.End+"]")
                     again()
-                else:
-                    slowprint("├─["+Color.BRed+"Shift value must be a number Between 1 and 25 (Default: 3)"+Color.End+"]")
+                elif text.isdigit():
+                    slowprint("└─["+Color.BRed+"Message cannot be only number"+Color.End+"]")
+                    again()
+                try:
+                    shift = int(input("├─[Enter your shift number]"""+color_banner[1]+"$ "+Color.End))
+                    if shift >= 1 and shift <= 25:
+                        print(f"└─[Output: {caesar_cipher_encrypt(text,shift)}]")
+                        again()
+                    else:
+                        slowprint("├─["+Color.BRed+"Shift value must be a number Between 1 and 25 (Default: 3)"+Color.End+"]")
+                        shift = 3
+                        print(f"└─[Output: {caesar_cipher_encrypt(text,shift)}]")
+                        again()
+                except ValueError:
+                    slowprint("├─["+Color.BRed+"Shift value must be a number (Default: 3)"+Color.End+"]")
                     shift = 3
                     print(f"└─[Output: {caesar_cipher_encrypt(text,shift)}]")
                     again()
-            except ValueError:
-                slowprint("├─["+Color.BRed+"Shift value must be a number (Default: 3)"+Color.End+"]")
-                shift = 3
-                print(f"└─[Output: {caesar_cipher_encrypt(text,shift)}]")
+
+            #::::: Decryption :::::
+            elif(pick == "2" or pick == "02"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                ciphertext = input("""
+┌───(christopher)─[~/christopher/Classic/Caesar Cipher]
+├─[Enter your Text]"""+color_banner[1]+"""$ """+Color.End).lower()
+                path = "./out"
+                if not os.path.exists(path):
+                    os.makedirs(path)
+                os.chdir("./out")
+                file_name = "CaesarCipher.txt"
+                with open(file_name, "w") as file:
+                    file.write("Brute Force Decryption:\n\n")
+                    decrypted_texts = caesar_brute_force_decrypt(ciphertext)
+                    for i, text in enumerate(decrypted_texts):
+                        file.write(f"Shift {i+1}: {text}\n")
+                print("└─[The file was saved at the ./out path as CaesarCipher.txt]")
                 again()
-            
+
+            #::::: Go Back to Main Menu :::::
+            elif (pick == "3" or pick == "03"):
+                christopher()
+            else:
+                again()
 
         elif select == "99":
             christopher()
@@ -164,7 +191,6 @@ def christopher():
 try:
     christopher()
     again()
-    printf()
 except KeyboardInterrupt:
     slowprint(Color.BRed+"Finishing up..."+Color.End)
     time.sleep(0.4)

@@ -43,10 +43,3 @@ def caesar_brute_force_decrypt(ciphertext: any) -> str:
                 decrypted_text += char
         decrypted_texts.append(decrypted_text)
     return decrypted_texts
-
-# Example usage:
-ciphertext = "lm qc reqi mw qsleqqeh"
-decrypted_texts = caesar_brute_force_decrypt(ciphertext)
-print("Brute Force Decryption:")
-for i, text in enumerate(decrypted_texts):
-    print(f"Shift {i+1}: {text}")
