@@ -16,6 +16,10 @@ from lib.color import Color, color_banner
 from lib.clearscr import clearScr
 from lib.slowprint import slowprint
 
+#::::: Src :::::
+from src.atbash import atbash
+from src.caesar import caesar_cipher_encrypt, caesar_brute_force_decrypt
+
 #::::: Default Library :::::
 import sys
 import time
@@ -38,6 +42,18 @@ def again():
         clearScr()
         christopher()
 
+def printf():
+    printf = input(Color.BCyan+"""\nDo you want to create a text file?"""+Color.End+"""\n    ┌───(christopher)─[~/file]─[Y/n]
+    └─"""+color_banner[0]+"""$ """+Color.End)
+    if (printf.upper() == "Y" or printf == ""):
+        file_name = input("Enter the name of the file: ")
+        with open(file_name, 'w') as file:
+            file.write("This is a new text file.")
+        print(f"Text file '{file_name}' has been created. on /out")
+    else:
+        clearScr()
+        christopher()
+
 #::::: Main Menu :::::
 def christopher():
     "The main function of christoper."
@@ -56,12 +72,61 @@ def christopher():
         select = input("""
 ┌───(christopher)─[~/christopher/Classic]
 └─"""+color_banner[1]+"""$ """+Color.End)
-        if select == "99":
+        
+        #::::: Atbash :::::
+        if (select == "1" or select == "01"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
+            message = input("""
+┌───(christopher)─[~/christopher/Classic/Atbash Cipher]
+├─[Enter your message]"""+color_banner[1]+"""$ """+Color.End).lower()
+            if len(message) == 0:
+                slowprint("└─["+Color.BRed+"Message cannot be empty"+Color.End+"]")
+                again()
+            elif message.isdigit():
+                slowprint("└─["+Color.BRed+"Message cannot be only number"+Color.End+"]")
+                again()
+            else:
+                print(f"└─[Output: {atbash(message)}]")
+                again()
+
+        elif (select == "2" or select == "02"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
+            text = input("""
+┌───(christopher)─[~/christopher/Classic/Caesar Cipher]
+├─[Enter your message]"""+color_banner[1]+"""$ """+Color.End).lower()
+            if len(text) == 0:
+                slowprint("└─["+Color.BRed+"Message cannot be empty"+Color.End+"]")
+                again()
+            elif text.isdigit():
+                slowprint("└─["+Color.BRed+"Message cannot be only number"+Color.End+"]")
+                again()
+            try:
+                shift = int(input("├─[Enter your shift number]"""+color_banner[1]+"$ "+Color.End))
+                if shift >= 1 and shift <= 25:
+                    print(f"└─[Output: {caesar_cipher_encrypt(text,shift)}]")
+                    again()
+                else:
+                    slowprint("├─["+Color.BRed+"Shift value must be a number Between 1 and 25 (Default: 3)"+Color.End+"]")
+                    shift = 3
+                    print(f"└─[Output: {caesar_cipher_encrypt(text,shift)}]")
+                    again()
+            except ValueError:
+                slowprint("├─["+Color.BRed+"Shift value must be a number (Default: 3)"+Color.End+"]")
+                shift = 3
+                print(f"└─[Output: {caesar_cipher_encrypt(text,shift)}]")
+                again()
+            
+
+        elif select == "99":
             christopher()
         again()
-
+    
     #::::: Modern :::::
-    if (choice == "2" or choice == "02"):
+    elif (choice == "2" or choice == "02"):
         clearScr()
         time.sleep(0.4)
         print(Banner.modern_banner)
@@ -72,9 +137,8 @@ def christopher():
             christopher()
         again()
 
-
     #::::: Quantum :::::
-    if (choice == "3" or choice == "03"):
+    elif (choice == "3" or choice == "03"):
         clearScr()
         time.sleep(0.4)
         print(Banner.quantum_banner)
@@ -96,9 +160,11 @@ def christopher():
         print(Color.BRed +"Choose one of the algorithms.")
         again()
     again()
+
 try:
     christopher()
     again()
+    printf()
 except KeyboardInterrupt:
     slowprint(Color.BRed+"Finishing up..."+Color.End)
     time.sleep(0.4)
