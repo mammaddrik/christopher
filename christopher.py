@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 #
-#    \ \  16 21 05 22 06 07 02 03 21 18 05 / /
-#     \ \ p  u  e  v  f  g  b  c  u  r  e / /
-#      \ \_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/ /
-#       \   abcdefghijklm-nopqrstuvwxyz   /
-#        \_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/
-#        /c  h  r  i  s  t  o  p  h  e  r\
-#        \_______________________________/
+#    \ \  16  21  05  22  06  07  02  03  21  18  05  / /
+#     \ \ Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee / /
+#      \ \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/ /
+#       \      abcd efgh ijkl m-n opqr stuv wxyz     /
+#        \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
+#        /Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr\
+#        \__________________________________________/
 #        Tool for Encryption & Decryption
 #               Github: mammaddrik       
 
@@ -87,7 +87,7 @@ def christopher():
             time.sleep(0.4)
             print(Banner.banner)
             print("""    [1]Encryption     [2]Decryption
-    [3]Go Back to Main Menu""")
+    [3]Back to Main Menu""")
             pick = input("""
 ┌───(christopher)─[~/christopher/Classic/Caesar Cipher]
 └─"""+color_banner[1]+"""$ """+Color.End)
@@ -150,7 +150,7 @@ def christopher():
                 print("└─[The file was saved at the ./out path as CaesarCipher.txt]")
                 again()
 
-            #::::: Go Back to Main Menu :::::
+            #::::: Back to Main Menu :::::
             elif (pick == "3" or pick == "03"):
                 christopher()
             else:
@@ -162,7 +162,7 @@ def christopher():
             time.sleep(0.4)
             print(Banner.banner)
             print("""    [1]Encryption     [2]Decryption
-    [3]Go Back to Main Menu""")
+    [3]Back to Main Menu""")
             pick = input("""
 ┌───(christopher)─[~/christopher/Classic/Affine Cipher]
 └─"""+color_banner[1]+"""$ """+Color.End)
@@ -214,6 +214,13 @@ def christopher():
                 affine_brute_force(ciphertext)
                 print("└─[The file was saved at the ./out path as AffineCipher.txt]")
                 again()
+
+            #::::: Back to Main Menu :::::
+            elif (pick == "3" or pick == "03"):
+                christopher()
+            else:
+                again()
+
         elif select == "99":
             christopher()
         again()
