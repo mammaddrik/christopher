@@ -18,7 +18,7 @@ from lib.slowprint import slowprint
 
 #::::: Src :::::
 from src.atbash import atbash
-from src.caesar import caesar_cipher_encrypt, caesar_brute_force_decrypt
+from src.caesar import caesar_cipher_encryption, caesar_brute_force
 from src.affine import affine_encryption, affine_brute_force
 
 #::::: Default Library :::::
@@ -109,17 +109,17 @@ def christopher():
                 try:
                     shift = int(input("├─[Enter your shift number]"+color_banner[1]+"$ "+Color.End))
                     if shift >= 1 and shift <= 25:
-                        print(f"└─[Output: {caesar_cipher_encrypt(text,shift)}]")
+                        print(f"└─[Output: {caesar_cipher_encryption(text,shift)}]")
                         again()
                     else:
                         slowprint("├─["+Color.BRed+"Shift value must be a number Between 1 and 25 (Default: 3)"+Color.End+"]")
                         shift = 3
-                        print(f"└─[Output: {caesar_cipher_encrypt(text,shift)}]")
+                        print(f"└─[Output: {caesar_cipher_encryption(text,shift)}]")
                         again()
                 except ValueError:
                     slowprint("├─["+Color.BRed+"Shift value must be a number (Default: 3)"+Color.End+"]")
                     shift = 3
-                    print(f"└─[Output: {caesar_cipher_encrypt(text,shift)}]")
+                    print(f"└─[Output: {caesar_cipher_encryption(text,shift)}]")
                     again()
 
             #::::: Decryption :::::
@@ -143,7 +143,7 @@ def christopher():
                 os.chdir("./out")
                 with open(file_name, "w") as file:
                     file.write("Brute Force Decryption:\n\n")
-                    decrypted_texts = caesar_brute_force_decrypt(ciphertext)
+                    decrypted_texts = caesar_brute_force(ciphertext)
                     for i, text in enumerate(decrypted_texts):
                         file.write(f"Shift {i+1}: {text}\n")
                 os.chdir("..")

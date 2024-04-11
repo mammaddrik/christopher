@@ -1,4 +1,4 @@
-def caesar_cipher_encrypt(text: any, shift: int) -> str:
+def caesar_cipher_encryption(text: any, shift: int) -> str:
     """
     Encrypts the given text using the Caesar Cipher with the specified shift.
 
@@ -17,7 +17,7 @@ def caesar_cipher_encrypt(text: any, shift: int) -> str:
             encrypted_text += char
     return encrypted_text
 
-def caesar_brute_force_decrypt(ciphertext: any) -> str:
+def caesar_brute_force(ciphertext: any) -> str:
     """
     Brute-force decrypts the given ciphertext using all possible Caesar Cipher shifts.
 
