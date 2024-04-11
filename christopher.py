@@ -19,6 +19,7 @@ from lib.slowprint import slowprint
 #::::: Src :::::
 from src.atbash import atbash
 from src.caesar import caesar_cipher_encrypt, caesar_brute_force_decrypt
+from src.affine import affine_encryption, affine_brute_force
 
 #::::: Default Library :::::
 import os
@@ -69,7 +70,7 @@ def christopher():
             print(Banner.banner)
             message = input("""
 ┌───(christopher)─[~/christopher/Classic/Atbash Cipher]
-├─[Enter your message]"""+color_banner[1]+"""$ """+Color.End).lower()
+├─[Enter your message]"""+color_banner[1]+"""$ """+Color.End).lower().strip()
             if len(message) == 0:
                 slowprint("└─["+Color.BRed+"Message cannot be empty"+Color.End+"]")
                 again()
@@ -89,7 +90,7 @@ def christopher():
     [3]Go Back to Main Menu""")
             pick = input("""
 ┌───(christopher)─[~/christopher/Classic/Caesar Cipher]
-└─"""+color_banner[1]+"""$ """+Color.End).lower()
+└─"""+color_banner[1]+"""$ """+Color.End)
 
             #::::: Encryption :::::
             if (pick == "1" or pick == "01"):
@@ -97,16 +98,16 @@ def christopher():
                 time.sleep(0.4)
                 print(Banner.banner)
                 text = input("""
-┌───(christopher)─[~/christopher/Classic/Caesar Cipher]
-├─[Enter your Text]"""+color_banner[1]+"""$ """+Color.End).lower()
+┌───(christopher)─[~/christopher/Classic/Caesar Cipher/Encryption]
+├─[Enter your Text]"""+color_banner[1]+"""$ """+Color.End).lower().strip()
                 if len(text) == 0:
-                    slowprint("└─["+Color.BRed+"Message cannot be empty"+Color.End+"]")
+                    slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
                     again()
                 elif text.isdigit():
-                    slowprint("└─["+Color.BRed+"Message cannot be only number"+Color.End+"]")
+                    slowprint("└─["+Color.BRed+"plaintext cannot be only number"+Color.End+"]")
                     again()
                 try:
-                    shift = int(input("├─[Enter your shift number]"""+color_banner[1]+"$ "+Color.End))
+                    shift = int(input("├─[Enter your shift number]"+color_banner[1]+"$ "+Color.End))
                     if shift >= 1 and shift <= 25:
                         print(f"└─[Output: {caesar_cipher_encrypt(text,shift)}]")
                         again()
@@ -127,18 +128,25 @@ def christopher():
                 time.sleep(0.4)
                 print(Banner.banner)
                 ciphertext = input("""
-┌───(christopher)─[~/christopher/Classic/Caesar Cipher]
-├─[Enter your Text]"""+color_banner[1]+"""$ """+Color.End).lower()
+┌───(christopher)─[~/christopher/Classic/Caesar Cipher/Decryption]
+├─[Enter your Text]"""+color_banner[1]+"""$ """+Color.End).lower().strip()
+                if len(ciphertext) == 0:
+                    slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
+                    again()
+                elif ciphertext.isdigit():
+                    slowprint("└─["+Color.BRed+"Ciphertext cannot be only number"+Color.End+"]")
+                    again()
                 path = "./out"
                 if not os.path.exists(path):
                     os.makedirs(path)
-                os.chdir("./out")
                 file_name = "CaesarCipher.txt"
+                os.chdir("./out")
                 with open(file_name, "w") as file:
                     file.write("Brute Force Decryption:\n\n")
                     decrypted_texts = caesar_brute_force_decrypt(ciphertext)
                     for i, text in enumerate(decrypted_texts):
                         file.write(f"Shift {i+1}: {text}\n")
+                os.chdir("..")
                 print("└─[The file was saved at the ./out path as CaesarCipher.txt]")
                 again()
 
@@ -148,6 +156,64 @@ def christopher():
             else:
                 again()
 
+        #::::: Affine Cipher :::::
+        elif (select == "3" or select == "03"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
+            print("""    [1]Encryption     [2]Decryption
+    [3]Go Back to Main Menu""")
+            pick = input("""
+┌───(christopher)─[~/christopher/Classic/Affine Cipher]
+└─"""+color_banner[1]+"""$ """+Color.End)
+
+            #::::: Encryption :::::
+            if (pick == "1" or pick == "01"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                plaintext = input("""
+┌───(christopher)─[~/christopher/Classic/Affine Cipher/Encryption]
+├─[Enter your Plaintext]"""+color_banner[1]+"""$ """+Color.End).lower().strip()
+                if len(plaintext) == 0:
+                    slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
+                    again()
+                elif plaintext.isdigit():
+                    slowprint("└─["+Color.BRed+"Plaintext cannot be only number"+Color.End+"]")
+                    again()
+                try:
+                    slope = int(input("├─[Enter your slope(a) number]"+color_banner[1]+"$ "+Color.End))
+                    if slope % 2 == 0:
+                        slowprint("├─["+Color.BRed+"Slope(a) value must be a number Between 1 and 25 (The number must be odd)"+Color.End+"]")
+                        again()
+                    intercept = int(input("├─[Enter your intercept(b) number]"+color_banner[1]+"$ "+Color.End))
+                    if (slope >= 1 and slope <= 25):
+                        print(f"└─[Output: {affine_encryption(plaintext, slope, intercept)}]")
+                        again()
+                    else:
+                        slowprint("├─["+Color.BRed+"Slope(a) and Intercept(b) value must be a number Between 1 and 25"+Color.End+"]")
+                        again()
+                except ValueError:
+                    slowprint("├─["+Color.BRed+"Slope(a) and Intercept(b) value must be a number (Slope(a) number must be odd)"+Color.End+"]")
+                    again()
+
+            #::::: Decryption :::::
+            elif(pick == "2" or pick == "02"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                ciphertext = input("""
+┌───(christopher)─[~/christopher/Classic/Affine Cipher/Decryption]
+├─[Enter your Ciphertext]"""+color_banner[1]+"""$ """+Color.End).lower().strip()
+                if len(ciphertext) == 0:
+                    slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
+                    again()
+                elif ciphertext.isdigit():
+                    slowprint("└─["+Color.BRed+"Ciphertext cannot be only number"+Color.End+"]")
+                    again()
+                affine_brute_force(ciphertext)
+                print("└─[The file was saved at the ./out path as AffineCipher.txt]")
+                again()
         elif select == "99":
             christopher()
         again()
