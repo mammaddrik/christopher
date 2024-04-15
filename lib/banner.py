@@ -14,7 +14,7 @@ class Banner:
    /"""+color_banner[2]+"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+"""\ 
    \__________________________________________/
     [01]Classic           [02]Modern
-    [03]Quantum           [04]Password Manager
+    [03]Quantum           [04]Tools
     [05]Github            [99]Exit""")
 
     #::::: Classic :::::
@@ -25,7 +25,7 @@ class Banner:
    \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
    /"""+color_banner[2]+"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+"""\ 
    \__________________________________________/
-    [01]Atbash Cipher    [02]Caesar Cipher      
+    [01]Atbash Cipher    [02]Caesar Cipher
     [03]Affine Cipher    [99]Back to Main Menu""")
 
     #::::: Modern :::::
@@ -36,7 +36,7 @@ class Banner:
    \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
    /"""+color_banner[2]+"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+"""\ 
    \__________________________________________/
-    [01]                 [02]Modern
+    [01]Hash Function          [02]Modern
     [03]                 [99]Back to Main Menu""")
 
     #::::: Quantum :::::
@@ -47,8 +47,20 @@ class Banner:
    \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
    /"""+color_banner[2]+"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+"""\ 
    \__________________________________________/
-    [01]                 [02]      
+    [01]                 [02]
     [03]Quantum          [99]Back to Main Menu""")
+
+    #::::: Tools :::::
+    tool_banner = (Color.End + """
+\ \ """+color_banner[0]+"""Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee"""+Color.End+""" / /
+ \ \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/ /
+  \ """+color_banner[1]+"""        abcdefghijklm-nopqrstuvwxyz        """+Color.End+"""/
+   \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
+   /"""+color_banner[2]+"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+"""\ 
+   \__________________________________________/
+   [01]Password List      [02]Password Manager
+   [03]Password generator [04]Check Password
+   [99]Back to Main Menu""")
 
     #::::: Main Menu (Empty) :::::
     banner = (Color.End + """

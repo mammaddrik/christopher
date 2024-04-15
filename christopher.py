@@ -249,6 +249,20 @@ def christopher():
             christopher()
         again()
 
+    #::::: Tools :::::
+    elif (choice == "4" or choice == "04"):
+        clearScr()
+        time.sleep(0.4)
+        print(Banner.tool_banner)
+        select = input("""
+┌───(christopher)─[~/christopher/Tools]
+└─"""+color_banner[1]+"""$ """+Color.End)
+
+
+        if select == "99":
+            christopher()
+        again()
+
     #::::: Exit :::::
     elif (choice == "99"):
         print("\nGoodBye :)")
