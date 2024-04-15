@@ -6,67 +6,67 @@ class Banner:
     "A Class to print different banner."
 
     #::::: Main Menu :::::
-    christopher_banner = (Color.End + """
-\ \ """+color_banner[0]+"""Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee"""+Color.End+""" / /
+    christopher_banner = (Color.End + r"""
+\ \ """+color_banner[0]+r"""Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee"""+Color.End+r""" / /
  \ \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/ /
-  \ """+color_banner[1]+"""     abcd efgh ijkl m-n opqr stuv wxyz     """+Color.End+"""/
+  \ """+color_banner[1]+r"""        abcdefghijklm-nopqrstuvwxyz        """+Color.End+r"""/
    \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
-   /"""+color_banner[2]+"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+"""\ 
+   /"""+color_banner[2]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
    \__________________________________________/
     [01]Classic           [02]Modern
     [03]Quantum           [04]Tools
     [05]Github            [99]Exit""")
 
     #::::: Classic :::::
-    classic_banner = (Color.End + """
-\ \ """+color_banner[0]+"""Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee"""+Color.End+""" / /
+    classic_banner = (Color.End + r"""
+\ \ """+color_banner[0]+r"""Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee"""+Color.End+r""" / /
  \ \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/ /
-  \ """+color_banner[1]+"""        abcdefghijklm-nopqrstuvwxyz        """+Color.End+"""/
+  \ """+color_banner[1]+r"""        abcdefghijklm-nopqrstuvwxyz        """+Color.End+r"""/
    \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
-   /"""+color_banner[2]+"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+"""\ 
+   /"""+color_banner[2]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
    \__________________________________________/
     [01]Atbash Cipher    [02]Caesar Cipher
     [03]Affine Cipher    [99]Back to Main Menu""")
 
     #::::: Modern :::::
-    modern_banner = (Color.End + """
-\ \ """+color_banner[0]+"""Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee"""+Color.End+""" / /
+    modern_banner = (Color.End + r"""
+\ \ """+color_banner[0]+r"""Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee"""+Color.End+r""" / /
  \ \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/ /
-  \ """+color_banner[1]+"""        abcdefghijklm-nopqrstuvwxyz        """+Color.End+"""/
+  \ """+color_banner[1]+r"""        abcdefghijklm-nopqrstuvwxyz        """+Color.End+r"""/
    \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
-   /"""+color_banner[2]+"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+"""\ 
+   /"""+color_banner[2]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
    \__________________________________________/
     [01]Hash Function          [02]Modern
     [03]                 [99]Back to Main Menu""")
 
     #::::: Quantum :::::
-    quantum_banner = (Color.End + """
-\ \ """+color_banner[0]+"""Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee"""+Color.End+""" / /
+    quantum_banner = (Color.End + r"""
+\ \ """+color_banner[0]+r"""Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee"""+Color.End+r""" / /
  \ \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/ /
-  \ """+color_banner[1]+"""        abcdefghijklm-nopqrstuvwxyz        """+Color.End+"""/
+  \ """+color_banner[1]+r"""        abcdefghijklm-nopqrstuvwxyz        """+Color.End+r"""/
    \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
-   /"""+color_banner[2]+"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+"""\ 
+   /"""+color_banner[2]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
    \__________________________________________/
     [01]                 [02]
     [03]Quantum          [99]Back to Main Menu""")
 
     #::::: Tools :::::
-    tool_banner = (Color.End + """
-\ \ """+color_banner[0]+"""Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee"""+Color.End+""" / /
+    tool_banner = (Color.End + r"""
+\ \ """+color_banner[0]+r"""Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee"""+Color.End+r""" / /
  \ \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/ /
-  \ """+color_banner[1]+"""        abcdefghijklm-nopqrstuvwxyz        """+Color.End+"""/
+  \ """+color_banner[1]+r"""        abcdefghijklm-nopqrstuvwxyz        """+Color.End+r"""/
    \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
-   /"""+color_banner[2]+"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+"""\ 
+   /"""+color_banner[2]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
    \__________________________________________/
    [01]Password List      [02]Password Manager
    [03]Password generator [04]Check Password
    [99]Back to Main Menu""")
 
     #::::: Main Menu (Empty) :::::
-    banner = (Color.End + """
-\ \ """+color_banner[0]+"""Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee"""+Color.End+""" / /
+    banner = (Color.End + r"""
+\ \ """+color_banner[0]+r"""Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee"""+Color.End+r""" / /
  \ \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/ /
-  \ """+color_banner[1]+"""        abcdefghijklm-nopqrstuvwxyz        """+Color.End+"""/
+  \ """+color_banner[1]+r"""        abcdefghijklm-nopqrstuvwxyz        """+Color.End+r"""/
    \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
-   /"""+color_banner[2]+"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+"""\ 
+   /"""+color_banner[2]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
    \__________________________________________/""")
