@@ -7,8 +7,8 @@
 #        \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
 #        /Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr\
 #        \__________________________________________/
-#        Tool for Encryption & Decryption
-#               Github: mammaddrik       
+#              Tool for Encryption & Decryption
+#                     Github: mammaddrik
 
 #::::: Library :::::
 from lib.banner import Banner
