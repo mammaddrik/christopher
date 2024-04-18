@@ -26,6 +26,7 @@ from src.affine import affine_encryption, affine_brute_force
 
 #* ::::: Tools :::::
 from src.wordlist import wordlist
+from src.passwordgenerator import passwordgenerate
 
 #::::: Default Library :::::
 import os
@@ -237,12 +238,15 @@ def christopher():
         print(Banner.tool_banner)
         select = input("\n┌───(christopher)─[~/christopher/Tools]\n└─"+color_banner[1]+"$ "+Color.End)
 
+        #::::: Password List :::::
         if (select == "1" or select == "01"):
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
             print("    [1]All Situations     [2]Custom\n    [99]Back to Main Menu")
             pick = input("\n┌───(christopher)─[~/christopher/Tools/Password List]\n└─"+color_banner[1]+"$ "+Color.End)
+
+            #::::: All Situations :::::
             if(pick == "1" or pick == "01"):
                 clearScr()
                 time.sleep(0.4)
@@ -254,22 +258,48 @@ def christopher():
                     slowprint("├─["+Color.BRed+"minimum length and maximum length must be a number"+Color.End+"]")
                     again()
                 wordlist(min_len, max_len)
+                again()
 
+            #::::: Custom :::::
             elif(pick == "2" or pick == "02"):
                 pass
 
             #::::: Back to Main Menu :::::
             elif (pick == "99"):
                 christopher()
-
             else:
                 again()
 
-
-        elif (select == "4" or select == "04"):
+        #::::: Password generator :::::
+        elif (select == "3" or select == "03"):
             clearScr()
             time.sleep(0.4)
-            print(Banner.tool_banner)
+            print(Banner.banner)
+            try:
+                length = int(input("\n┌───(christopher)─[~/christopher/Tools/Password generator]\n├─[Enter password length]"+color_banner[1]+"$ "+Color.End))
+            except ValueError:
+                slowprint("└─["+Color.BRed+"Length must be number]")
+                again()
+            if (length == 0):
+                slowprint("└─["+Color.BRed+"Length must be more than one]")
+                again()
+            try:
+                quantity = int(input("├─[How many passwords do you want]"+color_banner[1]+"$ "+Color.End))
+            except ValueError:
+                slowprint("└─["+Color.BRed+"Quantity must be number]")
+                again()
+            if (quantity == 0):
+                slowprint("└─["+Color.BRed+"Quantity must be more than one]")
+                again()
+
+            lowercase = input("├─[Include Lowercase Characters]─[Y/n]"+color_banner[1]+"$ "+Color.End)
+            uppercase = input("├─[Include Uppercase Characters]─[Y/n]"+color_banner[1]+"$ "+Color.End)
+            number = input("├─[Include Numbers]─[Y/n]"+color_banner[1]+"$ "+Color.End)
+            symbol = input("├─[Include Symbols]─[Y/n]"+color_banner[1]+"$ "+Color.End)
+            excludesimilar = input("├─[Exclude Similar Characters]─[Y/n]"+color_banner[1]+"$ "+Color.End)
+            textfile = input("├─[Do you want use save file]─[Y/n]"+color_banner[1]+"$ "+Color.End)
+            passwordgenerate(length, quantity,lowercase, uppercase, number, symbol, excludesimilar, textfile)
+            again()
 
     #::::: Exit :::::
     elif (choice == "99"):
