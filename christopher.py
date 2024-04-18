@@ -17,9 +17,15 @@ from lib.clearscr import clearScr
 from lib.slowprint import slowprint
 
 #::::: Src :::::
+#* ::::: Classic :::::
 from src.atbash import atbash
 from src.caesar import caesar_cipher_encryption, caesar_brute_force
 from src.affine import affine_encryption, affine_brute_force
+
+#* :::::  Modern  :::::
+
+#* ::::: Tools :::::
+from src.wordlist import wordlist
 
 #::::: Default Library :::::
 import os
@@ -257,7 +263,36 @@ def christopher():
         select = input("""
 ┌───(christopher)─[~/christopher/Tools]
 └─"""+color_banner[1]+"""$ """+Color.End)
+        if (select == "1" or select == "01"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
+            print("""    [1]All Situations     [2]Custom
+    [3]Back to Main Menu""")
+            pick = input("""
+┌───(christopher)─[~/christopher/Tools/Password List]
+└─"""+color_banner[1]+"""$ """+Color.End)
+            if(pick == "1" or pick == "01"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                try:
+                    min_len = int(input("""
+┌───(christopher)─[~/christopher/Tools/Password List/All Situations]
+├─[Enter minimum length of password]"""+color_banner[1]+"""$ """+Color.End))
+                    max_len = int(input("├─[Enter maximum length of password]"+color_banner[1]+"$ "+Color.End))
+                except ValueError:
+                    slowprint("├─["+Color.BRed+"minimum length and maximum length must be a number"+Color.End+"]")
+                    again()
+                wordlist(min_len, max_len)
 
+            elif(pick == "2" or pick == "02"):
+                pass
+            #::::: Back to Main Menu :::::
+            elif (pick == "3" or pick == "03"):
+                christopher()
+            else:
+                again()
 
         if select == "99":
             christopher()
