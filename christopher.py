@@ -35,8 +35,7 @@ import time
 #::::: Again :::::
 def again():
     "A Function To Ask The User To Restart The Program."
-    christopher_again = input(Color.BCyan+"""\nDo You Want To Continue?"""+Color.End+"""\n    ┌───(christopher)─[~/again]─[Y/n]
-    └─"""+color_banner[0]+"""$ """+Color.End)
+    christopher_again = input(Color.BCyan+"\nDo You Want To Continue?"+Color.End+"\n    ┌───(christopher)─[~/again]─[Y/n]\n    └─"+color_banner[0]+"$ "+Color.End)
     if (christopher_again.upper() == "Y" or christopher_again == ""):
         clearScr()
         time.sleep(0.4)
@@ -56,27 +55,21 @@ def christopher():
     clearScr()
     time.sleep(0.4)
     print(Banner.christopher_banner)
-    choice = input("""
-┌───(christopher)─[~/christopher]
-└─"""+color_banner[0]+"""$ """+Color.End)
+    choice = input("\n┌───(christopher)─[~/christopher]\n└─"+color_banner[0]+"$ "+Color.End)
 
     #::::: Classic :::::
     if (choice == "1" or choice == "01"):
         clearScr()
         time.sleep(0.4)
         print(Banner.classic_banner)
-        select = input("""
-┌───(christopher)─[~/christopher/Classic]
-└─"""+color_banner[1]+"""$ """+Color.End)
+        select = input("\n┌───(christopher)─[~/christopher/Classic]\n└─"+color_banner[1]+"$ "+Color.End)
 
         #::::: Atbash Cipher :::::
         if (select == "1" or select == "01"):
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            message = input("""
-┌───(christopher)─[~/christopher/Classic/Atbash Cipher]
-├─[Enter your message]"""+color_banner[1]+"""$ """+Color.End).lower().strip()
+            message = input("\n┌───(christopher)─[~/christopher/Classic/Atbash Cipher]\n├─[Enter your message]"+color_banner[1]+"$ "+Color.End).lower().strip()
             if len(message) == 0:
                 slowprint("└─["+Color.BRed+"Message cannot be empty"+Color.End+"]")
                 again()
@@ -92,20 +85,15 @@ def christopher():
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            print("""    [1]Encryption     [2]Decryption
-    [3]Back to Main Menu""")
-            pick = input("""
-┌───(christopher)─[~/christopher/Classic/Caesar Cipher]
-└─"""+color_banner[1]+"""$ """+Color.End)
+            print("    [1]Encryption     [2]Decryption\n    [99]Back to Main Menu")
+            pick = input("\n┌───(christopher)─[~/christopher/Classic/Caesar Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
 
             #::::: Encryption :::::
             if (pick == "1" or pick == "01"):
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                text = input("""
-┌───(christopher)─[~/christopher/Classic/Caesar Cipher/Encryption]
-├─[Enter your Text]"""+color_banner[1]+"""$ """+Color.End).lower().strip()
+                text = input("\n┌───(christopher)─[~/christopher/Classic/Caesar Cipher/Encryption]\n├─[Enter your Text]"+color_banner[1]+"$ "+Color.End).lower().strip()
                 if len(text) == 0:
                     slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
                     again()
@@ -133,9 +121,7 @@ def christopher():
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                ciphertext = input("""
-┌───(christopher)─[~/christopher/Classic/Caesar Cipher/Decryption]
-├─[Enter your Text]"""+color_banner[1]+"""$ """+Color.End).lower().strip()
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic/Caesar Cipher/Decryption]\n├─[Enter your Text]"+color_banner[1]+"$ "+Color.End).lower().strip()
                 if len(ciphertext) == 0:
                     slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
                     again()
@@ -157,7 +143,7 @@ def christopher():
                 again()
 
             #::::: Back to Main Menu :::::
-            elif (pick == "3" or pick == "03"):
+            elif (pick == "99"):
                 christopher()
             else:
                 again()
@@ -167,20 +153,15 @@ def christopher():
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            print("""    [1]Encryption     [2]Decryption
-    [3]Back to Main Menu""")
-            pick = input("""
-┌───(christopher)─[~/christopher/Classic/Affine Cipher]
-└─"""+color_banner[1]+"""$ """+Color.End)
+            print("    [1]Encryption     [2]Decryption\n    [99]Back to Main Menu")
+            pick = input("\n┌───(christopher)─[~/christopher/Classic/Affine Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
 
             #::::: Encryption :::::
             if (pick == "1" or pick == "01"):
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                plaintext = input("""
-┌───(christopher)─[~/christopher/Classic/Affine Cipher/Encryption]
-├─[Enter your Plaintext]"""+color_banner[1]+"""$ """+Color.End).lower().strip()
+                plaintext = input("\n┌───(christopher)─[~/christopher/Classic/Affine Cipher/Encryption]\n├─[Enter your Plaintext]"+color_banner[1]+"$ "+Color.End).lower().strip()
                 if len(plaintext) == 0:
                     slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
                     again()
@@ -208,9 +189,7 @@ def christopher():
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                ciphertext = input("""
-┌───(christopher)─[~/christopher/Classic/Affine Cipher/Decryption]
-├─[Enter your Ciphertext]"""+color_banner[1]+"""$ """+Color.End).lower().strip()
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic/Affine Cipher/Decryption]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
                 if len(ciphertext) == 0:
                     slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
                     again()
@@ -222,7 +201,7 @@ def christopher():
                 again()
 
             #::::: Back to Main Menu :::::
-            elif (pick == "3" or pick == "03"):
+            elif (pick == "99"):
                 christopher()
             else:
                 again()
@@ -230,15 +209,13 @@ def christopher():
         elif select == "99":
             christopher()
         again()
-    
+
     #::::: Modern :::::
     elif (choice == "2" or choice == "02"):
         clearScr()
         time.sleep(0.4)
         print(Banner.modern_banner)
-        select = input("""
-┌───(christopher)─[~/christopher/Modern]
-└─"""+color_banner[1]+"""$ """+Color.End)
+        select = input("\n┌───(christopher)─[~/christopher/Modern]\n└─"+color_banner[1]+"$ "+Color.End)
         if select == "99":
             christopher()
         again()
@@ -248,9 +225,7 @@ def christopher():
         clearScr()
         time.sleep(0.4)
         print(Banner.quantum_banner)
-        select = input("""
-┌───(christopher)─[~/christopher/Quantum]
-└─"""+color_banner[1]+"""$ """+Color.End)
+        select = input("\n┌───(christopher)─[~/christopher/Quantum]\n└─"+color_banner[1]+"$ "+Color.End)
         if select == "99":
             christopher()
         again()
@@ -260,26 +235,20 @@ def christopher():
         clearScr()
         time.sleep(0.4)
         print(Banner.tool_banner)
-        select = input("""
-┌───(christopher)─[~/christopher/Tools]
-└─"""+color_banner[1]+"""$ """+Color.End)
+        select = input("\n┌───(christopher)─[~/christopher/Tools]\n└─"+color_banner[1]+"$ "+Color.End)
+
         if (select == "1" or select == "01"):
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            print("""    [1]All Situations     [2]Custom
-    [3]Back to Main Menu""")
-            pick = input("""
-┌───(christopher)─[~/christopher/Tools/Password List]
-└─"""+color_banner[1]+"""$ """+Color.End)
+            print("    [1]All Situations     [2]Custom\n    [99]Back to Main Menu")
+            pick = input("\n┌───(christopher)─[~/christopher/Tools/Password List]\n└─"+color_banner[1]+"$ "+Color.End)
             if(pick == "1" or pick == "01"):
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
                 try:
-                    min_len = int(input("""
-┌───(christopher)─[~/christopher/Tools/Password List/All Situations]
-├─[Enter minimum length of password]"""+color_banner[1]+"""$ """+Color.End))
+                    min_len = int(input("\n┌───(christopher)─[~/christopher/Tools/Password List/All Situations]\n├─[Enter minimum length of password]"+color_banner[1]+"$ "+Color.End))
                     max_len = int(input("├─[Enter maximum length of password]"+color_banner[1]+"$ "+Color.End))
                 except ValueError:
                     slowprint("├─["+Color.BRed+"minimum length and maximum length must be a number"+Color.End+"]")
@@ -288,15 +257,19 @@ def christopher():
 
             elif(pick == "2" or pick == "02"):
                 pass
+
             #::::: Back to Main Menu :::::
-            elif (pick == "3" or pick == "03"):
+            elif (pick == "99"):
                 christopher()
+
             else:
                 again()
 
-        if select == "99":
-            christopher()
-        again()
+
+        elif (select == "4" or select == "04"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.tool_banner)
 
     #::::: Exit :::::
     elif (choice == "99"):
@@ -306,8 +279,8 @@ def christopher():
         sys.exit()
 
     else:
-        print(Color.BRed +"Choose one of the algorithms.")
         again()
+
     again()
 
 try:

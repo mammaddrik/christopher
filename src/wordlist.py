@@ -15,5 +15,5 @@ def wordlist(min_len, max_len):
                 word = "".join(j)
                 f.write(word+"\n")
                 counter+=1
-    print(f"└─[Output: wordlist of {counter} passwords created]")
+    print(f"└─[Output: wordlist of {counter} passwords created on ./passwordlist]")
     os.chdir("..")
