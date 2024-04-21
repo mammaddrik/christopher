@@ -26,7 +26,7 @@ from src.caesar import caesar_cipher_encryption, caesar_brute_force
 from src.affine import affine_encryption, affine_brute_force
 
 #* :::::  Modern  :::::
-
+from src.hashid import hash
 #* ::::: Tools :::::
 from src.wordlist import wordlist
 from src.passwordgenerator import passwordgenerate
@@ -221,7 +221,20 @@ def christopher():
         time.sleep(0.4)
         print(Banner.modern_banner)
         select = input("\n┌───(christopher)─[~/christopher/Modern]\n└─"+color_banner[1]+"$ "+Color.End)
-        if select == "99":
+        if (select == "1" or select == "01"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
+            print("   [1]Hash Generator    [2]Hash Cracker\n   [3]Hash Identifier   [99]Back to Main Menu")
+            pick = input("\n┌───(christopher)─[~/christopher/Modern/Hash Function]\n└─"+color_banner[1]+"$ "+Color.End)
+            if pick == "3" or pick == "03":
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                h = input("\n┌───(christopher)─[~/christopher/Modern/Hash Function/Hash Identifier]\n├─[Enter your Hash]"+color_banner[1]+"$ "+Color.End)
+                hash(h)
+                again()
+        elif select == "99":
             christopher()
         again()
 
