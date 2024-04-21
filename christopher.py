@@ -16,6 +16,9 @@ from lib.color import Color, color_banner
 from lib.clearscr import clearScr
 from lib.slowprint import slowprint
 
+#::::: Data :::::
+from data.detectenglish import isEnglish
+
 #::::: Src :::::
 #* ::::: Classic :::::
 from src.atbash import atbash
@@ -139,10 +142,11 @@ def christopher():
                     decrypted_texts = caesar_brute_force(ciphertext)
                     for i, text in enumerate(decrypted_texts):
                         file.write(f"Shift {i+1}: {text}\n")
+                        if isEnglish(text):
+                            print(f"├─[Shift = {i+1}]\n├─[The plaintext may be this: {text}]")
                 os.chdir("..")
                 print("└─[The file was saved at the ./out path as CaesarCipher.txt]")
                 again()
-
             #::::: Back to Main Menu :::::
             elif (pick == "99"):
                 christopher()
@@ -269,7 +273,10 @@ def christopher():
                 christopher()
             else:
                 again()
-
+        elif (select == "2" or select == "02"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
         #::::: Password generator :::::
         elif (select == "3" or select == "03"):
             clearScr()

@@ -1,6 +1,6 @@
+from data.detectenglish import isEnglish
 import string
 import os
-
 def affine_encryption(plaintext: any, a: int, b: int) -> str:
     """
     Encrypts the given message using the Affine cipher method.
@@ -108,4 +108,6 @@ def affine_brute_force(ciphertext: any) -> str:
                 for b in range(0, m):
                     decrypted_text = affine_decrypt(ciphertext, a, b)
                     file.write(f"Slope(a)={a} Intercept(b)={b} : {decrypted_text}\n")
+                    if isEnglish(decrypted_text):
+                        print(f"├─[Slope(a) = {a} Intercept(b) = {b}]\n├─[The plaintext may be this: {decrypted_text}]")
     os.chdir("..")

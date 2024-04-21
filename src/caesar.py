@@ -32,8 +32,9 @@ def caesar_brute_force(ciphertext: any) -> str:
         decrypted_text = ""
         for char in ciphertext:
             if char.isalpha():
-                    decrypted_text += chr((ord(char) - shift - 97) % 26 + 97)
+                decrypted_text += chr((ord(char) - shift - 97) % 26 + 97)
             else:
                 decrypted_text += char
         decrypted_texts.append(decrypted_text)
+        
     return decrypted_texts
