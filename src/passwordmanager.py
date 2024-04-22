@@ -15,7 +15,10 @@ def get_master_password():
             processed_password += str(ord(char.lower()) - 96)
         else:
             processed_password += char
-    master_pass = int(processed_password.replace("-", ""))
+    try:
+        master_pass = int(processed_password.replace("-", ""))
+    except ValueError:
+        slowprint("└─["+Color.BRed+"The master password is wrong"+Color.End+"]")
     return master_pass
 
 def encrypt(password, master_pass):
@@ -69,7 +72,3 @@ def delete(index):
     except PermissionError:
         slowprint("└─["+Color.BRed+"Close the password.csv file]"+Color.End+"]")
     print('└─[Delete Successfully]')
-
-data_file = os.path.isfile(path+'/storage/password.csv')
-if not data_file:
-    create_csv()

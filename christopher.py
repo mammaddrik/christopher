@@ -32,7 +32,7 @@ from src.hashid import hashid
 #* ::::: Tools :::::
 from src.wordlist import wordlist
 from src.passwordgenerator import passwordgenerate
-from src.passwordmanager import get_master_password, encrypt, decrypt, add, edit, delete
+from src.passwordmanager import get_master_password, encrypt, decrypt, create_csv, add, edit, delete
 
 #::::: Default Library :::::
 import os
@@ -376,6 +376,10 @@ def christopher():
             except:
                 slowprint("\n["+Color.BRed+"Master password consists of letters and numbers only"+Color.End+"]")
                 again()
+            pathcsv = "./storage"
+            if not os.path.exists(pathcsv):
+                os.makedirs(pathcsv)
+                create_csv()
             def passwordmanager():
                 def search(url=''):
                     path = os.getcwd()
