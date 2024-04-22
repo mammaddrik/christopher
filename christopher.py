@@ -16,7 +16,7 @@ from lib.color import Color, color_banner
 from lib.clearscr import clearScr
 from lib.slowprint import slowprint
 
-#::::: Data :::::
+#::::: Detect :::::
 from detect.detectenglish import isEnglish
 
 #::::: Src :::::
@@ -38,10 +38,13 @@ from src.passwordmanager import get_master_password, encrypt, decrypt, create_cs
 import os
 import sys
 import time
-import pandas as pd
-import os
-from pwinput import pwinput
 
+#::::: Libraries to be installed :::::
+try:
+    import pandas as pd
+    from pwinput import pwinput
+except ImportError:
+    os.system("pip install -r requirements.txt")
 
 #::::: Again :::::
 def again():
