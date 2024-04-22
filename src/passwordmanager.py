@@ -1,14 +1,13 @@
 import pandas as pd
 import os
-import os.path
 from pwinput import pwinput
 import string
-import tabulate
+from lib.color import Color, color_banner
 
 ALPHABET = string.ascii_letters + string.digits
-
+path = os.getcwd()
 def get_master_password():
-    master_pass = pwinput(prompt ="\n Enter master password: ", mask="*")
+    master_pass = pwinput(prompt = "\n┌───(christopher)─[~/christopher/Tools/Password Manager]\n└─[Enter master password]"+color_banner[1]+"$ "+Color.End, mask="*")
     processed_password = ""
     for char in master_pass:
         if char.isalpha():
@@ -41,40 +40,35 @@ def decrypt(encrypted_password, master_pass):
 def create_csv():
     data = {'Url/App name': [], 'Username': [], 'Password': []}
     df = pd.DataFrame(data)
-    df.to_csv('password.csv', index=False)
+    try:
+        df.to_csv(path+'/storage/password.csv', index=False)
+    except PermissionError:
+        print("Close the password.csv file.")
 
 def add(name, encrypted_pass, url):
     user_data = {'Url/App name': [url], 'Username': [name], 'Password': [encrypted_pass]}
     df = pd.DataFrame(user_data)
-    df.to_csv('data.csv', mode='a', header=False, index=False)
-    print('\n' * 2 + ' ADDED SUCCESSFULLY')
-
-def search(url=''):
-    df = pd.read_csv('data.csv')
-    dfS = df[df['Url/App name'].str.contains(url, na=False, case=False)]
-    index_d = dfS.index.values
-    password = []
-    dfS = dfS.reset_index()
-    for index, row in dfS.iterrows():
-        find_password = dfS.loc[index, 'Password']
-        dec_password = decrypt(find_password, master_password)
-        password.append(dec_password)
-    dfS = dfS.set_index(index_d)
-    dfS['Password'] = password
-    return dfS
+    df.to_csv(path+'/storage/password.csv', mode='a', header=False, index=False)
+    print('└─[Added  Successfully]')
 
 def edit(index, new_name, new_password):
-    df = pd.read_csv("data.csv")
+    df = pd.read_csv("password.csv")
     df.loc[index, ['Username', 'Password']] = [new_name, new_password]
-    df.to_csv('data.csv', index=False)
+    try:
+        df.to_csv(path+'/storage/password.csv', index=False)
+    except PermissionError:
+        print("Close the password.csv file.")
     print('\nEDITED SUCCESSFULLY')
 
 def delete(index):
-    df = pd.read_csv("data.csv")
+    df = pd.read_csv("password.csv")
     df.drop([index], axis=0, inplace=True)
-    df.to_csv('data.csv', index=False)
+    try:
+        df.to_csv(path+'/storage/password.csv', index=False)
+    except PermissionError:
+        print("Close the password.csv file.")
     print('\nDELETED SUCCESSFULLY')
 
-data_file = os.path.isfile('data.csv')
+data_file = os.path.isfile(path+'/storage/password.csv')
 if not data_file:
     create_csv()
