@@ -17,7 +17,7 @@ from lib.clearscr import clearScr
 from lib.slowprint import slowprint
 
 #::::: Data :::::
-from data.detectenglish import isEnglish
+from detect.detectenglish import isEnglish
 
 #::::: Src :::::
 #* ::::: Classic :::::
