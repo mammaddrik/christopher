@@ -3,6 +3,7 @@ import os
 from pwinput import pwinput
 import string
 from lib.color import Color, color_banner
+from lib.slowprint import slowprint
 
 ALPHABET = string.ascii_letters + string.digits
 path = os.getcwd()
@@ -43,7 +44,7 @@ def create_csv():
     try:
         df.to_csv(path+'/storage/password.csv', index=False)
     except PermissionError:
-        print("Close the password.csv file.")
+        slowprint("└─["+Color.BRed+"Close the password.csv file"+Color.End+"]")
 
 def add(name, encrypted_pass, url):
     user_data = {'Url/App name': [url], 'Username': [name], 'Password': [encrypted_pass]}
@@ -52,22 +53,22 @@ def add(name, encrypted_pass, url):
     print('└─[Added  Successfully]')
 
 def edit(index, new_name, new_password):
-    df = pd.read_csv("password.csv")
+    df = pd.read_csv(path+"/storage/password.csv")
     df.loc[index, ['Username', 'Password']] = [new_name, new_password]
     try:
         df.to_csv(path+'/storage/password.csv', index=False)
     except PermissionError:
-        print("Close the password.csv file.")
-    print('\nEDITED SUCCESSFULLY')
+        slowprint("└─["+Color.BRed+"Close the password.csv file]"+Color.End+"]")
+    print('└─[Edited Successfully]')
 
 def delete(index):
-    df = pd.read_csv("password.csv")
+    df = pd.read_csv(path+"/storage/password.csv")
     df.drop([index], axis=0, inplace=True)
     try:
         df.to_csv(path+'/storage/password.csv', index=False)
     except PermissionError:
-        print("Close the password.csv file.")
-    print('\nDELETED SUCCESSFULLY')
+        slowprint("└─["+Color.BRed+"Close the password.csv file]"+Color.End+"]")
+    print('└─[Delete Successfully]')
 
 data_file = os.path.isfile(path+'/storage/password.csv')
 if not data_file:

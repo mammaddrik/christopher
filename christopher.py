@@ -371,7 +371,11 @@ def christopher():
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            master_password = get_master_password()
+            try:
+                master_password = get_master_password()
+            except:
+                slowprint("\n["+Color.BRed+"Master password consists of letters and numbers only"+Color.End+"]")
+                again()
             def passwordmanager():
                 def search(url=''):
                     path = os.getcwd()
@@ -391,11 +395,13 @@ def christopher():
                 time.sleep(0.4)
                 print(Banner.banner)
                 menu_option = input("\n┌───(christopher)─[~/christopher/Tools/Password Manager]\n├───────────────────────┐\n├─[01]Add new account   │\n├─[02]Search account    │\n├─[03]Edit account      │\n├─[04]Delete account    │\n├─[99]Back to Main Menu │\n├───────────────────────┘\n├─[Select an option]"+color_banner[1]+"$ "+Color.End)
+
+                #::::: Add new account :::::
                 if (menu_option == "1" or menu_option == "01"):
                     clearScr()
                     time.sleep(0.4)
                     print(Banner.banner)
-                    name = input("\n┌───(christopher)─[~/christopher/Tools/Password Manager/Add new account]\n├─[Enter Name or Username]"+color_banner[1]+"$ "+Color.End)
+                    name = input("\n┌───(christopher)─[~/christopher/Tools/Password Manager/Add new account]\n├─[Enter Username]"+color_banner[1]+"$ "+Color.End)
                     password = pwinput(prompt ="├─[Enter Password]"+color_banner[1]+"$ "+Color.End, mask="*")
                     url = input("├─[Enter Url or App name]"+color_banner[1]+"$ "+Color.End)
                     if (name == ''):
@@ -410,11 +416,14 @@ def christopher():
                     time.sleep(1)
                     passwordmanager()
 
+                #::::: Search account :::::
                 elif (menu_option == "2" or menu_option == "02"):
                     clearScr()
                     time.sleep(0.4)
                     print(Banner.banner)
                     sub_option = input("\n┌───(christopher)─[~/christopher/Tools/Password Manager/Search account]\n├────────────────────────────┐\n├─[01]See a specific account │\n├─[02]See all account        │\n├────────────────────────────┘\n├─[Select an option]"+color_banner[1]+"$ "+Color.End)
+
+                    #::::: See a specific account :::::
                     if (sub_option == "1" or sub_option == "01"):
                         url = input("├─[Enter Url or App Name]"+color_banner[1]+"$ "+Color.End)
                         show_result = search(url)
@@ -422,6 +431,8 @@ def christopher():
                         print("│\n"+show_in_md+"\n│")
                         input("└─[Press Any Key]")
                         passwordmanager()
+
+                    #::::: See all account :::::
                     if (sub_option == "2" or sub_option == "02"):
                         show_result = search()
                         show_in_md = show_result.to_markdown(tablefmt="orgtbl", index=False)
@@ -429,19 +440,21 @@ def christopher():
                         input("└─[Press Any Key]")
                         passwordmanager()
 
+                #::::: Edit account :::::
                 elif (menu_option == "3" or menu_option == "03"):
-                    url = input("\n ENTER URL OR APP NAME, YOU WANT TO EDIT: ")
+                    clearScr()
+                    time.sleep(0.4)
+                    print(Banner.banner)
+                    url = input("\n┌───(christopher)─[~/christopher/Tools/Password Manager/Edit account]\n├─[Enter Url or App name]"+color_banner[1]+"$ "+Color.End)
                     show_result = search(url)
                     show_in_md = show_result.to_markdown(tablefmt="orgtbl", index=False) 
-                    print('\n')
-                    print(show_in_md)
-                    print('\n' * 2)
+                    print("│\n"+show_in_md+"\n│")
                     if (len(show_result) > 1):
-                        index = int(input("\n SELECT AN INDEX VALUE & PRESS ENTER : "))
+                        index = int(input("├─[Select an Index value]"+color_banner[1]+"$ "+Color.End))
                     else:
                         index = int(show_result.index.values[0])
-                    new_name = input("\n ENTER NEW NAME/USERNAME: ")
-                    new_password = pwinput(prompt ="\n ENTER NEW PASSWORD : ", mask="*")
+                    new_name = input("├─[Enter new Username]"+color_banner[1]+"$ "+Color.End)
+                    new_password = pwinput(prompt ="├─[Enter new Password]"+color_banner[1]+"$ "+Color.End, mask="*")
                     if (new_name == ''):
                         old_name = show_result.loc[index, 'Username']
                         new_name = old_name
@@ -450,25 +463,33 @@ def christopher():
                         new_password = old_password
                     new_password = encrypt(new_password, master_password)
                     edit(index, new_name, new_password)
+                    time.sleep(1)
                     passwordmanager()
 
-                elif (menu_option == "4"):
-                    url = input("\n ENTER URL OR APP NAME, YOU WANT TO DELETE: ")
+                #::::: Delete account :::::
+                elif (menu_option == "4" or menu_option == "04"):
+                    clearScr()
+                    time.sleep(0.4)
+                    print(Banner.banner)
+                    url = input("\n┌───(christopher)─[~/christopher/Tools/Password Manager/Delete account]\n├─[Enter Url or App name]"+color_banner[1]+"$ "+Color.End)
                     show_result = search(url)
                     show_in_md = show_result.to_markdown(tablefmt="orgtbl", index=False)
-                    print('\n')
-                    print(show_in_md)
-                    print('\n' * 2)
+                    print("│\n"+show_in_md+"\n│")
                     if (len(show_result) > 1):
-                        index = int(input("\n SELECT AN INDEX VALUE & PRESS ENTER : "))
+                        index = int(input("├─[Select an Index value]"+color_banner[1]+"$ "+Color.End))
                     else:
                         index = int(show_result.index.values[0])
-                    confirm = input("\n DO YOU WANT TO CONTINUE, ENTER [Y/N] : ")
-                    if (confirm == 'y' or confirm == 'Y'):
+                    confirm = input("├─[Do you want to continue [Y/n]")
+                    if (confirm.upper() == 'Y' or confirm == ""):
                         delete(index)
+                        time.sleep(1)
                     passwordmanager()
+
+                #::::: Back to Main Menu :::::
                 elif (menu_option == "99"):
                     christopher()
+                else:
+                    again()
             passwordmanager()
             again()
 
