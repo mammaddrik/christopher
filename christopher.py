@@ -27,7 +27,7 @@ from src.affine import affine_encryption, affine_brute_force
 
 #* :::::  Modern  :::::
 from src.hashid import hashid
-
+from src.hashgenerator import hashgenerator
 #* ::::: Tools :::::
 from src.wordlist import wordlist
 from src.passwordgenerator import passwordgenerate
@@ -40,7 +40,7 @@ import time
 #::::: Again :::::
 def again():
     "A Function To Ask The User To Restart The Program."
-    christopher_again = input(Color.BCyan+"\nDo You Want To Continue?"+Color.End+"\n    ┌───(christopher)─[~/again]─[Y/n]\n    └─"+color_banner[0]+"$ "+Color.End)
+    christopher_again = input(Color.BCyan+"\nDo You Want To Continue?"+Color.End+"\n┌───(christopher)─[~/again]─[Y/n]\n└─"+color_banner[0]+"$ "+Color.End)
     if (christopher_again.upper() == "Y" or christopher_again == ""):
         clearScr()
         time.sleep(0.4)
@@ -237,7 +237,25 @@ def christopher():
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                #TODO: Hash Generator
+                password = input("\n┌───(christopher)─[~/christopher/Modern/Hash Function/Hash Generator]\n├─[Enter the password]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                hashvalue = input("├────────────┬────────────┬────────────┐\n├─[1]MD5     ├─[2]SHA1    ├─[3]SHA224  │\n├─[4]SHA256  ├─[5]SHA384  ├─[6]SHA512  │\n├────────────┴────────────┴────────────┘\n├─[Select the function]"+color_banner[1]+"$ "+Color.End)
+
+                if(hashvalue == "1" or hashvalue == "01"):
+                    hashvalue = "md5"
+                elif(hashvalue == "2" or hashvalue == "02"):
+                    hashvalue = "sha1"
+                elif(hashvalue == "3" or hashvalue == "03"):
+                    hashvalue = "sha224"
+                elif(hashvalue == "4" or hashvalue == "04"):
+                    hashvalue = "sha256"
+                elif(hashvalue == "5" or hashvalue == "05"):
+                    hashvalue = "sha384"
+                elif(hashvalue == "6" or hashvalue == "06"):
+                    hashvalue = "sha512"
+                else:
+                    slowprint(Color.BRed +"Enter the Available Algorithm.")
+                    again()
+                hashgenerator(password, hashvalue)
                 again()
 
             #::::: Hash Cracker :::::
@@ -383,7 +401,7 @@ def christopher():
 
     #::::: Exit :::::
     elif (choice == "99"):
-        print("\nGoodBye :)")
+        print("\n\tGoodBye :)")
         time.sleep(0.4)
         clearScr()
         sys.exit()

@@ -1,4 +1,4 @@
-from data.detectenglish import isEnglish
+from detect.detectenglish import isEnglish
 import string
 import os
 def affine_encryption(plaintext: any, a: int, b: int) -> str:
