@@ -26,7 +26,8 @@ from src.caesar import caesar_cipher_encryption, caesar_brute_force
 from src.affine import affine_encryption, affine_brute_force
 
 #* :::::  Modern  :::::
-from src.hashid import hash
+from src.hashid import hashid
+
 #* ::::: Tools :::::
 from src.wordlist import wordlist
 from src.passwordgenerator import passwordgenerate
@@ -147,6 +148,7 @@ def christopher():
                 os.chdir("..")
                 print("└─[The file was saved at the ./out path as CaesarCipher.txt]")
                 again()
+
             #::::: Back to Main Menu :::::
             elif (pick == "99"):
                 christopher()
@@ -221,22 +223,75 @@ def christopher():
         time.sleep(0.4)
         print(Banner.modern_banner)
         select = input("\n┌───(christopher)─[~/christopher/Modern]\n└─"+color_banner[1]+"$ "+Color.End)
+
+        #::::: Hash Function :::::
         if (select == "1" or select == "01"):
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
             print("   [1]Hash Generator    [2]Hash Cracker\n   [3]Hash Identifier   [99]Back to Main Menu")
             pick = input("\n┌───(christopher)─[~/christopher/Modern/Hash Function]\n└─"+color_banner[1]+"$ "+Color.End)
-            if pick == "3" or pick == "03":
+
+            #::::: Hash Generator :::::
+            if (pick == "1" or pick == "01"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                #TODO: Hash Generator
+                again()
+
+            #::::: Hash Cracker :::::
+            elif (pick == "2" or pick == "02"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                #TODO: Hash Cracker
+                again()
+
+            #::::: Hash Identifier :::::
+            elif (pick == "3" or pick == "03"):
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
                 h = input("\n┌───(christopher)─[~/christopher/Modern/Hash Function/Hash Identifier]\n├─[Enter your Hash]"+color_banner[1]+"$ "+Color.End)
-                hash(h)
+                hashid(h)
                 again()
+
+            #::::: Back to Main Menu :::::
+            elif (pick == "99"):
+                christopher()
+            else:
+                again()
+        #::::: Morse Code :::::
+        elif (select == "2" or select == "02"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
+            print("    [1]Text to Morse Code     [2]Morse Code to Text\n    [99]Back to Main Menu")
+            pick = input("\n┌───(christopher)─[~/christopher/Modern/Morse Code]\n└─"+color_banner[1]+"$ "+Color.End)
+            if pick == "1" or pick == "01":
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                #TODO: Text to Morse Code
+                again()
+            elif (pick == "2" or pick == "02"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                #TODO: Morse Code to Text
+                again()
+
+            #::::: Back to Main Menu :::::
+            elif (pick == "99"):
+                christopher()
+            else:
+                again()
+
         elif select == "99":
             christopher()
-        again()
+        else:
+            again()
 
     #::::: Quantum :::::
     elif (choice == "3" or choice == "03"):
@@ -279,17 +334,23 @@ def christopher():
 
             #::::: Custom :::::
             elif(pick == "2" or pick == "02"):
-                pass
+                #TODO: Password List Custom
+                again()
 
             #::::: Back to Main Menu :::::
             elif (pick == "99"):
                 christopher()
             else:
                 again()
+
+        #::::: Password Manager :::::
         elif (select == "2" or select == "02"):
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
+            #TODO: Password Manager
+            again()
+
         #::::: Password generator :::::
         elif (select == "3" or select == "03"):
             clearScr()
@@ -311,7 +372,6 @@ def christopher():
             if (quantity == 0):
                 slowprint("└─["+Color.BRed+"Quantity must be more than one]")
                 again()
-
             lowercase = input("├─[Include Lowercase Characters]─[Y/n]"+color_banner[1]+"$ "+Color.End)
             uppercase = input("├─[Include Uppercase Characters]─[Y/n]"+color_banner[1]+"$ "+Color.End)
             number = input("├─[Include Numbers]─[Y/n]"+color_banner[1]+"$ "+Color.End)
@@ -330,8 +390,6 @@ def christopher():
 
     else:
         again()
-
-    again()
 
 try:
     christopher()

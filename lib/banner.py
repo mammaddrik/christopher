@@ -36,7 +36,7 @@ class Banner:
    \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
    /"""+color_banner[2]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
    \__________________________________________/
-    [01]Hash Function          [02]Modern
+    [01]Hash Function    [02]Morse Code
     [03]                 [99]Back to Main Menu""")
 
     #::::: Quantum :::::

@@ -1,9 +1,8 @@
 import string
 import os
 
-upperletters = string.ascii_uppercase
-lowerletters = string.ascii_lowercase
-LETTERS_AND_SPACE = upperletters + lowerletters + ' \t\n'
+letters = string.ascii_letters
+LETTERS_AND_SPACE = letters + ' \t\n'
 
 def loadDictionary():
     path = os.getcwd()
