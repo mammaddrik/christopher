@@ -322,7 +322,7 @@ def christopher():
                     clearScr()
                     time.sleep(0.4)
                     print(Banner.banner)
-                    Hash = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Hash Function/Hash Cracker/All Situations]\n├─[Enter the hash]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                    Hash = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Hash Function/Hash Cracker/Custom]\n├─[Enter the hash]"+color_banner[1]+"$ "+Color.End).lower().strip()
                     if len(Hash) == 32:
                         hashvalue = "md5"
                     elif len(Hash) == 40:
