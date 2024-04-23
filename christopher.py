@@ -39,6 +39,11 @@ from src.passwordmanager import get_master_password, encrypt, decrypt, create_cs
 import os
 import sys
 import time
+import hashlib
+import string
+from datetime import datetime
+from itertools import product
+from hmac import compare_digest
 
 #::::: Libraries to be installed :::::
 try:
@@ -100,8 +105,7 @@ def christopher():
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            print("    [1]Encryption     [2]Decryption\n    [99]Back to Main Menu")
-            pick = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Caesar Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
+            pick = input("    [01]Encryption     [02]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/Caesar Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
 
             #::::: Encryption :::::
             if (pick == "1" or pick == "01"):
@@ -170,8 +174,7 @@ def christopher():
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            print("    [1]Encryption     [2]Decryption\n    [99]Back to Main Menu")
-            pick = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Affine Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
+            pick = input("    [01]Encryption    [12]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/Affine Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
 
             #::::: Encryption :::::
             if (pick == "1" or pick == "01"):
@@ -239,8 +242,7 @@ def christopher():
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            print("   [1]Hash Generator    [2]Hash Cracker\n   [3]Hash Identifier   [99]Back to Main Menu")
-            pick = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Hash Function]\n└─"+color_banner[1]+"$ "+Color.End)
+            pick = input("   [1]Hash Generator    [2]Hash Cracker\n   [3]Hash Identifier   [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Modern Cipher/Hash Function]\n└─"+color_banner[1]+"$ "+Color.End)
 
             #::::: Hash Generator :::::
             if (pick == "1" or pick == "01"):
@@ -272,8 +274,103 @@ def christopher():
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                #TODO: Hash Cracker
-                again()
+                pick = input("    [01]All Situations              [02]Custom\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Modern Cipher/Hash Function/Hash Cracker]\n└─"+color_banner[1]+"$ "+Color.End)
+
+                #::::: All Situations :::::
+                if (pick == "1" or pick == "01"):
+                    clearScr()
+                    time.sleep(0.4)
+                    print(Banner.banner)
+                    Hash = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Hash Function/Hash Cracker/All Situations]\n├─[Enter the hash]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                    if len(Hash) == 32:
+                        hashvalue = "md5"
+                    elif len(Hash) == 40:
+                        hashvalue = "sha1"
+                    elif len(Hash) == 64:
+                        hashvalue = "sha256"
+                    elif len(Hash) == 96:
+                        hashvalue = "sha384"
+                    elif len(Hash) == 128:
+                        hashvalue = "sha512"
+                    else:
+                        slowprint("├─["+Color.BRed+"Hash Function: Unknown"+Color.End+"]")
+                        again()
+                    counter = 0
+                    character = string.ascii_letters+string.digits+string.punctuation
+                    t1 = datetime.now()
+                    for i in range(1, 1000):
+                        for j in product(character, repeat=i):
+                            word = "".join(j)
+                            h = hashlib.new(hashvalue)
+                            setpass = bytes(word.strip(), "utf-8")
+                            h.update(setpass)
+                            hashedguess = h.hexdigest()
+                            counter+=1
+                            print(f"├─[Password number {counter}: {word.strip()}]")
+                            if compare_digest(Hash, hashedguess):
+                                t2 = datetime.now()
+                                t3 = t2 - t1
+                                print(f"├─[Finishing Time: {t3}]")
+                                print("└─[Password: "+Color.BGreen+f"{word}"+Color.End+"]")
+                                again()
+                    else:
+                        slowprint("\n└─["+Color.BRed+"Password Not Found"+Color.End+"]")
+                        again()
+
+                #::::: Custom :::::
+                elif (pick == "2" or pick == "02"):
+                    clearScr()
+                    time.sleep(0.4)
+                    print(Banner.banner)
+                    Hash = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Hash Function/Hash Cracker/All Situations]\n├─[Enter the hash]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                    if len(Hash) == 32:
+                        hashvalue = "md5"
+                    elif len(Hash) == 40:
+                        hashvalue = "sha1"
+                    elif len(Hash) == 64:
+                        hashvalue = "sha256"
+                    elif len(Hash) == 96:
+                        hashvalue = "sha384"
+                    elif len(Hash) == 128:
+                        hashvalue = "sha512"
+                    else:
+                        slowprint("├─["+Color.BRed+"Hash Function: Unknown"+Color.End+"]")
+                        again()
+                    pwfile = input("├─[Enter the password file name]"+color_banner[1]+"$ "+Color.End)
+                    try:
+                        with open(pwfile, "r") as f:
+                            filesize = os.path.getsize((pwfile))
+                            if filesize == 0:
+                                slowprint("└─["+Color.BRed+"File is Empty"+Color.End+"]")
+                                again()
+                        with open(pwfile, "r") as f:
+                            counter = 1
+                            t1 = datetime.now()
+                            for password in f:
+                                h = hashlib.new(hashvalue)
+                                setpass = bytes(password.strip(), "utf-8")
+                                h.update(setpass)
+                                hashedguess = h.hexdigest()
+                                print(f"├─[Password number {counter}: {password.strip()}]")
+                                counter += 1
+                                if compare_digest(Hash, hashedguess):
+                                    t2 = datetime.now()
+                                    t3 = t2 - t1
+                                    print(f"├─[Finishing Time: {t3}]")
+                                    print("└─[Password: "+Color.BGreen+f"{password}"+Color.End+"]")
+                                    again()
+                            else:
+                                slowprint("\n└─["+Color.BRed+"Password Not Found"+Color.End+"]")
+                                again()
+                    except FileNotFoundError:
+                        slowprint("└─["+Color.BRed+"File Not Found"+Color.End+"]")
+                        again()
+
+                #::::: Back to Main Menu :::::
+                elif (pick == "99"):
+                    character()
+                else:
+                    again()
 
             #::::: Hash Identifier :::::
             elif (pick == "3" or pick == "03"):
@@ -289,13 +386,15 @@ def christopher():
                 christopher()
             else:
                 again()
+
         #::::: Morse Code :::::
         elif (select == "2" or select == "02"):
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            print("    [01]Text to Morse        [02]Morse to Text\n    [99]Back to Main Menu")
-            pick = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Morse Code]\n└─"+color_banner[1]+"$ "+Color.End)
+            pick = input("    [01]Text to Morse        [02]Morse to Text\n    [99]Back to Main Menu\n┌───(christopher)─[~/christopher/Modern Cipher/Morse Code]\n└─"+color_banner[1]+"$ "+Color.End)
+
+            #:::::Text to Morse :::::
             if pick == "1" or pick == "01":
                 clearScr()
                 time.sleep(0.4)
@@ -303,6 +402,8 @@ def christopher():
                 message = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Morse Code/Text to Morse]\n├─[Enter your message]"+color_banner[1]+"$ "+Color.End).upper()
                 morse(message)
                 again()
+
+            #::::: Morse to Text :::::
             elif (pick == "2" or pick == "02"):
                 clearScr()
                 time.sleep(0.4)
@@ -344,8 +445,7 @@ def christopher():
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            print("    [1]All Situations     [2]Custom\n    [99]Back to Main Menu")
-            pick = input("\n┌───(christopher)─[~/christopher/Tools/Password List]\n└─"+color_banner[1]+"$ "+Color.End)
+            pick = input("    [01]All Situations              [02]Custom\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Tools/Password List]\n└─"+color_banner[1]+"$ "+Color.End)
 
             #::::: All Situations :::::
             if(pick == "1" or pick == "01"):
