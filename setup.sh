@@ -17,7 +17,7 @@ loc="$( pwd )"
 
 func_title(){
     echo " ==============================================================================="
-    echo "                              Dentelle (Setup Script)                           "
+    echo "                           Christopher (Setup Script)                           "
     echo " ==============================================================================="
     echo "                                                                                "
     echo "                                os = ${os}                                      "
@@ -32,6 +32,5 @@ func_title(){
 func_title
 
 pip install -r requirements.txt
-
 
 trap ctrl_c INT
