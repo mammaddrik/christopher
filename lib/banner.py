@@ -37,7 +37,7 @@ class Banner:
    /"""+color_banner[2]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
    \__________________________________________/
     [01]Hash Function    [02]Morse Code
-    [03]Rot-13           [99]Back to Main Menu""")
+    [03]Rot13 Cipher     [99]Back to Main Menu""")
 
     #::::: Quantum :::::
     quantum_banner = (Color.End + r"""
