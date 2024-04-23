@@ -29,6 +29,7 @@ from src.affine import affine_encryption, affine_brute_force
 from src.hashgenerator import hashgenerator
 from src.hashid import hashid
 from src.morsecode import morse, morsetext
+from src.rot13 import rot13
 
 #* ::::: Tools :::::
 from src.wordlist import wordlist
@@ -417,7 +418,14 @@ def christopher():
                 christopher()
             else:
                 again()
-
+        elif (select == "3" or select == "03"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
+            message = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Rot13]\n├─[Enter your text]"+color_banner[1]+"$ "+Color.End)
+            text = rot13(message)
+            print(f"└─[Output: {text}]")
+            again()
         elif select == "99":
             christopher()
         else:
