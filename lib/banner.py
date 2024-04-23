@@ -13,9 +13,9 @@ class Banner:
    \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
    /"""+color_banner[2]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
    \__________________________________________/
-    [01]Classic           [02]Modern
-    [03]Quantum           [04]Tools
-    [05]Github            [99]Exit""")
+    [01]Classic Cipher       [02]Modern Cipher
+    [03]Quantum Cipher       [04]Tools
+    [05]Github               [99]Exit""")
 
     #::::: Classic :::::
     classic_banner = (Color.End + r"""

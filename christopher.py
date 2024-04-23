@@ -28,6 +28,7 @@ from src.affine import affine_encryption, affine_brute_force
 #* :::::  Modern  :::::
 from src.hashgenerator import hashgenerator
 from src.hashid import hashid
+from src.morsecode import morse, morsetext
 
 #* ::::: Tools :::::
 from src.wordlist import wordlist
@@ -76,14 +77,14 @@ def christopher():
         clearScr()
         time.sleep(0.4)
         print(Banner.classic_banner)
-        select = input("\n┌───(christopher)─[~/christopher/Classic]\n└─"+color_banner[1]+"$ "+Color.End)
+        select = input("\n┌───(christopher)─[~/christopher/Classic Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
 
         #::::: Atbash Cipher :::::
         if (select == "1" or select == "01"):
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            message = input("\n┌───(christopher)─[~/christopher/Classic/Atbash Cipher]\n├─[Enter your message]"+color_banner[1]+"$ "+Color.End).lower().strip()
+            message = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Atbash Cipher]\n├─[Enter your message]"+color_banner[1]+"$ "+Color.End).lower().strip()
             if len(message) == 0:
                 slowprint("└─["+Color.BRed+"Message cannot be empty"+Color.End+"]")
                 again()
@@ -100,14 +101,14 @@ def christopher():
             time.sleep(0.4)
             print(Banner.banner)
             print("    [1]Encryption     [2]Decryption\n    [99]Back to Main Menu")
-            pick = input("\n┌───(christopher)─[~/christopher/Classic/Caesar Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
+            pick = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Caesar Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
 
             #::::: Encryption :::::
             if (pick == "1" or pick == "01"):
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                text = input("\n┌───(christopher)─[~/christopher/Classic/Caesar Cipher/Encryption]\n├─[Enter your Text]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                text = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Caesar Cipher/Encryption]\n├─[Enter your Text]"+color_banner[1]+"$ "+Color.End).lower().strip()
                 if len(text) == 0:
                     slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
                     again()
@@ -135,7 +136,7 @@ def christopher():
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic/Caesar Cipher/Decryption]\n├─[Enter your Text]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Caesar Cipher/Decryption]\n├─[Enter your Text]"+color_banner[1]+"$ "+Color.End).lower().strip()
                 if len(ciphertext) == 0:
                     slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
                     again()
@@ -170,14 +171,14 @@ def christopher():
             time.sleep(0.4)
             print(Banner.banner)
             print("    [1]Encryption     [2]Decryption\n    [99]Back to Main Menu")
-            pick = input("\n┌───(christopher)─[~/christopher/Classic/Affine Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
+            pick = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Affine Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
 
             #::::: Encryption :::::
             if (pick == "1" or pick == "01"):
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                plaintext = input("\n┌───(christopher)─[~/christopher/Classic/Affine Cipher/Encryption]\n├─[Enter your Plaintext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                plaintext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Affine Cipher/Encryption]\n├─[Enter your Plaintext]"+color_banner[1]+"$ "+Color.End).lower().strip()
                 if len(plaintext) == 0:
                     slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
                     again()
@@ -205,7 +206,7 @@ def christopher():
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic/Affine Cipher/Decryption]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Affine Cipher/Decryption]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
                 if len(ciphertext) == 0:
                     slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
                     again()
@@ -231,7 +232,7 @@ def christopher():
         clearScr()
         time.sleep(0.4)
         print(Banner.modern_banner)
-        select = input("\n┌───(christopher)─[~/christopher/Modern]\n└─"+color_banner[1]+"$ "+Color.End)
+        select = input("\n┌───(christopher)─[~/christopher/Modern Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
 
         #::::: Hash Function :::::
         if (select == "1" or select == "01"):
@@ -239,14 +240,14 @@ def christopher():
             time.sleep(0.4)
             print(Banner.banner)
             print("   [1]Hash Generator    [2]Hash Cracker\n   [3]Hash Identifier   [99]Back to Main Menu")
-            pick = input("\n┌───(christopher)─[~/christopher/Modern/Hash Function]\n└─"+color_banner[1]+"$ "+Color.End)
+            pick = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Hash Function]\n└─"+color_banner[1]+"$ "+Color.End)
 
             #::::: Hash Generator :::::
             if (pick == "1" or pick == "01"):
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                password = input("\n┌───(christopher)─[~/christopher/Modern/Hash Function/Hash Generator]\n├─[Enter the password]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                password = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Hash Function/Hash Generator]\n├─[Enter the password]"+color_banner[1]+"$ "+Color.End).lower().strip()
                 hashvalue = input("├────────────┬────────────┬────────────┐\n├─[1]MD5     ├─[2]SHA1    ├─[3]SHA224  │\n├─[4]SHA256  ├─[5]SHA384  ├─[6]SHA512  │\n├────────────┴────────────┴────────────┘\n├─[Select the function]"+color_banner[1]+"$ "+Color.End)
                 if(hashvalue == "1" or hashvalue == "01"):
                     hashvalue = "md5"
@@ -279,7 +280,7 @@ def christopher():
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                h = input("\n┌───(christopher)─[~/christopher/Modern/Hash Function/Hash Identifier]\n├─[Enter your Hash]"+color_banner[1]+"$ "+Color.End)
+                h = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Hash Function/Hash Identifier]\n├─[Enter your Hash]"+color_banner[1]+"$ "+Color.End)
                 hashid(h)
                 again()
 
@@ -293,19 +294,21 @@ def christopher():
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            print("    [1]Text to Morse Code     [2]Morse Code to Text\n    [99]Back to Main Menu")
-            pick = input("\n┌───(christopher)─[~/christopher/Modern/Morse Code]\n└─"+color_banner[1]+"$ "+Color.End)
+            print("    [01]Text to Morse        [02]Morse to Text\n    [99]Back to Main Menu")
+            pick = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Morse Code]\n└─"+color_banner[1]+"$ "+Color.End)
             if pick == "1" or pick == "01":
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                #TODO: Text to Morse Code
+                message = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Morse Code/Text to Morse]\n├─[Enter your message]"+color_banner[1]+"$ "+Color.End).upper()
+                morse(message)
                 again()
             elif (pick == "2" or pick == "02"):
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                #TODO: Morse Code to Text
+                message = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Morse Code/Morse to Text]\n├─[Enter your morse code]"+color_banner[1]+"$ "+Color.End).upper()
+                morsetext(message)
                 again()
 
             #::::: Back to Main Menu :::::
