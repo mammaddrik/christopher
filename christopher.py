@@ -530,6 +530,11 @@ def christopher():
             passwordgenerate(length, quantity,lowercase, uppercase, number, symbol, excludesimilar, textfile)
             again()
 
+        #::::: Back to Main Menu :::::
+        elif (select == "99"):
+            christopher()
+        else:
+            again()
     #::::: Exit :::::
     elif (choice == "99"):
         print("\n\tGoodBye :)")
