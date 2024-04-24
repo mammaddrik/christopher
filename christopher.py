@@ -24,6 +24,7 @@ from detect.detectenglish import isEnglish
 from src.atbash import atbash
 from src.caesar import caesar_cipher_encryption, caesar_brute_force
 from src.affine import affine_encryption, affine_brute_force
+from src.vigenère import vigenère_encrypt, vigenère_decrypt
 
 #* :::::  Modern  :::::
 from src.hashgenerator import hashgenerator
@@ -42,6 +43,7 @@ import sys
 import time
 import hashlib
 import string
+import re
 from datetime import datetime
 from itertools import product
 from hmac import compare_digest
@@ -106,7 +108,7 @@ def christopher():
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            pick = input("    [01]Encryption     [02]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/Caesar Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
+            pick = input("    [01]Encryption              [02]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/Caesar Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
 
             #::::: Encryption :::::
             if (pick == "1" or pick == "01"):
@@ -175,7 +177,7 @@ def christopher():
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            pick = input("    [01]Encryption    [12]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/Affine Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
+            pick = input("    [01]Encryption              [02]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/Affine Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
 
             #::::: Encryption :::::
             if (pick == "1" or pick == "01"):
@@ -227,6 +229,63 @@ def christopher():
             else:
                 again()
 
+        #::::: Vigenère Cipher :::::
+        elif (select == "4" or select == "04"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
+            pick = input("    [01]Encryption              [02]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/Vigenère Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
+
+            #::::: Encryption :::::
+            if(pick == "1" or pick == "01"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                plaintext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Vigenère Cipher/Encryption]\n├─[Enter your Plaintext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                if len(plaintext) == 0:
+                    slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
+                    again()
+                key = input("├─[Enter the key]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                if key.isdigit():
+                    slowprint("└─["+Color.BRed+"Key cannot be number"+Color.End+"]")
+                    again()
+                elif len(key) == 0:
+                    slowprint("└─["+Color.BRed+"key cannot be empty"+Color.End+"]")
+                    again()
+                key = re.sub(r'\d+', '', key)
+                print("├─[Key: "+Color.BGreen+f"{key}"+Color.End+"]")
+                ciphertext = vigenère_encrypt(plaintext, key)
+                print(f"└─[Ciphertext: {ciphertext}]")
+                again()
+
+            #::::: Decryption :::::
+            elif(pick == "2" or pick == "02"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Vigenère Cipher/Decryption]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                if len(ciphertext) == 0:
+                    slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
+                    again()
+                key = input("├─[Enter the key]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                if key.isdigit():
+                    slowprint("└─["+Color.BRed+"Key cannot be number"+Color.End+"]")
+                    again()
+                elif len(key) == 0:
+                    slowprint("└─["+Color.BRed+"key cannot be empty"+Color.End+"]")
+                    again()
+                key = re.sub(r'\d+', '', key)
+                print("├─[Key: "+Color.BGreen+f"{key}"+Color.End+"]")
+                plaintext = vigenère_decrypt(ciphertext, key)
+                print(f"└─[Plaintext: {plaintext}]")
+                again()
+
+            #::::: Back to Main Menu :::::
+            elif (pick == "99"):
+                christopher()
+            else:
+                again()
+
         elif select == "99":
             christopher()
         again()
@@ -243,7 +302,7 @@ def christopher():
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            pick = input("   [1]Hash Generator    [2]Hash Cracker\n   [3]Hash Identifier   [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Modern Cipher/Hash Function]\n└─"+color_banner[1]+"$ "+Color.End)
+            pick = input("   [01]Hash Generator    [02]Hash Cracker\n   [03]Hash Identifier   [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Modern Cipher/Hash Function]\n└─"+color_banner[1]+"$ "+Color.End)
 
             #::::: Hash Generator :::::
             if (pick == "1" or pick == "01"):
@@ -264,6 +323,8 @@ def christopher():
                     hashvalue = "sha384"
                 elif(hashvalue == "6" or hashvalue == "06"):
                     hashvalue = "sha512"
+                elif(hashvalue == "7" or hashvalue == "07"):
+                    hashvalue = "blake2s"
                 else:
                     slowprint(Color.BRed +"Enter the Available Algorithm.")
                     again()
@@ -294,12 +355,12 @@ def christopher():
                     elif len(Hash) == 128:
                         hashvalue = "sha512"
                     else:
-                        slowprint("├─["+Color.BRed+"Hash Function: Unknown"+Color.End+"]")
+                        slowprint("└─["+Color.BRed+"Hash Function: Unknown"+Color.End+"]")
                         again()
                     counter = 0
                     character = string.ascii_letters+string.digits+string.punctuation
                     t1 = datetime.now()
-                    for i in range(1, 1000):
+                    for i in range(1, 2):
                         for j in product(character, repeat=i):
                             word = "".join(j)
                             h = hashlib.new(hashvalue)
@@ -315,7 +376,7 @@ def christopher():
                                 print("└─[Password: "+Color.BGreen+f"{word}"+Color.End+"]")
                                 again()
                     else:
-                        slowprint("\n└─["+Color.BRed+"Password Not Found"+Color.End+"]")
+                        slowprint("└─["+Color.BRed+"Password Not Found"+Color.End+"]")
                         again()
 
                 #::::: Custom :::::
@@ -335,7 +396,7 @@ def christopher():
                     elif len(Hash) == 128:
                         hashvalue = "sha512"
                     else:
-                        slowprint("├─["+Color.BRed+"Hash Function: Unknown"+Color.End+"]")
+                        slowprint("└─["+Color.BRed+"Hash Function: Unknown"+Color.End+"]")
                         again()
                     pwfile = input("├─[Enter the password file name]"+color_banner[1]+"$ "+Color.End)
                     try:
@@ -361,7 +422,7 @@ def christopher():
                                     print("└─[Password: "+Color.BGreen+f"{password}"+Color.End+"]")
                                     again()
                             else:
-                                slowprint("\n└─["+Color.BRed+"Password Not Found"+Color.End+"]")
+                                slowprint("└─["+Color.BRed+"Password Not Found"+Color.End+"]")
                                 again()
                     except FileNotFoundError:
                         slowprint("└─["+Color.BRed+"File Not Found"+Color.End+"]")
@@ -369,7 +430,7 @@ def christopher():
 
                 #::::: Back to Main Menu :::::
                 elif (pick == "99"):
-                    character()
+                    christopher()
                 else:
                     again()
 

@@ -1,3 +1,2 @@
 pandas
 pwinput
-playsound==1.2.2

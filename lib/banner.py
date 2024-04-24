@@ -26,7 +26,8 @@ class Banner:
    /"""+color_banner[2]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
    \__________________________________________/
     [01]Atbash Cipher    [02]Caesar Cipher
-    [03]Affine Cipher    [99]Back to Main Menu""")
+    [03]Affine Cipher    [04]Vigenère Cipher
+    [99]Back to Main Menu""")
 
     #::::: Modern :::::
     modern_banner = (Color.End + r"""
