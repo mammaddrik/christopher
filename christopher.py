@@ -25,6 +25,7 @@ from src.atbash import atbash
 from src.caesar import caesar_cipher_encryption, caesar_brute_force
 from src.affine import affine_encryption, affine_brute_force
 from src.vigenère import vigenère_encrypt, vigenère_decrypt
+from src.revers import revers
 
 #* :::::  Modern  :::::
 from src.hashgenerator import hashgenerator
@@ -286,6 +287,17 @@ def christopher():
             else:
                 again()
 
+        #::::: Revers Text :::::
+        elif (select == "5" or select == "05"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                message = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Revers Text]\n├─[Enter your message]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                if len(message) == 0:
+                    slowprint("└─["+Color.BRed+"message cannot be empty"+Color.End+"]")
+                    again()
+                revers(message)
+                again()
         elif select == "99":
             christopher()
         again()
@@ -310,25 +322,55 @@ def christopher():
                 time.sleep(0.4)
                 print(Banner.banner)
                 password = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Hash Function/Hash Generator]\n├─[Enter the password]"+color_banner[1]+"$ "+Color.End).lower().strip()
-                hashvalue = input("├────────────┬────────────┬────────────┐\n├─[1]MD5     ├─[2]SHA1    ├─[3]SHA224  │\n├─[4]SHA256  ├─[5]SHA384  ├─[6]SHA512  │\n├────────────┴────────────┴────────────┘\n├─[Select the function]"+color_banner[1]+"$ "+Color.End)
-                if(hashvalue == "1" or hashvalue == "01"):
+                hashvalue = input("├───────────────┬───────────────┬───────────────┐\n├─[01]MD2       ├─[2]MD4        ├─[03]MD5       │\n├─[04]SHA1      ├─[05]SHA224    ├─[06]SHA256    │\n├─[07]SHA384    ├─[08]SHA512    ├─[09]sha3-224  │\n├─[10]sha3-256  ├─[11]sha3-384  ├─[12]sha3-512  │\n├─[13]shake-128 ├─[14]shake-256 ├─[15]blake2b   │\n├─[16]blake2s   ├─[17]NTLM      ├─[18]adler32   │\n├─[19]crc32     ├─[20]all       ├─[21]Back      │\n├───────────────┴───────────────┴───────────────┘\n├─[Select the function]"+color_banner[1]+"$ "+Color.End)
+                if (hashvalue == "1" or hashvalue == "01"):
+                    hashvalue = "md2"
+                elif (hashvalue == "2" or hashvalue == "02"):
+                    hashvalue = "md4"
+                elif (hashvalue == "3" or hashvalue == "03"):
                     hashvalue = "md5"
-                elif(hashvalue == "2" or hashvalue == "02"):
-                    hashvalue = "sha1"
-                elif(hashvalue == "3" or hashvalue == "03"):
-                    hashvalue = "sha224"
-                elif(hashvalue == "4" or hashvalue == "04"):
-                    hashvalue = "sha256"
-                elif(hashvalue == "5" or hashvalue == "05"):
-                    hashvalue = "sha384"
-                elif(hashvalue == "6" or hashvalue == "06"):
-                    hashvalue = "sha512"
-                elif(hashvalue == "7" or hashvalue == "07"):
-                    hashvalue = "blake2s"
+                elif (hashvalue == "4" or hashvalue == "04"):
+                    hashvalue = 'sha1'
+                elif (hashvalue == "5" or hashvalue == "05"):
+                    hashvalue = 'sha224'
+                elif (hashvalue == "6" or hashvalue == "06"):
+                    hashvalue = 'sha256'
+                elif (hashvalue == "7" or hashvalue == "07"):
+                    hashvalue = 'sha384'
+                elif (hashvalue == "8" or hashvalue == "08"):
+                    hashvalue = 'sha512'
+                elif (hashvalue == "9" or hashvalue == "09"):
+                    hashvalue = 'sha3_224'
+                elif (hashvalue == "10"):
+                    hashvalue = 'sha3_256'
+                elif (hashvalue == "11"):
+                    hashvalue = 'sha3_384'
+                elif (hashvalue == "12"):
+                    hashvalue = 'sha3_512'
+                elif (hashvalue == "13"):
+                    hashvalue = 'shake_128'
+                elif (hashvalue == "14"):
+                    hashvalue = 'shake_256'
+                elif (hashvalue == "15"):
+                    hashvalue = 'blake2b'
+                elif (hashvalue == "16"):
+                    hashvalue = 'blake2s'
+                elif (hashvalue == "17"):
+                    hashvalue = 'NTLM'
+                elif (hashvalue == "18"):
+                    hashvalue = 'adler32'
+                elif (hashvalue == "19"):
+                    hashvalue = 'crc32'
+                elif (hashvalue == "20"):
+                    hashvalue = 'all'
+                elif (hashvalue == "21"):
+                    character()
                 else:
                     slowprint(Color.BRed +"Enter the Available Algorithm.")
                     again()
+
                 hashgenerator(password, hashvalue)
+
                 again()
 
             #::::: Hash Cracker :::::
@@ -360,7 +402,7 @@ def christopher():
                     counter = 0
                     character = string.ascii_letters+string.digits+string.punctuation
                     t1 = datetime.now()
-                    for i in range(1, 2):
+                    for i in range(1, 1000):
                         for j in product(character, repeat=i):
                             word = "".join(j)
                             h = hashlib.new(hashvalue)

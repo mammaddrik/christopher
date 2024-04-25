@@ -27,6 +27,7 @@ class Banner:
    \__________________________________________/
     [01]Atbash Cipher    [02]Caesar Cipher
     [03]Affine Cipher    [04]Vigenère Cipher
+    [05]Revers Text
     [99]Back to Main Menu""")
 
     #::::: Modern :::::
