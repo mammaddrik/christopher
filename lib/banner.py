@@ -25,9 +25,10 @@ class Banner:
    \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
    /"""+color_banner[2]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
    \__________________________________________/
-    [01]Atbash Cipher    [02]Caesar Cipher
-    [03]Affine Cipher    [04]Vigenère Cipher
-    [05]Revers Text      [06]Playfire Cipher
+    [01]Atbash Cipher      [02]Caesar Cipher
+    [03]Affine Cipher      [04]Vigenère Cipher
+    [05]Revers Text        [06]Playfire Cipher
+    [07]Rail Fence Cipher  [08]Scytale Cipher
     [99]Back to Main Menu""")
 
     #::::: Modern :::::

@@ -27,6 +27,9 @@ from src.affine import affine_encryption, affine_brute_force
 from src.vigenère import vigenère_encrypt, vigenère_decrypt
 from src.revers import revers
 from src.playfair import playfair_encrypt, playfair_decrypt
+from src.railfence import railfence_encrypt, railfence_decrypt
+from src.scytale import scytale_encrypt, scytale_decrypt
+
 
 #* :::::  Modern Cipher :::::
 from src.hashgenerator import hashgenerator
@@ -168,7 +171,6 @@ def christopher():
                 print("└─[The file was saved at the ./out path as CaesarCipher.txt]")
                 again()
 
-            #::::: Back to Main Menu :::::
             elif (pick == "99"):
                 christopher()
             else:
@@ -300,7 +302,7 @@ def christopher():
                 revers(message)
                 again()
 
-    #::::: Playfair Cipher :::::
+        #::::: Playfair Cipher :::::
         elif (select == "6" or select == "06"):
             clearScr()
             time.sleep(0.4)
@@ -346,12 +348,114 @@ def christopher():
                 plaintext = playfair_decrypt(ciphertext, key)
                 print(f"└─[Plaintext: {plaintext}]")
                 again()
+            #::::: Back to Main Menu :::::
+            elif(pick == "99"):
+                christopher()
+            else:
+                again()
+
+        #::::: Rail Fence Cipher :::::
+        elif (select == "7" or select == "07"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
+            pick = input("    [01]Encryption              [02]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/Playfair Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
+
+            #::::: Encryption :::::
+            if(pick == "1" or pick == "01"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                plaintext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Playfair Cipher/Encryption]\n├─[Enter your Plaintext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                if len(plaintext) == 0:
+                    slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
+                    again()
+                try:
+                    key = int(input("├─[Enter the key]"+color_banner[1]+"$ "+Color.End))
+                    ciphertext = railfence_encrypt(plaintext, key)
+                    print(f"└─[Ciphertext: {ciphertext}]")
+                except ValueError:
+                    slowprint("├─["+Color.BRed+"Key value must be a number"+Color.End+"]")
+                    again()
+
+            #::::: Decryption :::::
+            elif(pick == "2" or pick == "02"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Playfair Cipher/Decryption]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                if len(ciphertext) == 0:
+                    slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
+                    again()
+                try:
+                    key = int(input("├─[Enter the key]"+color_banner[1]+"$ "+Color.End))
+                    plaintext = railfence_decrypt(ciphertext, key)
+                    print(f"└─[Ciphertext: {plaintext}]")
+                    again()
+                except ValueError:
+                    slowprint("├─["+Color.BRed+"Key value must be a number"+Color.End+"]")
+                    again()
+            #::::: Back to Main Menu :::::
+            elif(pick == "99"):
+                christopher()
+            else:
+                again()
+
+        #::::: Scytale Cipher :::::
+        elif (select == "8" or select == "08"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
+            pick = input("    [01]Encryption              [02]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/Playfair Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
+
+            #::::: Encryption :::::
+            if(pick == "1" or pick == "01"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                plaintext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Scytale Cipher/Encryption]\n├─[Enter your Plaintext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                if len(plaintext) == 0:
+                    slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
+                    again()
+                try:
+                    diameter = int(input("├─[Enter the diameter number]"+color_banner[1]+"$ "+Color.End))
+                    ciphertext = scytale_encrypt(plaintext, diameter)
+                    print(f"└─[Ciphertext: {ciphertext}]")
+                    again()
+                except ValueError:
+                    slowprint("├─["+Color.BRed+"diameter value must be a number"+Color.End+"]")
+                    again()
+
+            #::::: Decryption :::::
+            if(pick == "2" or pick == "02"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Scytale Cipher/Decryption]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                if len(ciphertext) == 0:
+                    slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
+                    again()
+                try:
+                    diameter = int(input("├─[Enter the diameter number]"+color_banner[1]+"$ "+Color.End))
+                    plaintext = scytale_decrypt(ciphertext, diameter)
+                    print(f"└─[Ciphertext: {plaintext}]")
+                    again()
+                except ValueError:
+                    slowprint("├─["+Color.BRed+"diameter value must be a number"+Color.End+"]")
+                    again()
+
+            #::::: Back to Main Menu :::::
+            elif(pick == "99"):
+                christopher()
+            else:
+                again()
 
         #::::: Back to Main Menu :::::
         elif select == "99":
             christopher()
-        again()
-        
+        else:
+            again()
+
     #::::: Modern :::::
     elif (choice == "2" or choice == "02"):
         clearScr()
@@ -579,6 +683,8 @@ def christopher():
             text = rot13(message)
             print(f"└─[Output: {text}]")
             again()
+
+        #::::: Back to Main Menu :::::
         elif select == "99":
             christopher()
         else:
@@ -799,6 +905,7 @@ def christopher():
             christopher()
         else:
             again()
+
     #::::: Exit :::::
     elif (choice == "99"):
         print("\n\tGoodBye :)")
