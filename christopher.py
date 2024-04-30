@@ -20,14 +20,15 @@ from lib.slowprint import slowprint
 from detect.detectenglish import isEnglish
 
 #::::: Src :::::
-#* ::::: Classic :::::
+#* ::::: Classic Cipher :::::
 from src.atbash import atbash
 from src.caesar import caesar_cipher_encryption, caesar_brute_force
 from src.affine import affine_encryption, affine_brute_force
 from src.vigenère import vigenère_encrypt, vigenère_decrypt
 from src.revers import revers
+from src.playfair import playfair_encrypt, playfair_decrypt
 
-#* :::::  Modern  :::::
+#* :::::  Modern Cipher :::::
 from src.hashgenerator import hashgenerator
 from src.hashid import hashid
 from src.morsecode import morse, morsetext
@@ -81,7 +82,7 @@ def christopher():
     print(Banner.christopher_banner)
     choice = input("\n┌───(christopher)─[~/christopher]\n└─"+color_banner[0]+"$ "+Color.End)
 
-    #::::: Classic :::::
+    #::::: Classic Cipher :::::
     if (choice == "1" or choice == "01"):
         clearScr()
         time.sleep(0.4)
@@ -298,10 +299,59 @@ def christopher():
                     again()
                 revers(message)
                 again()
+
+    #::::: Playfair Cipher :::::
+        elif (select == "6" or select == "06"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
+            pick = input("    [01]Encryption              [02]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/Playfair Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
+
+            #::::: Encryption :::::
+            if(pick == "1" or pick == "01"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                plaintext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Playfair Cipher/Encryption]\n├─[Enter your Plaintext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                if len(plaintext) == 0:
+                    slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
+                    again()
+                key = input("├─[Enter the key]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                if key.isdigit():
+                    slowprint("└─["+Color.BRed+"Key cannot be number"+Color.End+"]")
+                    again()
+                elif len(key) == 0:
+                    slowprint("└─["+Color.BRed+"key cannot be empty"+Color.End+"]")
+                    again()
+                ciphertext = playfair_encrypt(plaintext, key)
+                print(f"└─[Ciphertext: {ciphertext}]")
+                again()
+
+            #::::: Decryption :::::
+            elif(pick == "2" or pick == "02"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Playfair Cipher/Decryption]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                if len(ciphertext) == 0:
+                    slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
+                    again()
+                key = input("├─[Enter the key]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                if key.isdigit():
+                    slowprint("└─["+Color.BRed+"Key cannot be number"+Color.End+"]")
+                    again()
+                elif len(key) == 0:
+                    slowprint("└─["+Color.BRed+"key cannot be empty"+Color.End+"]")
+                    again()
+                plaintext = playfair_decrypt(ciphertext, key)
+                print(f"└─[Plaintext: {plaintext}]")
+                again()
+
+        #::::: Back to Main Menu :::::
         elif select == "99":
             christopher()
         again()
-
+        
     #::::: Modern :::::
     elif (choice == "2" or choice == "02"):
         clearScr()
@@ -364,13 +414,11 @@ def christopher():
                 elif (hashvalue == "20"):
                     hashvalue = 'all'
                 elif (hashvalue == "21"):
-                    character()
+                    christopher()
                 else:
                     slowprint(Color.BRed +"Enter the Available Algorithm.")
                     again()
-
                 hashgenerator(password, hashvalue)
-
                 again()
 
             #::::: Hash Cracker :::::

@@ -17,14 +17,32 @@ translate_dict = {'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..',
                   '-': '-...-', '_': '..--.-', '$': '...-..-', "F": '.-.-.',
                   ' ': '-.-.-.-'}
 
-def morse(message):
+def morse(message: any) -> str:
+    """
+    Encode text into Morse code.
+    
+    Args:
+    message (any): The message to be encoded.
+    
+    Returns:
+    str: The Morse code representation of the input text.
+    """
     try:
         message = " ".join(translate_dict[c] for c in message.upper())
         print(f"└─[Output: {message}]")
     except KeyError:
         slowprint("└─["+Color.BRed+"Invalid character detected"+Color.End+"]")
 
-def morsetext(text):
+def morsetext(text: str)-> str:
+    """
+    Decode Morse code into text.
+    
+    Args:
+    text (str): The Morse code to be decoded.
+    
+    Returns:
+    str: The decoded text.
+    """
     try:
         reverse_dict = {v: k for k, v in translate_dict.items()}
         reverse_message = "".join(reverse_dict[c] for c in text.split(" "))
