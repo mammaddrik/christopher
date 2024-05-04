@@ -39,6 +39,7 @@ from src.rot13 import rot13
 
 #* ::::: Tools :::::
 from src.wordlist import wordlist
+from src.customwordlist import interactive
 from src.passwordgenerator import passwordgenerate
 from src.passwordmanager import get_master_password, encrypt, decrypt, create_csv, add, edit, delete
 
@@ -730,7 +731,23 @@ def christopher():
 
             #::::: Custom :::::
             elif(pick == "2" or pick == "02"):
-                #TODO: Password List Custom
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                name = input("\n┌───(christopher)─[~/christopher/Tools/Password List/Custom]\n├─[Enter the first name]"+color_banner[1]+"$ "+Color.End).lower()
+                while len(name) == 0 or name == " " or name == "  " or name == "   ":
+                    slowprint("├─["+Color.BRed+"You must enter a name at least"+Color.End+"]")
+                    name = input("├─[Enter the first name]"+color_banner[1]+"$ "+Color.End).lower()
+                surname = input("├─[Enter the surname]"+color_banner[1]+"$ "+Color.End).lower()
+                birth = input("├─[Birthdate (DDMMYYYY)]"+color_banner[1]+"$ "+Color.End).lower()
+                while len(birth) != 0 and len(birth) != 8:
+                    slowprint("├─["+Color.BRed+"You must enter 8 digits for birthday"+Color.End+"]")
+                    birth = input("├─[Birthdate (DDMMYYYY)]"+color_banner[1]+"$ "+Color.End)
+                birth_d = birth[:2]
+                birth_m = birth[2:4]
+                birth_y = birth[4:]
+                combinations = [name, birth_d, surname, birth_m, birth, birth_y]
+                interactive(combinations)
                 again()
 
             #::::: Back to Main Menu :::::
