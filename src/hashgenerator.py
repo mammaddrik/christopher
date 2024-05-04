@@ -1,6 +1,10 @@
+import os
 import hashlib
 from passlib.hash import nthash
-from Crypto.Hash import MD2, MD4
+try:
+    from Crypto.Hash import MD2, MD4
+except ImportError:
+    os.system("pip install -r requirements.txt")
 import zlib
 
 def hashgenerator(password, hashvalue):
