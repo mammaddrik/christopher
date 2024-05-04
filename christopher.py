@@ -723,8 +723,11 @@ def christopher():
                 try:
                     min_len = int(input("\n┌───(christopher)─[~/christopher/Tools/Password List/All Situations]\n├─[Enter minimum length of password]"+color_banner[1]+"$ "+Color.End))
                     max_len = int(input("├─[Enter maximum length of password]"+color_banner[1]+"$ "+Color.End))
+                    if max_len < min_len:
+                        slowprint("└─["+Color.BRed+"The maximum length must be greater than the minimum length"+Color.End+"]")
+                        again()
                 except ValueError:
-                    slowprint("├─["+Color.BRed+"minimum length and maximum length must be a number"+Color.End+"]")
+                    slowprint("└─["+Color.BRed+"minimum length and maximum length must be a number"+Color.End+"]")
                     again()
                 wordlist(min_len, max_len)
                 again()
