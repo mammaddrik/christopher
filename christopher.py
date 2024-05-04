@@ -78,9 +78,9 @@ def again():
         clearScr()
         christopher()
 
-#::::: Main Menu :::::
+#::::: Christopher :::::
 def christopher():
-    "The main function of christoper."
+    "The function of christoper."
     clearScr()
     time.sleep(0.4)
     print(Banner.christopher_banner)
@@ -386,12 +386,12 @@ def christopher():
                 print(Banner.banner)
                 ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Playfair Cipher/Decryption]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
                 if len(ciphertext) == 0:
-                    slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
+                    slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
                     again()
                 try:
                     key = int(input("├─[Enter the key]"+color_banner[1]+"$ "+Color.End))
                     plaintext = railfence_decrypt(ciphertext, key)
-                    print(f"└─[Ciphertext: {plaintext}]")
+                    print(f"└─[Plaintext: {plaintext}]")
                     again()
                 except ValueError:
                     slowprint("├─["+Color.BRed+"Key value must be a number"+Color.End+"]")
@@ -457,7 +457,7 @@ def christopher():
         else:
             again()
 
-    #::::: Modern :::::
+    #::::: Modern Cipher :::::
     elif (choice == "2" or choice == "02"):
         clearScr()
         time.sleep(0.4)
@@ -691,7 +691,7 @@ def christopher():
         else:
             again()
 
-    #::::: Quantum :::::
+    #::::: Quantum Cipher :::::
     elif (choice == "3" or choice == "03"):
         clearScr()
         time.sleep(0.4)
