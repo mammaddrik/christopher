@@ -1,9 +1,9 @@
 #!/bin/bash
 
-RED="\e[31m"
-BLUE="\e[34m"
-GREEN='\e[32m'
-RESET="\e[0m"
+RED="\033[1;31m"
+BLUE="\033[1;34m"
+GREEN='\033[1;32m'
+RESET="\033[1;37m"
 
 function ctrl_c(){
     echo -e "\n\n${RED}Finishing up...${RESET}\n"
@@ -53,7 +53,7 @@ echo "exec python christopher.py \"\$@\"" >> /usr/bin/christopher
 cp $path/logo/christopher.desktop /usr/share/applications/christopher.desktop
 cp $path/logo/christopher.png /usr/share/icons/christopher.png
 cp christopher.py /usr/local/sbin/christopher
-cp -r detect/ lib/ src/ /usr/local/sbin/christopher
+cp -r detect/ lib/ src/ /usr/local/sbin
 chmod +x /usr/local/sbin/christopher
 chmod +x christopher.py
 
