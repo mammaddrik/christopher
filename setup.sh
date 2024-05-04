@@ -30,15 +30,8 @@ func_title(){
     echo "                          trueuser = ${username}                                "
     echo "                          location = ${loc}                                     "
     echo "                                                                                "
-    echo "                {$RED} [✔] Installer The Christopher [✔] {$RESET}              "
+    echo -e "                ${RED} [✔] Installer The Christopher [✔] ${RESET}              "
 }
-
-RED="\e[31m"
-GREEN="\e[32m"
-ENDCOLOR="\e[0m"
-
-echo -e "${RED}This is some red text, ${ENDCOLOR}"
-echo -e "${GREEN}And this is some green text${ENDCOLOR}"
 
 func_title
 mkdir /usr/share/christopher
@@ -57,9 +50,9 @@ cp -r detect/ lib/ src/ /usr/local/sbin
 chmod +x /usr/local/sbin/christopher
 chmod +x christopher.py
 
-echo -e "{$GREEN}╔───────────────────────────────╗{$RESET}"
-echo -e "{$BLUE}| Run in Terminal (christopher) |{$RESET}"
-echo -e "{$GREEN}╚───────────────────────────────╝{$RESET}"
+echo -e "${GREEN}╔───────────────────────────────╗${RESET}"
+echo -e "${BLUE}| Run in Terminal (christopher) |${RESET}"
+echo -e "${GREEN}╚───────────────────────────────╝${RESET}"
 exit
 
 trap ctrl_c INT
