@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=christopher
+Encoding=UTF-8
+Exec=sh -c "christopher;${SHELL:-bash}"
+Icon=christopher.png
+StartupNotify=false
+Terminal=true
+Type=Application
+Categories=05-Password Attacks;
+X-Kali-Package=christopher
+Name[C]=christopher
