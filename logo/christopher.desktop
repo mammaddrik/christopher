@@ -6,6 +6,6 @@ Icon=christopher.png
 StartupNotify=false
 Terminal=true
 Type=Application
-Categories=05-Password Attacks;
+Categories=05-Password-Attacks;
 X-Kali-Package=christopher
 Name[C]=christopher
