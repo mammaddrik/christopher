@@ -1,9 +1,9 @@
 #!/bin/bash
 
-RED="\033[1;31m"
-BLUE='\033[1;34m'
-GREEN='\033[1;32m'
-RESET="\033[1;37m"
+RED="\e[31m"
+BLUE="\e[34m"
+GREEN='\e[32m'
+RESET="\e[0m"
 
 function ctrl_c(){
     echo -e "\n\n${RED}Finishing up...${RESET}\n"
@@ -30,8 +30,15 @@ func_title(){
     echo "                          trueuser = ${username}                                "
     echo "                          location = ${loc}                                     "
     echo "                                                                                "
-    echo "                  $RED [✔] Installer The Christopher [✔] $RESET                "
+    echo "                {$RED} [✔] Installer The Christopher [✔] {$RESET}              "
 }
+
+RED="\e[31m"
+GREEN="\e[32m"
+ENDCOLOR="\e[0m"
+
+echo -e "${RED}This is some red text, ${ENDCOLOR}"
+echo -e "${GREEN}And this is some green text${ENDCOLOR}"
 
 func_title
 mkdir /usr/share/christopher
@@ -46,12 +53,13 @@ echo "exec python christopher.py \"\$@\"" >> /usr/bin/christopher
 cp $path/logo/christopher.desktop /usr/share/applications/christopher.desktop
 cp $path/logo/christopher.png /usr/share/icons/christopher.png
 cp christopher.py /usr/local/sbin/christopher
+cp -r detect/ lib/ src/ /usr/local/sbin/christopher
 chmod +x /usr/local/sbin/christopher
 chmod +x christopher.py
 
-echo -e $GREEN"╔───────────────────────────────╗"$RESET
-echo -e $BLUE"| Run in Terminal<(christopher)> |"$RESET
-echo -e $GREEN"╚───────────────────────────────╝"$RESET
+echo -e "{$GREEN}╔───────────────────────────────╗{$RESET}"
+echo -e "{$BLUE}| Run in Terminal (christopher) |{$RESET}"
+echo -e "{$GREEN}╚───────────────────────────────╝{$RESET}"
 exit
 
 trap ctrl_c INT
