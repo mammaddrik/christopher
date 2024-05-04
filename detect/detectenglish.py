@@ -4,9 +4,16 @@ import os
 letters = string.ascii_letters
 LETTERS_AND_SPACE = letters + ' \t\n'
 
+if os.name == "nt":
+    os.system("cls")
+else:
+    os.system("clear")
 def loadDictionary():
     path = os.getcwd()
-    dictionaryFile = open(path+'/detect/dictionary.txt')
+    if os.name == "nt":
+        dictionaryFile = open(path+'/detect/dictionary.txt')
+    else:
+        dictionaryFile = open('/usr/local/sbin/detect/dictionary.txt')
     englishWords = {}
     for word in dictionaryFile.read().split('\n'):
         englishWords[word] = None

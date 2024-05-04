@@ -34,22 +34,23 @@ func_title(){
 }
 
 func_title
-mkdir /usr/share/christopher
+
+mkdir -p /usr/share/christopher
 cp setup.sh /usr/share/christopher
 cp christopher.py /usr/share/christopher
 cp -r detect/ lib/ src/ /usr/share/christopher
-pip install -r requirements.txt
-echo -e ${BLUE} "[✔]Done"
+
 echo "#!/bin/sh" >> /usr/bin/christopher
 echo "cd /usr/share/christopher" >> /usr/bin/christopher
 echo "exec python christopher.py \"\$@\"" >> /usr/bin/christopher
 cp $path/logo/christopher.desktop /usr/share/applications/christopher.desktop
 cp $path/logo/christopher.png /usr/share/icons/christopher.png
-cp christopher.py /usr/local/sbin/christopher
+cp christopher.py /usr/local/sbin/christopher.py
 cp -r detect/ lib/ src/ /usr/local/sbin
-chmod +x /usr/local/sbin/christopher
+chmod +x /usr/local/sbin/christopher.py
 chmod +x christopher.py
 
+echo -e "${BLUE}[✔]Done${RESET}"
 echo -e "${GREEN}╔───────────────────────────────╗${RESET}"
 echo -e "${BLUE}| Run in Terminal (christopher) |${RESET}"
 echo -e "${GREEN}╚───────────────────────────────╝${RESET}"
