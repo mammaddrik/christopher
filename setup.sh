@@ -49,9 +49,9 @@ cp christopher.py /usr/local/sbin/christopher
 chmod +x /usr/local/sbin/christopher
 chmod +x christopher.py
 
-echo -e {$GREEN}"╔───────────────────────────────╗"
-echo -e {$BLUE}"| Run in Terminal<(christopher)> |"
-echo -e {$GREEN}"╚───────────────────────────────╝"
+echo -e {$GREEN}"╔───────────────────────────────╗"${RESET}
+echo -e {$BLUE}"| Run in Terminal<(christopher)> |"${RESET}
+echo -e {$GREEN}"╚───────────────────────────────╝"${RESET}
 exit
 
 trap ctrl_c INT
