@@ -30,7 +30,7 @@ func_title(){
     echo "                          trueuser = ${username}                                "
     echo "                          location = ${loc}                                     "
     echo "                                                                                "
-    echo "                ${RED} [✔] Installer The Christopher [✔] ${RESET}              "
+    echo "                  $RED [✔] Installer The Christopher [✔] $RESET                "
 }
 
 func_title
@@ -43,15 +43,15 @@ echo -e ${BLUE} "[✔]Done"
 echo "#!/bin/sh" >> /usr/bin/christopher
 echo "cd /usr/share/christopher" >> /usr/bin/christopher
 echo "exec python christopher.py \"\$@\"" >> /usr/bin/christopher
-cp $path/Dev/christopher.desktop /usr/share/applications/christopher.desktop
-cp $path/Dev/christopher.png /usr/share/icons/christopher.png
+cp $path/logo/christopher.desktop /usr/share/applications/christopher.desktop
+cp $path/logo/christopher.png /usr/share/icons/christopher.png
 cp christopher.py /usr/local/sbin/christopher
 chmod +x /usr/local/sbin/christopher
 chmod +x christopher.py
 
-echo -e {$GREEN}"╔───────────────────────────────╗"${RESET}
-echo -e {$BLUE}"| Run in Terminal<(christopher)> |"${RESET}
-echo -e {$GREEN}"╚───────────────────────────────╝"${RESET}
+echo -e $GREEN"╔───────────────────────────────╗"$RESET
+echo -e $BLUE"| Run in Terminal<(christopher)> |"$RESET
+echo -e $GREEN"╚───────────────────────────────╝"$RESET
 exit
 
 trap ctrl_c INT
