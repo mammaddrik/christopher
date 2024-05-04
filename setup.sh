@@ -1,9 +1,9 @@
 #!/bin/bash
 
-RED="\033[01;31m"
-BLUE='\e[1;34m'
-GREEN='\e[0;32m'
-RESET="\033[00m"
+RED="\033[1;31m"
+BLUE='\033[1;34m'
+GREEN='\033[1;32m'
+RESET="\033[1;37m"
 
 function ctrl_c(){
     echo -e "\n\n${RED}Finishing up...${RESET}\n"
@@ -45,13 +45,13 @@ echo "cd /usr/share/christopher" >> /usr/bin/christopher
 echo "exec python christopher.py \"\$@\"" >> /usr/bin/christopher
 cp $path/Dev/christopher.desktop /usr/share/applications/christopher.desktop
 cp $path/Dev/christopher.png /usr/share/icons/christopher.png
-cp christopher /usr/local/sbin/christopher
+cp christopher.py /usr/local/sbin/christopher
 chmod +x /usr/local/sbin/christopher
 chmod +x christopher.py
 
-echo -e {$GREEN}"╔─────────────────────────────╗"
-echo -e {$BLUE}"|Run in Terminal<(christopher)>|"
-echo -e {$GREEN}"╚─────────────────────────────╝"
+echo -e {$GREEN}"╔───────────────────────────────╗"
+echo -e {$BLUE}"| Run in Terminal<(christopher)> |"
+echo -e {$GREEN}"╚───────────────────────────────╝"
 exit
 
 trap ctrl_c INT
