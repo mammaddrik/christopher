@@ -84,7 +84,7 @@ def affine_decrypt(ciphertext: any, a: int, b: int) -> str:
             plaintext += char
     return plaintext
 
-def affine_brute_force(ciphertext: any) -> str:
+def affine_decrypt(ciphertext: any) -> str:
     """Brute-force attack to find possible keys for an Affine Cipher
     and print potential decryptions for manual inspection.
     

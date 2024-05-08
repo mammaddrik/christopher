@@ -22,8 +22,8 @@ from detect.detectenglish import isEnglish
 #::::: Src :::::
 #* ::::: Classic Cipher :::::
 from src.atbash import atbash
-from src.caesar import caesar_cipher_encryption, caesar_brute_force
-from src.affine import affine_encryption, affine_brute_force
+from src.caesar import caesar_encryption, caesar_decrypt
+from src.affine import affine_encryption, affine_decrypt
 from src.vigenère import vigenère_encrypt, vigenère_decrypt
 from src.revers import revers
 from src.playfair import playfair_encrypt, playfair_decrypt
@@ -78,6 +78,17 @@ def again():
         clearScr()
         christopher()
 
+#::::: Keep :::::
+def keep():
+    "A Function To Ask The User To Decrypt with different keys."
+    christopher_keep = input(Color.BCyan+"\nDo You Want To try more keys?"+Color.End+"\n┌───(christopher)─[~/continue]─[Y/n]\n└─"+color_banner[0]+"$ "+Color.End)
+    if (christopher_keep.upper() == "Y" or christopher_keep == ""):
+        pass
+    elif (christopher_keep.upper() == "N"):
+        again()
+    else:
+        again()
+
 #::::: Christopher :::::
 def christopher():
     "The function of christoper."
@@ -131,17 +142,17 @@ def christopher():
                 try:
                     shift = int(input("├─[Enter your shift number]"+color_banner[1]+"$ "+Color.End))
                     if shift >= 1 and shift <= 25:
-                        print(f"└─[Output: {caesar_cipher_encryption(text,shift)}]")
+                        print(f"└─[Output: {caesar_encryption(text,shift)}]")
                         again()
                     else:
                         slowprint("├─["+Color.BRed+"Shift value must be a number Between 1 and 25 (Default: 3)"+Color.End+"]")
                         shift = 3
-                        print(f"└─[Output: {caesar_cipher_encryption(text,shift)}]")
+                        print(f"└─[Output: {caesar_encryption(text,shift)}]")
                         again()
                 except ValueError:
                     slowprint("├─["+Color.BRed+"Shift value must be a number (Default: 3)"+Color.End+"]")
                     shift = 3
-                    print(f"└─[Output: {caesar_cipher_encryption(text,shift)}]")
+                    print(f"└─[Output: {caesar_encryption(text,shift)}]")
                     again()
 
             #::::: Decryption :::::
@@ -163,7 +174,7 @@ def christopher():
                 os.chdir("./out")
                 with open(file_name, "w") as file:
                     file.write("Brute Force Decryption:\n\n")
-                    decrypted_texts = caesar_brute_force(ciphertext)
+                    decrypted_texts = caesar_decrypt(ciphertext)
                     for i, text in enumerate(decrypted_texts):
                         file.write(f"Shift {i+1}: {text}\n")
                         if isEnglish(text):
@@ -224,7 +235,7 @@ def christopher():
                 elif ciphertext.isdigit():
                     slowprint("└─["+Color.BRed+"Ciphertext cannot be only number"+Color.End+"]")
                     again()
-                affine_brute_force(ciphertext)
+                affine_decrypt(ciphertext)
                 print("└─[The file was saved at the ./out path as AffineCipher.txt]")
                 again()
 
@@ -272,17 +283,27 @@ def christopher():
                 if len(ciphertext) == 0:
                     slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
                     again()
-                key = input("├─[Enter the key]"+color_banner[1]+"$ "+Color.End).lower().strip()
-                if key.isdigit():
-                    slowprint("└─["+Color.BRed+"Key cannot be number"+Color.End+"]")
-                    again()
-                elif len(key) == 0:
-                    slowprint("└─["+Color.BRed+"key cannot be empty"+Color.End+"]")
-                    again()
-                key = re.sub(r'\d+', '', key)
-                print("├─[Key: "+Color.BGreen+f"{key}"+Color.End+"]")
-                plaintext = vigenère_decrypt(ciphertext, key)
-                print(f"└─[Plaintext: {plaintext}]")
+                path = "./out"
+                if not os.path.exists(path):
+                    os.makedirs(path)
+                file_name = "VigenèreCipher.txt"
+                os.chdir("./out")
+                character = string.ascii_lowercase
+                for i in range(1, 1000):
+                    for j in product(character, repeat=i):
+                        key = "".join(j)
+                        key = re.sub(r'\d+', '', key)
+                        print(f"├─[Key: {key}]", end='\r')
+                        plaintext = vigenère_decrypt(ciphertext, key).upper()
+                        if isEnglish(plaintext):
+                            print(f"├─[Key: "+Color.BGreen+f"{key}"+Color.End+"]")
+                            print(f"├─[Plaintext: {plaintext.lower()}]")
+                            keep()
+                print("└─[The file was saved at the ./out path as VigenèreCipher.txt]")
+                with open(file_name, "w") as file:
+                    file.write("Brute Force Decryption:\n\n")
+                    file.write(f"key {key}: {plaintext.lower()}\n")
+                    os.chdir("..")
                 again()
 
             #::::: Back to Main Menu :::::

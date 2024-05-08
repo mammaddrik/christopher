@@ -32,6 +32,7 @@ func_title(){
     echo "                                                                                "
 }
 
+clear
 func_title
 
 mkdir -p /usr/share/christopher
