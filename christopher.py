@@ -340,12 +340,12 @@ def christopher():
                 if len(plaintext) == 0:
                     slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
                     again()
-                key = input("├─[Enter the key]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                key = input("├─[Enter the key]"+color_banner[1]+"$ "+Color.End)
                 if key.isdigit():
                     slowprint("└─["+Color.BRed+"Key cannot be number"+Color.End+"]")
                     again()
                 elif len(key) == 0:
-                    slowprint("└─["+Color.BRed+"key cannot be empty"+Color.End+"]")
+                    slowprint("└─["+Color.BRed+"Key cannot be empty"+Color.End+"]")
                     again()
                 ciphertext = playfair_encrypt(plaintext, key)
                 print(f"└─[Ciphertext: {ciphertext}]")
@@ -356,11 +356,11 @@ def christopher():
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Playfair Cipher/Decryption]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Playfair Cipher/Decryption]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).strip()
                 if len(ciphertext) == 0:
                     slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
                     again()
-                key = input("├─[Enter the key]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                key = input("├─[Enter the key]"+color_banner[1]+"$ "+Color.End).strip()
                 if key.isdigit():
                     slowprint("└─["+Color.BRed+"Key cannot be number"+Color.End+"]")
                     again()
@@ -369,7 +369,6 @@ def christopher():
                     again()
                 plaintext = playfair_decrypt(ciphertext, key)
                 print(f"└─[Plaintext: {plaintext}]")
-                again()
             #::::: Back to Main Menu :::::
             elif(pick == "99"):
                 christopher()

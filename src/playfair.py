@@ -21,7 +21,7 @@ def generate_key_square(key: str) -> list:
     Returns:
     list: A 5x5 matrix (list of lists) representing the key square.
     """
-    alphabet = "abcdefghiklmnopqrstuvwxyz"
+    alphabet = "abcdefghiklmnopqrstuvwxyz".upper()
     key = prepare_text(key)
     key = key.replace("J", "I")
     key_square = []
@@ -48,7 +48,7 @@ def find_position(matrix: list, char: str) -> tuple:
     for i in range(5):
         for j in range(5):
             if matrix[i][j] == char:
-                return (i, j)
+                return i, j
 
 def playfair_encrypt(plaintext: str, key: str) -> str:
     """
@@ -102,3 +102,46 @@ def playfair_decrypt(ciphertext: str, key: str) -> str:
         else:
             plaintext += key_square[row1][col2] + key_square[row2][col1]
     return plaintext
+
+
+def generate_playfair_matrix(key):
+    # Generate a 5x5 matrix for the Playfair cipher
+    alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ"  # J is omitted
+    key = key.upper().replace("J", "I")  # Replace J with I and make uppercase
+    key = "".join(dict.fromkeys(key))  # Remove duplicates
+    
+    matrix = []
+    for char in key + alphabet:
+        if char not in matrix:
+            matrix.append(char)
+    
+    matrix = [matrix[i:i+5] for i in range(0, 25, 5)]
+    return matrix
+
+
+
+def encrypt_playfair(plaintext, key):
+    plaintext = plaintext.upper().replace("J", "I")
+    key = key.upper().replace("J", "I")
+    matrix = generate_playfair_matrix(key)
+    ciphertext = ""
+    for i in range(0, len(plaintext), 2):
+        char1 = plaintext[i]
+        char2 = plaintext[i + 1] if i + 1 < len(plaintext) else 'X'
+        if char1 == char2:
+            char2 = 'X'
+        row1, col1 = find_position(matrix, char1)
+        row2, col2 = find_position(matrix, char2)
+        if row1 == row2:  # Same row
+            ciphertext += matrix[row1][(col1 + 1) % 5]
+            ciphertext += matrix[row2][(col2 + 1) % 5]
+        elif col1 == col2:  # Same column
+            ciphertext += matrix[(row1 + 1) % 5][col1]
+            ciphertext += matrix[(row2 + 1) % 5][col2]
+        else:
+            ciphertext += matrix[row1][col2]
+            ciphertext += matrix[row2][col1]
+    return ciphertext
+
+
+
