@@ -178,7 +178,7 @@ def christopher():
                     for i, text in enumerate(decrypted_texts):
                         file.write(f"Shift {i+1}: {text}\n")
                         if isEnglish(text):
-                            print(f"├─[Shift = {i+1}]\n├─[The plaintext may be this: {text}]")
+                            print("├─[Shift: "+Color.BGreen+f"{i+1}"+Color.End+f"]\n├─[The plaintext may be this: {text}]")
                 os.chdir("..")
                 print("└─[The file was saved at the ./out path as CaesarCipher.txt]")
                 again()
@@ -387,7 +387,7 @@ def christopher():
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                plaintext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Playfair Cipher/Encryption]\n├─[Enter your Plaintext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                plaintext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Rail Fence Cipher/Encryption]\n├─[Enter your Plaintext]"+color_banner[1]+"$ "+Color.End).lower().strip()
                 if len(plaintext) == 0:
                     slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
                     again()
@@ -395,8 +395,9 @@ def christopher():
                     key = int(input("├─[Enter the key]"+color_banner[1]+"$ "+Color.End))
                     ciphertext = railfence_encrypt(plaintext, key)
                     print(f"└─[Ciphertext: {ciphertext}]")
+                    again()
                 except ValueError:
-                    slowprint("├─["+Color.BRed+"Key value must be a number"+Color.End+"]")
+                    slowprint("└─["+Color.BRed+"Key value must be a number"+Color.End+"]")
                     again()
 
             #::::: Decryption :::::
@@ -404,18 +405,27 @@ def christopher():
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Playfair Cipher/Decryption]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Rail Fence Cipher/Decryption]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
                 if len(ciphertext) == 0:
                     slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
                     again()
-                try:
-                    key = int(input("├─[Enter the key]"+color_banner[1]+"$ "+Color.End))
-                    plaintext = railfence_decrypt(ciphertext, key)
-                    print(f"└─[Plaintext: {plaintext}]")
-                    again()
-                except ValueError:
-                    slowprint("├─["+Color.BRed+"Key value must be a number"+Color.End+"]")
-                    again()
+                path = "./out"
+                if not os.path.exists(path):
+                    os.makedirs(path)
+                file_name = "RailFenceCipher.txt"
+                os.chdir("./out")
+                for i in range(2, len(ciphertext)):
+                    key = i
+                    plaintext = railfence_decrypt(ciphertext, key).upper()
+                    if isEnglish(plaintext):
+                        print(f"├─[Key: "+Color.BGreen+f"{key}"+Color.End+"]")
+                        print(f"├─[Plaintext: {plaintext.lower()}]")
+                        print("└─[The file was saved at the ./out path as RailFenceCipher.txt]")
+                        with open(file_name, "w") as file:
+                            file.write("Brute Force Decryption:\n\n")
+                            file.write(f"key {key}: {plaintext.lower()}\n")
+                os.chdir("..")
+                again()
             #::::: Back to Main Menu :::::
             elif(pick == "99"):
                 christopher()
