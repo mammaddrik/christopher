@@ -13,7 +13,10 @@ def loadDictionary():
     if os.name == "nt":
         dictionaryFile = open(path+'/detect/dictionary.txt')
     else:
-        dictionaryFile = open('/usr/local/sbin/detect/dictionary.txt')
+        try:
+            dictionaryFile = open('/usr/local/sbin/detect/dictionary.txt')
+        except FileNotFoundError:
+            dictionaryFile = open(path+'/detect/dictionary.txt')
     englishWords = {}
     for word in dictionaryFile.read().split('\n'):
         englishWords[word] = None
