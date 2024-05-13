@@ -8,6 +8,7 @@ if os.name == "nt":
     os.system("cls")
 else:
     os.system("clear")
+
 def loadDictionary():
     path = os.getcwd()
     if os.name == "nt":

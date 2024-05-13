@@ -30,7 +30,6 @@ from src.playfair import playfair_encrypt, playfair_decrypt
 from src.railfence import railfence_encrypt, railfence_decrypt
 from src.scytale import scytale_encrypt, scytale_decrypt
 
-
 #* :::::  Modern Cipher :::::
 from src.hashgenerator import hashgenerator
 from src.hashid import hashid
@@ -393,9 +392,13 @@ def christopher():
                     again()
                 try:
                     key = int(input("├─[Enter the key]"+color_banner[1]+"$ "+Color.End))
-                    ciphertext = railfence_encrypt(plaintext, key)
-                    print(f"└─[Ciphertext: {ciphertext}]")
-                    again()
+                    if key >= 2 and key <= len(plaintext):
+                        ciphertext = railfence_encrypt(plaintext, key)
+                        print(f"└─[Ciphertext: {ciphertext}]")
+                        again()
+                    else:
+                        slowprint("└─["+Color.BRed+f"Key value must be a number Between 2 and {len(plaintext)}"+Color.End+"]")
+                        again()
                 except ValueError:
                     slowprint("└─["+Color.BRed+"Key value must be a number"+Color.End+"]")
                     again()
@@ -420,11 +423,12 @@ def christopher():
                     if isEnglish(plaintext):
                         print(f"├─[Key: "+Color.BGreen+f"{key}"+Color.End+"]")
                         print(f"├─[Plaintext: {plaintext.lower()}]")
-                        print("└─[The file was saved at the ./out path as RailFenceCipher.txt]")
                         with open(file_name, "w") as file:
                             file.write("Brute Force Decryption:\n\n")
                             file.write(f"key {key}: {plaintext.lower()}\n")
-                os.chdir("..")
+                            os.chdir("..")
+                        keep()
+                print("└─[The file was saved at the ./out path as RailFenceCipher.txt]")
                 again()
             #::::: Back to Main Menu :::::
             elif(pick == "99"):
