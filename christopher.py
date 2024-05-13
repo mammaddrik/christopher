@@ -23,13 +23,14 @@ from detect.detectenglish import isEnglish
 #* ::::: Classic Cipher :::::
 from src.atbash import atbash
 from src.caesar import caesar_encryption, caesar_decrypt
-from src.affine import affine_encryption, affine_decrypt
+from src.affine import affine_encryption, affine_decrypt, extended_gcd
 from src.vigenère import vigenère_encrypt, vigenère_decrypt
 from src.revers import revers
 from src.playfair import playfair_encrypt, playfair_decrypt
 from src.railfence import railfence_encrypt, railfence_decrypt
 from src.scytale import scytale_encrypt, scytale_decrypt
 from src.polybiussquare import polybius_square_encrypt, polybius_square_decrypt
+from src.columnar import columnar_encrypt, columnar_decrypt
 
 #* :::::  Modern Cipher :::::
 from src.hashgenerator import hashgenerator
@@ -167,20 +168,10 @@ def christopher():
                 elif ciphertext.isdigit():
                     slowprint("└─["+Color.BRed+"Ciphertext cannot be only number"+Color.End+"]")
                     again()
-                path = "./out"
-                if not os.path.exists(path):
-                    os.makedirs(path)
-                file_name = "CaesarCipher.txt"
-                os.chdir("./out")
-                with open(file_name, "w") as file:
-                    file.write("Brute Force Decryption:\n\n")
-                    decrypted_texts = caesar_decrypt(ciphertext)
-                    for i, text in enumerate(decrypted_texts):
-                        file.write(f"Shift {i+1}: {text}\n")
-                        if isEnglish(text):
-                            print("├─[Shift: "+Color.BGreen+f"{i+1}"+Color.End+f"]\n├─[The plaintext may be this: {text}]")
-                os.chdir("..")
-                print("└─[The file was saved at the ./out path as CaesarCipher.txt]")
+                decrypted_texts = caesar_decrypt(ciphertext)
+                for i, text in enumerate(decrypted_texts):
+                    if isEnglish(text):
+                        print("├─[Shift: "+Color.BGreen+f"{i+1}"+Color.End+f"]\n└─[The plaintext may be this: {text}]")
                 again()
 
             elif (pick == "99"):
@@ -210,17 +201,17 @@ def christopher():
                 try:
                     slope = int(input("├─[Enter your slope(a) number]"+color_banner[1]+"$ "+Color.End))
                     if slope % 2 == 0:
-                        slowprint("├─["+Color.BRed+"Slope(a) value must be a number Between 1 and 25 (The number must be odd)"+Color.End+"]")
+                        slowprint("└─["+Color.BRed+"Slope(a) value must be a number Between 1 and 25 (The number must be odd)"+Color.End+"]")
                         again()
                     intercept = int(input("├─[Enter your intercept(b) number]"+color_banner[1]+"$ "+Color.End))
                     if (slope >= 1 and slope <= 25):
                         print(f"└─[Output: {affine_encryption(plaintext, slope, intercept)}]")
                         again()
                     else:
-                        slowprint("├─["+Color.BRed+"Slope(a) and Intercept(b) value must be a number Between 1 and 25"+Color.End+"]")
+                        slowprint("└─["+Color.BRed+"Slope(a) and Intercept(b) value must be a number Between 1 and 25"+Color.End+"]")
                         again()
                 except ValueError:
-                    slowprint("├─["+Color.BRed+"Slope(a) and Intercept(b) value must be a number (Slope(a) number must be odd)"+Color.End+"]")
+                    slowprint("└─["+Color.BRed+"Slope(a) and Intercept(b) value must be a number (Slope(a) number must be odd)"+Color.End+"]")
                     again()
 
             #::::: Decryption :::::
@@ -228,15 +219,22 @@ def christopher():
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Affine Cipher/Decryption]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Affine Cipher/Decryption]\n└─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
                 if len(ciphertext) == 0:
                     slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
                     again()
                 elif ciphertext.isdigit():
                     slowprint("└─["+Color.BRed+"Ciphertext cannot be only number"+Color.End+"]")
                     again()
-                affine_decrypt(ciphertext)
-                print("└─[The file was saved at the ./out path as AffineCipher.txt]")
+                alphabet = string.ascii_lowercase
+                m = len(alphabet)
+                for a in range(1, m):
+                    if extended_gcd(a, m)[0] == 1:
+                        for b in range(0, m):
+                            decrypted_text = affine_decrypt(ciphertext, a, b)
+                            if isEnglish(decrypted_text):
+                                print("┌─[Slope(a) = "+Color.BGreen+f"{a} "+Color.End+"Intercept(b) = "+Color.BGreen+f"{b}"+Color.End+f"]\n└─[The plaintext may be this: {decrypted_text}]")
+                                keep()
                 again()
 
             #::::: Back to Main Menu :::::
@@ -269,7 +267,6 @@ def christopher():
                     slowprint("└─["+Color.BRed+"key cannot be empty"+Color.End+"]")
                     again()
                 key = re.sub(r'\d+', '', key)
-                print("├─[Key: "+Color.BGreen+f"{key}"+Color.End+"]")
                 ciphertext = vigenère_encrypt(plaintext, key)
                 print(f"└─[Ciphertext: {ciphertext}]")
                 again()
@@ -279,15 +276,10 @@ def christopher():
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Vigenère Cipher/Decryption]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Vigenère Cipher/Decryption]\n└─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
                 if len(ciphertext) == 0:
                     slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
                     again()
-                path = "./out"
-                if not os.path.exists(path):
-                    os.makedirs(path)
-                file_name = "VigenèreCipher.txt"
-                os.chdir("./out")
                 character = string.ascii_lowercase
                 for i in range(1, 1000):
                     for j in product(character, repeat=i):
@@ -296,14 +288,9 @@ def christopher():
                         print(f"├─[Key: {key}]", end='\r')
                         plaintext = vigenère_decrypt(ciphertext, key).upper()
                         if isEnglish(plaintext):
-                            print(f"├─[Key: "+Color.BGreen+f"{key}"+Color.End+"]")
-                            print(f"├─[Plaintext: {plaintext.lower()}]")
+                            print(f"┌─[Key: "+Color.BGreen+f"{key}"+Color.End+"]")
+                            print(f"└─[The plaintext may be this: {plaintext.lower()}]")
                             keep()
-                print("└─[The file was saved at the ./out path as VigenèreCipher.txt]")
-                with open(file_name, "w") as file:
-                    file.write("Brute Force Decryption:\n\n")
-                    file.write(f"key {key}: {plaintext.lower()}\n")
-                    os.chdir("..")
                 again()
 
             #::::: Back to Main Menu :::::
@@ -409,27 +396,17 @@ def christopher():
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Rail Fence Cipher/Decryption]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Rail Fence Cipher/Decryption]\n└─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
                 if len(ciphertext) == 0:
                     slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
                     again()
-                path = "./out"
-                if not os.path.exists(path):
-                    os.makedirs(path)
-                file_name = "RailFenceCipher.txt"
-                os.chdir("./out")
                 for i in range(2, len(ciphertext)):
                     key = i
                     plaintext = railfence_decrypt(ciphertext, key).upper()
                     if isEnglish(plaintext):
-                        print(f"├─[Key: "+Color.BGreen+f"{key}"+Color.End+"]")
-                        print(f"├─[Plaintext: {plaintext.lower()}]")
-                        with open(file_name, "w") as file:
-                            file.write("Brute Force Decryption:\n\n")
-                            file.write(f"key {key}: {plaintext.lower()}\n")
-                            os.chdir("..")
+                        print(f"┌─[Key: "+Color.BGreen+f"{key}"+Color.End+"]")
+                        print(f"└─[Plaintext: {plaintext.lower()}]")
                         keep()
-                print("└─[The file was saved at the ./out path as RailFenceCipher.txt]")
                 again()
             #::::: Back to Main Menu :::::
             elif(pick == "99"):
@@ -526,6 +503,48 @@ def christopher():
                 print(f"└─[Plaintext: {plaintext.lower()}]")
                 again()
 
+        #::::: Columnar Cipher :::::
+        elif (select == "10"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
+            pick = input("    [01]Encryption              [02]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/Columnar Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
+
+            #::::: Encryption :::::
+            if(pick == "1" or pick == "01"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                plaintext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Columnar Cipher/Encryption]\n├─[Enter your Plaintext]"+color_banner[1]+"$ "+Color.End).strip()
+                if len(plaintext) == 0:
+                    slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
+                    again()
+                try:
+                    key = int(input("├─[Enter the key]"+color_banner[1]+"$ "+Color.End))
+                except ValueError:
+                    slowprint("└─["+Color.BRed+"Key value must be a number"+Color.End+"]")
+                    again()
+                ciphertext = columnar_encrypt(plaintext, key)
+                print(f"└─[Ciphertext: {ciphertext}]")
+                again()
+
+            #::::: Decryption :::::
+            elif(pick == "2" or pick == "02"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Columnar Cipher/Decryption]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                if len(ciphertext) == 0:
+                    slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
+                    again()
+                for key in range(1, len(ciphertext)):
+                    print(f"├─[Key: {key}]", end='\r')
+                    plaintext = columnar_decrypt(ciphertext, key).upper()
+                    if isEnglish(plaintext):
+                        print(f"├─[Key: "+Color.BGreen+f"{key}"+Color.End+"]")
+                        print(f"├─[Plaintext: {plaintext.lower()}]")
+                        keep()
+                again()
         #::::: Back to Main Menu :::::
         elif select == "99":
             christopher()

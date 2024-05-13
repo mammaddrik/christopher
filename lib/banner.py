@@ -29,7 +29,7 @@ class Banner:
     [03]Affine Cipher      [04]Vigenère Cipher
     [05]Revers Text        [06]Playfire Cipher
     [07]Rail Fence Cipher  [08]Scytale Cipher
-    [09]Polybius Square    [10]
+    [09]Polybius Square    [10]Columnar Cipher
     [11]                   [12]
     [13]                   [14]
     [15]                   [16]

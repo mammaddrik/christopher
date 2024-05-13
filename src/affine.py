@@ -1,6 +1,5 @@
-from detect.detectenglish import isEnglish
 import string
-import os
+
 def affine_encryption(plaintext: any, a: int, b: int) -> str:
     """
     Encrypts the given message using the Affine cipher method.
@@ -83,31 +82,3 @@ def affine_decrypt(ciphertext: any, a: int, b: int) -> str:
         else:
             plaintext += char
     return plaintext
-
-def affine_decrypt(ciphertext: any) -> str:
-    """Brute-force attack to find possible keys for an Affine Cipher
-    and print potential decryptions for manual inspection.
-    
-    Parameters:
-    ciphertext (str): The ciphertext to be decrypted.
-
-    Returns:
-    str: A list containing all possible decrypted plaintexts.
-    """
-    alphabet = string.ascii_lowercase
-    m = len(alphabet)
-    path = r"./out"
-    if not os.path.exists(path):
-        os.makedirs(path)
-    file_name = "AffineCipher.txt"
-    os.chdir("./out")
-    with open(file_name, "w") as file:
-        file.write("Brute Force Decryption:\n\n")
-        for a in range(1, m):
-            if extended_gcd(a, m)[0] == 1:
-                for b in range(0, m):
-                    decrypted_text = affine_decrypt(ciphertext, a, b)
-                    file.write(f"Slope(a)={a} Intercept(b)={b} : {decrypted_text}\n")
-                    if isEnglish(decrypted_text):
-                        print(f"├─[Slope(a) = {a} Intercept(b) = {b}]\n├─[The plaintext may be this: {decrypted_text}]")
-    os.chdir("..")
