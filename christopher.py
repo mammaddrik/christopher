@@ -43,6 +43,7 @@ from src.wordlist import wordlist
 from src.customwordlist import interactive
 from src.passwordgenerator import passwordgenerate
 from src.passwordmanager import get_master_password, encrypt, decrypt, create_csv, add, edit, delete
+from src.frequencyanalysis import getFrequencyOrder, getFrequencyScore
 
 #::::: Default Library :::::
 import os
@@ -545,6 +546,7 @@ def christopher():
                         print(f"├─[Plaintext: {plaintext.lower()}]")
                         keep()
                 again()
+        
         #::::: Back to Main Menu :::::
         elif select == "99":
             christopher()
@@ -1014,6 +1016,21 @@ def christopher():
             passwordgenerate(length, quantity,lowercase, uppercase, number, symbol, excludesimilar, textfile)
             again()
 
+        #::::: Frequency Analysis :::::
+        elif (select == "5" or select == "05"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
+            text = input("\n┌───(christopher)─[~/christopher/Tools/Frequency Analysis]\n├─[Enter your text]"+color_banner[1]+"$ "+Color.End).upper().strip()
+            if len(text) == 0:
+                slowprint("└─["+Color.BRed+"Text cannot be empty"+Color.End+"]")
+                again()
+            elif text.isdigit():
+                slowprint("└─["+Color.BRed+"Text cannot be only number"+Color.End+"]")
+                again()
+            else:
+                print("├─[Frequency Order: "+getFrequencyOrder(text)+"]")
+                print("└─[Frequency Score: "+str(getFrequencyScore(text))+"]")
         #::::: Back to Main Menu :::::
         elif (select == "99"):
             christopher()
