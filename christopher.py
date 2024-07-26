@@ -23,7 +23,7 @@ from detect.detectenglish import isEnglish
 #* ::::: Classic Cipher :::::
 from src.atbash import atbash
 from src.caesar import caesar_encryption, caesar_decryption, caesar_crack
-from src.affine import affine_encryption, affine_decrypt, extended_gcd
+from src.affine import affine_encryption, affine_decryption, affine_crack, extended_gcd
 from src.vigenère import vigenère_encrypt, vigenère_decrypt
 from src.revers import revers
 from src.playfair import playfair_encrypt, playfair_decrypt
@@ -213,7 +213,7 @@ def christopher():
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            pick = input("    [01]Encryption              [02]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/Affine Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
+            pick = input("    [01]Encryption       [02]Decryption\n    [03]Crack            [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/Affine Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
 
             #::::: Encryption :::::
             if (pick == "1" or pick == "01"):
@@ -228,7 +228,7 @@ def christopher():
                     slowprint("└─["+Color.BRed+"Plaintext cannot be only number"+Color.End+"]")
                     again()
                 try:
-                    slope = int(input("├─[Enter your slope(a) number]"+color_banner[1]+"$ "+Color.End))
+                    slope = int(input("├─[Enter your slope(a) number (The number must be odd)]"+color_banner[1]+"$ "+Color.End))
                     if slope % 2 == 0:
                         slowprint("└─["+Color.BRed+"Slope(a) value must be a number Between 1 and 25 (The number must be odd)"+Color.End+"]")
                         again()
@@ -248,7 +248,34 @@ def christopher():
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Affine Cipher/Decryption]\n└─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Affine Cipher/Decryption]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                if len(ciphertext) == 0:
+                    slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
+                    again()
+                elif ciphertext.isdigit():
+                    slowprint("└─["+Color.BRed+"Ciphertext cannot be only number"+Color.End+"]")
+                    again()
+                try:
+                    slope = int(input("├─[Enter your slope(a) number (The number must be odd)]"+color_banner[1]+"$ "+Color.End))
+                    if slope % 2 == 0:
+                        slowprint("└─["+Color.BRed+"Slope(a) value must be a number Between 1 and 25 (The number must be odd)"+Color.End+"]")
+                        again()
+                    intercept = int(input("├─[Enter your intercept(b) number]"+color_banner[1]+"$ "+Color.End))
+                    if (slope >= 1 and slope <= 25):
+                        print(f"└─[Output: {affine_decryption(ciphertext, slope, intercept)}]")
+                        again()
+                    else:
+                        slowprint("└─["+Color.BRed+"Slope(a) and Intercept(b) value must be a number Between 1 and 25"+Color.End+"]")
+                        again()
+                except ValueError:
+                    slowprint("└─["+Color.BRed+"Slope(a) and Intercept(b) value must be a number (Slope(a) number must be odd)"+Color.End+"]")
+                    again()
+            #::::: Crack :::::
+            elif(pick == "3" or pick == "03"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Affine Cipher/Crack]\n└─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
                 if len(ciphertext) == 0:
                     slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
                     again()
@@ -260,7 +287,7 @@ def christopher():
                 for a in range(1, m):
                     if extended_gcd(a, m)[0] == 1:
                         for b in range(0, m):
-                            decrypted_text = affine_decrypt(ciphertext, a, b)
+                            decrypted_text = affine_crack(ciphertext, a, b)
                             if isEnglish(decrypted_text):
                                 print("┌─[Slope(a) = "+Color.BGreen+f"{a} "+Color.End+"Intercept(b) = "+Color.BGreen+f"{b}"+Color.End+f"]\n└─[The plaintext may be this: {decrypted_text}]")
                                 keep()
