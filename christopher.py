@@ -22,7 +22,7 @@ from detect.detectenglish import isEnglish
 #::::: Src :::::
 #* ::::: Classic Cipher :::::
 from src.atbash import atbash
-from src.caesar import caesar_encryption, caesar_decrypt
+from src.caesar import caesar_encryption, caesar_decryption, caesar_crack
 from src.affine import affine_encryption, affine_decrypt, extended_gcd
 from src.vigenère import vigenère_encrypt, vigenère_decrypt
 from src.revers import revers
@@ -127,34 +127,34 @@ def christopher():
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            pick = input("    [01]Encryption              [02]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/Caesar Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
+            pick = input("    [01]Encryption       [02]Decryption\n    [03]Crack            [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/Caesar Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
 
             #::::: Encryption :::::
             if (pick == "1" or pick == "01"):
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                text = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Caesar Cipher/Encryption]\n├─[Enter your Text]"+color_banner[1]+"$ "+Color.End).lower().strip()
-                if len(text) == 0:
+                plaintext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Caesar Cipher/Encryption]\n├─[Enter your Text]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                if len(plaintext) == 0:
                     slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
                     again()
-                elif text.isdigit():
+                elif plaintext.isdigit():
                     slowprint("└─["+Color.BRed+"plaintext cannot be only number"+Color.End+"]")
                     again()
                 try:
                     shift = int(input("├─[Enter your shift number]"+color_banner[1]+"$ "+Color.End))
                     if shift >= 1 and shift <= 25:
-                        print(f"└─[Output: {caesar_encryption(text,shift)}]")
+                        print(f"└─[Output: {caesar_encryption(plaintext, shift)}]")
                         again()
                     else:
                         slowprint("├─["+Color.BRed+"Shift value must be a number Between 1 and 25 (Default: 3)"+Color.End+"]")
                         shift = 3
-                        print(f"└─[Output: {caesar_encryption(text,shift)}]")
+                        print(f"└─[Output: {caesar_encryption(plaintext, shift)}]")
                         again()
                 except ValueError:
                     slowprint("├─["+Color.BRed+"Shift value must be a number (Default: 3)"+Color.End+"]")
                     shift = 3
-                    print(f"└─[Output: {caesar_encryption(text,shift)}]")
+                    print(f"└─[Output: {caesar_encryption(plaintext, shift)}]")
                     again()
 
             #::::: Decryption :::::
@@ -169,7 +169,35 @@ def christopher():
                 elif ciphertext.isdigit():
                     slowprint("└─["+Color.BRed+"Ciphertext cannot be only number"+Color.End+"]")
                     again()
-                decrypted_texts = caesar_decrypt(ciphertext)
+                try:
+                    shift = int(input("├─[Enter your shift number]"+color_banner[1]+"$ "+Color.End))
+                    if shift >= 1 and shift <= 25:
+                        print(f"└─[Output: {caesar_decryption(ciphertext, shift)}]")
+                        again()
+                    else:
+                        slowprint("├─["+Color.BRed+"Shift value must be a number Between 1 and 25 (Default: 3)"+Color.End+"]")
+                        shift = 3
+                        print(f"└─[Output: {caesar_decryption(ciphertext, shift)}]")
+                        again()
+                except ValueError:
+                    slowprint("├─["+Color.BRed+"Shift value must be a number (Default: 3)"+Color.End+"]")
+                    shift = 3
+                    print(f"└─[Output: {caesar_decryption(ciphertext, shift)}]")
+                    again()
+
+            #::::: Crack :::::
+            elif(pick == "3" or pick == "03"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Caesar Cipher/Crack]\n├─[Enter your Text]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                if len(ciphertext) == 0:
+                    slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
+                    again()
+                elif ciphertext.isdigit():
+                    slowprint("└─["+Color.BRed+"Ciphertext cannot be only number"+Color.End+"]")
+                    again()
+                decrypted_texts = caesar_crack(ciphertext)
                 for i, text in enumerate(decrypted_texts):
                     if isEnglish(text):
                         print("├─[Shift: "+Color.BGreen+f"{i+1}"+Color.End+f"]\n└─[The plaintext may be this: {text}]")
@@ -1031,6 +1059,7 @@ def christopher():
             else:
                 print("├─[Frequency Order: "+getFrequencyOrder(text)+"]")
                 print("└─[Frequency Score: "+str(getFrequencyScore(text))+"]")
+
         #::::: Back to Main Menu :::::
         elif (select == "99"):
             christopher()

@@ -14,7 +14,7 @@ class Banner:
    /"""+color_banner[2]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
    \__________________________________________/
    [01]Classic Cipher         [02]Modern Cipher
-   [03]Quantum Cipher         [04]Tools
+   [03]Steganography          [04]Tools
    [05]Github                 [99]Exit""")
 
     #::::: Classic :::::
@@ -30,12 +30,7 @@ class Banner:
    [05]Revers Text          [06]Playfire Cipher
    [07]Rail Fence Cipher    [08]Scytale Cipher
    [09]Polybius Square      [10]Columnar Cipher
-   [11]Substitution Cipher  [12]
-   [13]                     [14]
-   [15]                     [16]
-   [17]                     [18]
-   [19]                     [20]
-   [99]Back to Main Menu""")
+   [11]Substitution Cipher  [99]Back to Main Menu""")
 
     #::::: Modern :::::
     modern_banner = (Color.End + r"""
