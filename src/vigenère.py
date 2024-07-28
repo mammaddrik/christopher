@@ -1,4 +1,4 @@
-def vigenère_encrypt(plain_text: str, key: str):
+def vigenère_encrypt(plain_text: str, key: str) -> str:
     """
     Encrypts the given plaintext using the Vigenère cipher.
 
@@ -26,7 +26,7 @@ def vigenère_encrypt(plain_text: str, key: str):
             encrypted_text += plain_text[i]
     return encrypted_text
 
-def vigenère_decrypt(cipher_text, key):
+def vigenère_decrypt(cipher_text: str, key: str) -> str:
     """
     Decrypts the given ciphertext using the Vigenère cipher.
 
