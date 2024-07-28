@@ -8,6 +8,10 @@ def caesar_encryption(plaintext: any, shift: int) -> str:
 
     Returns:
     str: The encrypted ciphertext.
+
+    Example:
+        >>> caesar_encryption("christopher", 3)
+        'fkulvwrskhu'
     """
     encrypted_text = ""
     for char in plaintext:
@@ -27,6 +31,10 @@ def caesar_decryption(ciphertext: any, shift: int) -> str:
 
     Returns:
     str: The decrypted ciphertext.
+
+    Example:
+        >>> caesar_decryption("fkulvwrskhu", 3)
+        'christopher'
     """
     decrypted_text = ""
     for char in ciphertext:

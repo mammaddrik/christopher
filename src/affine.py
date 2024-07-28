@@ -2,8 +2,7 @@ import string
 
 def extended_gcd(a: int, b: int) -> tuple:
     """
-    Extended Euclidean Algorithm to find the greatest common divisor
-    and coefficients x, y such that ax + by = gcd(a, b).
+    Extended Euclidean Algorithm to find the greatest common divisor and coefficients x, y such that ax + by = gcd(a, b).
     
     Parameters:
     a (int): The slope value to use for encryption.

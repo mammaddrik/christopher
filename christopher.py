@@ -304,7 +304,7 @@ def christopher():
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            pick = input("    [01]Encryption              [02]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/Vigenère Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
+            pick = input("    [01]Encryption       [02]Decryption\n    [03]Crack            [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/Vigenère Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
 
             #::::: Encryption :::::
             if(pick == "1" or pick == "01"):
@@ -332,7 +332,21 @@ def christopher():
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Vigenère Cipher/Decryption]\n└─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Vigenère Cipher/Decryption]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                if len(ciphertext) == 0:
+                    slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
+                    again()
+                key = input("├─[Enter the key]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                plaintext = vigenère_decrypt(ciphertext, key)
+                print(f"└─[Plaintext: {plaintext.lower()}]")
+                again()
+
+            #::::: Crack :::::
+            elif(pick == "3" or pick == "03"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Vigenère Cipher/Crack]\n└─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
                 if len(ciphertext) == 0:
                     slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
                     again()
@@ -1086,6 +1100,7 @@ def christopher():
             else:
                 print("├─[Frequency Order: "+getFrequencyOrder(text)+"]")
                 print("└─[Frequency Score: "+str(getFrequencyScore(text))+"]")
+                again()
 
         #::::: Back to Main Menu :::::
         elif (select == "99"):

@@ -7,6 +7,10 @@ def atbash(message: any) -> str:
 
     Returns:
     str: The encrypted ciphertext.
+    
+    Example:
+        >>> atbash("christopher")
+        'xsirhglksvi'
     """
     lookup_table = {'a' : 'z', 'b' : 'y', 'c' : 'x', 'd' : 'w', 'e' : 'v',
         'f' : 'u', 'g' : 't', 'h' : 's', 'i' : 'r', 'j' : 'q',
