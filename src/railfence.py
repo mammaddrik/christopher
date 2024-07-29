@@ -2,12 +2,16 @@ def railfence_encrypt(plaintext: str, key: int) -> str:
     """
     Encrypt plaintext using the Rail Fence Cipher.
     
-    Args:
+    Parameters:
     plaintext (str): The plaintext to be encrypted.
     rails (int): The number of rails (rows) in the rail fence.
     
     Returns:
     str: The encrypted ciphertext.
+
+    Example:
+        >>> railfence_encrypt("christopher", 5)
+        'chhperorits'
     """
     rail = [['\n' for i in range(len(plaintext))] for j in range(key)]
     dir_down = False
@@ -32,12 +36,16 @@ def railfence_decrypt(ciphertext: str, key: int) -> str:
     """
     Decrypt ciphertext using the Rail Fence ciphertext.
     
-    Args:
+    Parameters:
     ciphertext (str): The ciphertext to be decrypted.
     rails (int): The number of rails (rows) in the rail fence.
     
     Returns:
     str: The decrypted plaintext.
+
+    Example:
+        >>> railfence_decrypt("chhperorits", 5)
+        'christopher'
     """
     rail = [['\n' for i in range(len(ciphertext))] for j in range(key)]
     dir_down = None

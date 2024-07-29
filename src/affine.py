@@ -42,6 +42,10 @@ def affine_encryption(plaintext: any, a: int, b: int) -> str:
 
     Returns:
     str: The encrypted ciphertext.
+
+    Example:
+        >>> affine_encryption("christopher", 3 , 10)
+        'qfjimpadfwj'
     """
     alphabet = string.ascii_lowercase
     m = len(alphabet)
@@ -66,6 +70,10 @@ def affine_decryption(ciphertext: any, a: int, b: int) -> str:
 
     Returns:
     str: The decrypted ciphertext.
+
+    Example:
+        >>> affine_encryption("qfjimpadfwj", 3 , 10)
+        'christopher'
     """
     alphabet = string.ascii_lowercase
     m = len(alphabet)

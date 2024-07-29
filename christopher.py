@@ -386,7 +386,7 @@ def christopher():
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            pick = input("    [01]Encryption              [02]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/Playfair Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
+            pick = input("    [01]Encryption       [02]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/Playfair Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
 
             #::::: Encryption :::::
             if(pick == "1" or pick == "01"):
@@ -426,6 +426,8 @@ def christopher():
                     again()
                 plaintext = playfair_decrypt(ciphertext, key)
                 print(f"└─[Plaintext: {plaintext}]")
+                again()
+
             #::::: Back to Main Menu :::::
             elif(pick == "99"):
                 christopher()
@@ -437,7 +439,7 @@ def christopher():
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            pick = input("    [01]Encryption              [02]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/Playfair Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
+            pick = input("    [01]Encryption       [02]Decryption\n    [03]Crack            [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/Playfair Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
 
             #::::: Encryption :::::
             if(pick == "1" or pick == "01"):
@@ -466,7 +468,29 @@ def christopher():
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Rail Fence Cipher/Decryption]\n└─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Rail Fence Cipher/Decryption]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                if len(ciphertext) == 0:
+                    slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
+                    again()
+                try:
+                    key = int(input("├─[Enter the key]"+color_banner[1]+"$ "+Color.End))
+                    if key >= 2 and key <= len(ciphertext):
+                        plaintext = railfence_decrypt(ciphertext, key)
+                        print(f"└─[Plaintext: {plaintext}]")
+                        again()
+                    else:
+                        slowprint("└─["+Color.BRed+f"Key value must be a number Between 2 and {len(plaintext)}"+Color.End+"]")
+                        again()
+                except ValueError:
+                    slowprint("└─["+Color.BRed+"Key value must be a number"+Color.End+"]")
+                    again()
+
+            #::::: Crack :::::
+            elif(pick == "3" or pick == "03"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Rail Fence Cipher/Crack]\n└─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
                 if len(ciphertext) == 0:
                     slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
                     again()
@@ -478,6 +502,7 @@ def christopher():
                         print(f"└─[Plaintext: {plaintext.lower()}]")
                         keep()
                 again()
+
             #::::: Back to Main Menu :::::
             elif(pick == "99"):
                 christopher()
