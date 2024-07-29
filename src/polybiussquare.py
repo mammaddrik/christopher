@@ -1,18 +1,17 @@
-def polybius_square_encrypt(message):
+def polybius_square_encrypt(message: str) -> str:
     """
     Encrypts a message using the Polybius Square cipher.
 
-    The Polybius Square cipher is a simple substitution cipher that exchanges each letter 
-    in the plaintext with a pair of numbers and vice versa. In this implementation, 
-    the Polybius Square is represented as a 5x5 grid with the letters A-Z (without J).
-
-    Args:
-        message (str): The message to be encrypted.
+    Parameters:
+    message (str): The message to be encrypted.
 
     Returns:
-        str: The encrypted message.
+    str: The encrypted message.
+
+    Example:
+        >>> polybius_square_encrypt("christopher")
+        '1323422443443435231542'
     """
-    # Polybius Square grid
     polybius_grid = [
         ['A', 'B', 'C', 'D', 'E'],
         ['F', 'G', 'H', 'I', 'K'],
@@ -20,10 +19,8 @@ def polybius_square_encrypt(message):
         ['Q', 'R', 'S', 'T', 'U'],
         ['V', 'W', 'X', 'Y', 'Z']
     ]
-
     message = message.upper()
     encrypted_message = ""
-
     for char in message:
         if char == 'J':
             char = 'I'  # Replace 'J' with 'I'
@@ -34,21 +31,22 @@ def polybius_square_encrypt(message):
                     encrypted_message += str(row + 1) + str(col + 1)
         else:
             encrypted_message += char
-
     return encrypted_message
 
-
-def polybius_square_decrypt(message):
+def polybius_square_decrypt(message: str) -> str:
     """
     Decrypts a message encrypted using the Polybius Square cipher.
 
-    Args:
-        message (str): The encrypted message.
+    Parameters:
+    message (str): The encrypted message.
 
     Returns:
-        str: The decrypted message.
+    str: The decrypted message.
+
+    Example:
+        >>> polybius_square_decrypt("1323422443443435231542")
+        'christopher'
     """
-    # Polybius Square grid
     polybius_grid = [
         ['A', 'B', 'C', 'D', 'E'],
         ['F', 'G', 'H', 'I', 'K'],
@@ -56,10 +54,8 @@ def polybius_square_decrypt(message):
         ['Q', 'R', 'S', 'T', 'U'],
         ['V', 'W', 'X', 'Y', 'Z']
     ]
-
     decrypted_message = ""
     i = 0
-
     while i < len(message):
         if message[i].isdigit():
             row = int(message[i]) - 1
@@ -69,5 +65,4 @@ def polybius_square_decrypt(message):
         else:
             decrypted_message += message[i]
             i += 1
-
     return decrypted_message
