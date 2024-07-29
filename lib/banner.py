@@ -30,7 +30,8 @@ class Banner:
    [05]Revers Text          [06]Playfire Cipher
    [07]Rail Fence Cipher    [08]Scytale Cipher
    [09]Polybius Square      [10]Columnar Cipher
-   [11]Substitution Cipher  [99]Back to Main Menu""")
+   [11]Substitution Cipher  [12]Baconian Cipher
+   [99]Back to Main Menu""")
 
     #::::: Modern :::::
     modern_banner = (Color.End + r"""

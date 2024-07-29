@@ -31,6 +31,9 @@ from src.railfence import railfence_encrypt, railfence_decrypt
 from src.scytale import scytale_encrypt, scytale_decrypt
 from src.polybiussquare import polybius_square_encrypt, polybius_square_decrypt
 from src.columnar import columnar_encrypt, columnar_decrypt
+from src.simplesubstitution import simple_substitution_encrypt, simple_substitution_decrypt, generateKey, crack
+from src.makewordpatterns import getWordPattern
+from src.baconian import baconian_encryption, baconian_decryption
 
 #* :::::  Modern Cipher :::::
 from src.hashgenerator import hashgenerator
@@ -666,7 +669,130 @@ def christopher():
                         print(f"└─[Plaintext: {plaintext.lower()}]")
                         keep()
                 again()
-        
+
+        #::::: Simple Substitution  Cipher :::::
+        elif (select == "11"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
+            pick = input("    [01]Encryption       [02]Decryption\n    [03]Crack            [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/Simple Substitution Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
+
+            #::::: Encryption :::::
+            if(pick == "1" or pick == "01"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                plaintext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Simple Substitution Cipher/Encryption]\n├─[Enter your Plaintext]"+color_banner[1]+"$ "+Color.End).strip()
+                if len(plaintext) == 0:
+                    slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
+                    again()
+                elif plaintext.isdigit():
+                    slowprint("└─["+Color.BRed+"Plaintext cannot be only number"+Color.End+"]")
+                    again()
+                key = generateKey()
+                print(f"├─[key: {key}]")
+                print(f"└─[Ciphertext: {simple_substitution_encrypt(plaintext, key)}]")
+                again()
+
+            #::::: Decryption :::::
+            if(pick == "2" or pick == "02"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Simple Substitution Cipher/Decryption]\n├─[Enter your Plaintext]"+color_banner[1]+"$ "+Color.End).strip()
+                if len(ciphertext) == 0:
+                    slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
+                    again()
+                elif ciphertext.isdigit():
+                    slowprint("└─["+Color.BRed+"Ciphertext cannot be only number"+Color.End+"]")
+                    again()
+                key = input(f"├─[Enter your Key]"+color_banner[1]+"$ "+Color.End).strip()
+                contains_number = any(char.isdigit() for char in key)
+                if contains_number:
+                    slowprint("└─["+Color.BRed+"The key must be 26 characters without numbers"+Color.End+"]")
+                    again()
+                if len(key) == 26:
+                    print(f"└─[Plaintext: {simple_substitution_decrypt(ciphertext, key)}]")
+                    again()
+                else:
+                    slowprint("└─["+Color.BRed+"The key must be 26 characters without numbers"+Color.End+"]")
+                    again()
+
+            #::::: Crack :::::
+            if(pick == "3" or pick == "03"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Simple Substitution Cipher/Crack]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).strip()
+                if len(ciphertext) == 0:
+                    slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
+                    again()
+                elif ciphertext.isdigit():
+                    slowprint("└─["+Color.BRed+"Ciphertext cannot be only number"+Color.End+"]")
+                    again()
+                patterns = input("├─[Do you have a Word Pattern file]─[Y/n]"+color_banner[1]+"$ "+Color.End).strip()
+                if (patterns.upper() == "Y" or patterns == ""):
+                    crack(ciphertext)
+                    again()
+                elif (patterns.upper() == "N"):
+                    wordPatterns = {}
+                    file = input("├─[Enter the file]"+color_banner[1]+"$ "+Color.End).strip()
+                    try:
+                        with open(file, "r") as f:
+                            filesize = os.path.getsize((pwfile))
+                            if filesize == 0:
+                                slowprint("└─["+Color.BRed+"File is Empty"+Color.End+"]")
+                                again()
+                    except FileNotFoundError:
+                        slowprint("└─["+Color.BRed+"File Not Found"+Color.End+"]")
+                        again()
+                    path = os.getcwd()
+                    if os.name == "nt":
+                        with open(file, "r") as f:
+                            for word in f:
+                                word = word.strip()
+                                pattern = getWordPattern(word)
+                                if pattern in wordPatterns:
+                                    wordPatterns[pattern].append(word)
+                                else:
+                                    wordPatterns[pattern] = [word]
+                            with open(path+"/src/wordpatterns.py", "w") as f:
+                                f.write(f"wordPatterns = {wordPatterns}")
+                    else:
+                        try:
+                            with open(path+"/src/wordpatterns.py", "w") as f:
+                                f.write(f"wordPatterns = {wordPatterns}")
+                        except FileNotFoundError:
+                            dictionaryFile = open(path+'/src/wordpatterns.py')
+                    crack(ciphertext)
+                    again()
+                else:
+                    again()
+
+        #::::: Baconian Cipher :::::
+        elif (select == "12"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
+            message = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Baconian Cipher]\n├─[Enter your message]"+color_banner[1]+"$ "+Color.End).upper().strip()
+            if len(message) == 0:
+                slowprint("└─["+Color.BRed+"Message cannot be empty"+Color.End+"]")
+                again()
+            elif message.isdigit():
+                slowprint("└─["+Color.BRed+"Message cannot be only number"+Color.End+"]")
+                again()
+            elif re.fullmatch(r'[AB]*', message):
+                chunk_size = 5
+                print(f"└─[Plaintext: ", end='')
+                for i in range(0, len(message), chunk_size):
+                    decoded = baconian_decryption(message[i:i + chunk_size])
+                    print(f"{decoded.lower()}",end='')
+                print("]")
+                again()
+            else:
+                print(f"└─[Ciphertext: {baconian_encryption(message)}]")
+                again()
+
         #::::: Back to Main Menu :::::
         elif select == "99":
             christopher()
