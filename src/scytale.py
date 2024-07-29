@@ -4,12 +4,16 @@ def scytale_encrypt(plaintext: str, diameter: int) -> str:
     """
     Encrypts a plaintext using the Scytale cipher.
 
-    Args:
+    Parameters:
     plaintext (str): The plaintext to be encrypted.
     diameter (int): The diameter of the Scytale cylinder.
 
     Returns:
     str: The encrypted ciphertext.
+
+    Example:
+        >>> affine_encryption("christopher", 2)
+        'crsohrhitpe|'
     """
     chars = [c.lower() for c in plaintext if c not in (' ',',','.','?','!',':',';',"'")]
     chunks = math.ceil(len(chars) / float(diameter))
@@ -34,12 +38,16 @@ def scytale_decrypt(ciphertext:str , diameter: int) -> str:
     """
     Decrypts a Scytale ciphertext.
 
-    Args:
+    Parameters:
     ciphertext (str): The ciphertext to be decrypted.
     diameter (int): The diameter of the Scytale cylinder.
 
     Returns:
     str: The decrypted plaintext.
+
+    Example:
+        >>> scytale_decrypt("qfjimpadfwj", 2)
+        'christopher'
     """
     chars = [c for c in ciphertext]
     chunks = int(math.ceil(len(chars) / float(diameter)))
