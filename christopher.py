@@ -603,7 +603,7 @@ def christopher():
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            pick = input("    [01]Encryption              [02]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/Columnar Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
+            pick = input("    [01]Encryption       [02]Decryption\n    [03]Crack            [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/Columnar Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
 
             #::::: Encryption :::::
             if(pick == "1" or pick == "01"):
@@ -616,11 +616,16 @@ def christopher():
                     again()
                 try:
                     key = int(input("├─[Enter the key]"+color_banner[1]+"$ "+Color.End))
+                    if key >= 2 and key <= len(plaintext):
+                        ciphertext = columnar_encrypt(plaintext, key)
+                        print(f"└─[Ciphertext: {ciphertext}]")
+                        again()
+                    else:
+                        slowprint("└─["+Color.BRed+f"Key value must be a number Between 2 and {len(plaintext)}"+Color.End+"]")
+                        again()
                 except ValueError:
                     slowprint("└─["+Color.BRed+"Key value must be a number"+Color.End+"]")
                     again()
-                ciphertext = columnar_encrypt(plaintext, key)
-                print(f"└─[Ciphertext: {ciphertext}]")
                 again()
 
             #::::: Decryption :::::
@@ -632,12 +637,33 @@ def christopher():
                 if len(ciphertext) == 0:
                     slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
                     again()
+                try:
+                    key = int(input("├─[Enter the key]"+color_banner[1]+"$ "+Color.End))
+                    if key >= 2 and key <= len(ciphertext):
+                        plaintext = columnar_decrypt(ciphertext, key)
+                        print(f"└─[Ciphertext: {plaintext}]")
+                        again()
+                    else:
+                        slowprint("└─["+Color.BRed+f"Key value must be a number Between 2 and {len(ciphertext)}"+Color.End+"]")
+                        again()
+                except ValueError:
+                    slowprint("└─["+Color.BRed+"Key value must be a number"+Color.End+"]")
+                    again()
+
+            #::::: Crack :::::
+            elif(pick == "3" or pick == "03"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Columnar Cipher/Crack]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                if len(ciphertext) == 0:
+                    slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
+                    again()
                 for key in range(1, len(ciphertext)):
-                    print(f"├─[Key: {key}]", end='\r')
                     plaintext = columnar_decrypt(ciphertext, key).upper()
                     if isEnglish(plaintext):
                         print(f"├─[Key: "+Color.BGreen+f"{key}"+Color.End+"]")
-                        print(f"├─[Plaintext: {plaintext.lower()}]")
+                        print(f"└─[Plaintext: {plaintext.lower()}]")
                         keep()
                 again()
         
