@@ -1,6 +1,19 @@
-def rot13(text):
+def rot13(text: str) -> str:
     """
-    Encrypt or decrypt the given text using Rot-13 cipher.
+    Encrypts & Decrypt the text using the ROT13 cipher.
+
+    Parameters:
+    text (str): The input string to be encrypted or decrypted.
+
+    Returns:
+    str: The encrypted or decrypted string with ROT13 applied.
+
+    Examples:
+        >>> rot13("christopher")
+        'puevfgbcure'
+
+        >>> rot13("puevfgbcure")
+        'christopher'
     """
     result = ""
     for char in text:

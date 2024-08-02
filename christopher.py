@@ -34,12 +34,12 @@ from src.columnar import columnar_encrypt, columnar_decrypt
 from src.simplesubstitution import simple_substitution_encrypt, simple_substitution_decrypt, generateKey, crack
 from src.makewordpatterns import getWordPattern
 from src.baconian import baconian_encryption, baconian_decryption
+from src.morsecode import morse, morsetext
+from src.rot13 import rot13
 
 #* :::::  Modern Cipher :::::
 from src.hashgenerator import hashgenerator
 from src.hashid import hashid
-from src.morsecode import morse, morsetext
-from src.rot13 import rot13
 
 #* ::::: Tools :::::
 from src.wordlist import wordlist
@@ -793,6 +793,37 @@ def christopher():
                 print(f"└─[Ciphertext: {baconian_encryption(message)}]")
                 again()
 
+        #::::: Morse Code :::::
+        elif (select == "13"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
+            message = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Morse Code]\n├─"+color_banner[1]+"$ "+Color.End).upper()
+            if len(message) == 0:
+                slowprint("└─["+Color.BRed+"Message cannot be empty"+Color.End+"]")
+                again()
+            elif message.isdigit():
+                slowprint("└─["+Color.BRed+"Message cannot be only number"+Color.End+"]")
+                again()
+            characters = {'-', '.', ' '}
+            pick = all(char in characters for char in message)
+            if pick:
+                morsetext(message)
+                again()
+            else:
+                morse(message)
+                again()
+
+        #::::: Rot13 Cipher :::::
+        elif (select == "14"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
+            message = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Rot13]\n├─[Enter your text]"+color_banner[1]+"$ "+Color.End)
+            text = rot13(message)
+            print(f"└─[Output: {text}]")
+            again()
+
         #::::: Back to Main Menu :::::
         elif select == "99":
             christopher()
@@ -985,47 +1016,6 @@ def christopher():
                 christopher()
             else:
                 again()
-
-        #::::: Morse Code :::::
-        elif (select == "2" or select == "02"):
-            clearScr()
-            time.sleep(0.4)
-            print(Banner.banner)
-            pick = input("    [01]Text to Morse        [02]Morse to Text\n    [99]Back to Main Menu\n┌───(christopher)─[~/christopher/Modern Cipher/Morse Code]\n└─"+color_banner[1]+"$ "+Color.End)
-
-            #:::::Text to Morse :::::
-            if pick == "1" or pick == "01":
-                clearScr()
-                time.sleep(0.4)
-                print(Banner.banner)
-                message = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Morse Code/Text to Morse]\n├─[Enter your message]"+color_banner[1]+"$ "+Color.End).upper()
-                morse(message)
-                again()
-
-            #::::: Morse to Text :::::
-            elif (pick == "2" or pick == "02"):
-                clearScr()
-                time.sleep(0.4)
-                print(Banner.banner)
-                message = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Morse Code/Morse to Text]\n├─[Enter your morse code]"+color_banner[1]+"$ "+Color.End).upper()
-                morsetext(message)
-                again()
-
-            #::::: Back to Main Menu :::::
-            elif (pick == "99"):
-                christopher()
-            else:
-                again()
-
-        #::::: Rot13 Cipher :::::
-        elif (select == "3" or select == "03"):
-            clearScr()
-            time.sleep(0.4)
-            print(Banner.banner)
-            message = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Rot13]\n├─[Enter your text]"+color_banner[1]+"$ "+Color.End)
-            text = rot13(message)
-            print(f"└─[Output: {text}]")
-            again()
 
         #::::: Back to Main Menu :::::
         elif select == "99":

@@ -31,6 +31,7 @@ class Banner:
    [07]Rail Fence Cipher    [08]Scytale Cipher
    [09]Polybius Square      [10]Columnar Cipher
    [11]Substitution Cipher  [12]Baconian Cipher
+   [13]Morse Code           [14]Rot13 Cipher
    [99]Back to Main Menu""")
 
     #::::: Modern :::::
@@ -41,16 +42,16 @@ class Banner:
    \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
    /"""+color_banner[2]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
    \__________________________________________/
-   [01]Hash Function             [02]Morse Code
-   [03]Rot13 Cipher              [04]
-   [05]                          [06]
-   [07]                          [08]
-   [09]                          [10]
-   [11]                          [12]
-   [13]                          [14]
-   [15]                          [16]
-   [17]                          [18]
-   [19]                          [20]
+   [01]Hash Function        [02]
+   [03]                     [04]
+   [05]                     [06]
+   [07]                     [08]
+   [09]                     [10]
+   [11]                     [12]
+   [13]                     [14]
+   [15]                     [16]
+   [17]                     [18]
+   [19]                     [20]
    [99]Back to Main Menu""")
 
     #::::: Steganography :::::

@@ -14,18 +14,21 @@ translate_dict = {'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..',
                   '"': '.-..-.', '(': '-----.', ')': '.-----', "'": '-.--.-',
                   '@': '.--.-.', '?': '..--..', '!': '-.-.--', "/": '-..-.',
                   '&': '.-...', '?': '..--..', '=': '-...-', "+": '.-.-.',
-                  '-': '-...-', '_': '..--.-', '$': '...-..-', "F": '.-.-.',
-                  ' ': '-.-.-.-'}
+                  '-': '-...-', '_': '..--.-', '$': '...-..-', ' ': '-.-.-.-'}
 
 def morse(message: any) -> str:
     """
     Encode text into Morse code.
     
-    Args:
+    Parameters:
     message (any): The message to be encoded.
     
     Returns:
     str: The Morse code representation of the input text.
+
+    Example:
+        >>> morse("christopher")
+        '-.-. .... .-. .. ... - --- .--. .... . .-.'
     """
     try:
         message = " ".join(translate_dict[c] for c in message.upper())
@@ -37,11 +40,15 @@ def morsetext(text: str)-> str:
     """
     Decode Morse code into text.
     
-    Args:
+    Parameters:
     text (str): The Morse code to be decoded.
     
     Returns:
     str: The decoded text.
+
+    Example:
+        >>> morsetext("-.-. .... .-. .. ... - --- .--. .... . .-.")
+        'christopher'
     """
     try:
         reverse_dict = {v: k for k, v in translate_dict.items()}
