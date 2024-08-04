@@ -32,7 +32,7 @@ class Banner:
    [09]Polybius Square      [10]Columnar Cipher
    [11]Substitution Cipher  [12]Baconian Cipher
    [13]Morse Code           [14]Rot13 Cipher
-   [99]Back to Main Menu""")
+   [15]One-Time Pad Cipher  [99]Back to Main Menu""")
 
     #::::: Modern :::::
     modern_banner = (Color.End + r"""

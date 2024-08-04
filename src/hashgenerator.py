@@ -7,114 +7,110 @@ except ImportError:
     os.system("pip install -r requirements.txt")
 import zlib
 
-def hashgenerator(password, hashvalue):
-    if hashvalue == "md2":
-        setpass = bytes(password, 'utf-8')
-        md2 = MD2.new()
-        md2.update(setpass)
-        print(f"└─[MD2 HASH] {md2.hexdigest()}")
+def bytes_to_str(password:str) -> bytes:
+    """
+    Converts the provided password from a string to bytes using UTF-8 encoding.
 
-    elif hashvalue == "md4":
-        setpass = bytes(password, 'utf-8')
-        md4_hash = MD4.new()
-        md4_hash.update(setpass)
-        print(f"└─[MD4 Hash] {md4_hash.hexdigest()}")
+    Parameters:
+    password (str): The password string to be converted.
 
-    elif hashvalue == "NTLM":
-        hash_NTLM = nthash.hash(password)
-        print(f"└─[NTLM HASH] {hash_NTLM}")
+    Returns:
+    bytes: The UTF-8 encoded byte representation of the password.
+    """
+    return bytes(password, 'utf-8')
 
-    elif hashvalue == "adler32":
-        def adler32_hash(password):
-            setpass = bytes(password, 'utf-8')
-            adler32_checksum = zlib.adler32(setpass)
-            return format(adler32_checksum & 0xFFFFFFFF, '08x')
-        adler32_checksum = adler32_hash(password)
-        print(f"└─[Adler-32 Checksum] {adler32_checksum}")
+def print_hash(label: str, hash_value: str):
+    """
+    Prints the hash label and its corresponding hash value.
 
-    elif hashvalue == "crc32":
-        def crc32_hash(password):
-            setpass = bytes(password, 'utf-8')
-            crc32_checksum = zlib.crc32(setpass)
-            return format(crc32_checksum & 0xFFFFFFFF, '08x')
-        crc32_checksum = crc32_hash(password)
-        print(f"└─[CRC32 checksum] {crc32_checksum}")
+    Parameters:
+    label (str): The label for the hash type (e.g., 'MD5 HASH').
+    hash_value (str): The hexadecimal hash value to be printed.
+    """
+    print(f"{label}\t: {hash_value}")
 
-    elif hashvalue == "all":
-        setpass = bytes(password, 'utf-8')
-        md2 = MD2.new()
-        md2.update(setpass)
-        print(f"├─[    MD2   HASH    ] {md2.hexdigest()}")
+def adler32_hash(password: str)-> str:
+    """
+    Computes the Adler-32 hash of the given password and returns it as a hexadecimal string.
 
-        md4_hash = MD4.new()
-        md4_hash.update(setpass)
-        print(f"├─[    MD4   Hash    ] {md4_hash.hexdigest()}")
+    Parameters:
+    password (str): The password to hash.
 
-        hash_md5 = hashlib.md5(password.encode())
-        print(f"├─[    MD5   HASH    ] {hash_md5.hexdigest()}")
+    Returns:
+    str: The Adler-32 hash of the password in hexadecimal format.
+    """
+    return format(zlib.adler32(bytes_to_str(password)) & 0xFFFFFFFF, '08x')
 
-        hash_sha1 = hashlib.sha1(password.encode())
-        print(f"├─[    SHA1  HASH    ] {hash_sha1.hexdigest()}")
+def crc32_hash(password: str)-> str:
+    """
+    Computes the CRC32 hash of the given password and returns it as a hexadecimal string.
 
-        hash_sha224 = hashlib.sha224(password.encode())
-        print(f"├─[  SHA-224   HASH  ] {hash_sha224.hexdigest()}")
+    Parameters:
+    password (str): The password to hash.
 
-        hash_sha256 = hashlib.sha256(password.encode())
-        print(f"├─[  SHA-256   HASH  ] {hash_sha256.hexdigest()}")
+    Returns:
+    str: The CRC32 hash of the password in hexadecimal format.
+    """
+    return format(zlib.crc32(bytes_to_str(password)) & 0xFFFFFFFF, '08x')
 
-        hash_sha384 = hashlib.sha384(password.encode())
-        print(f"├─[  SHA-384   HASH  ] {hash_sha384.hexdigest()}")
+def generate_hashes(password: str, hash_methods: str):
+    """
+    Computes and prints hashes for the given password using the specified hash methods.
 
-        hash_sha512 = hashlib.sha512(password.encode())
-        print(f"├─[  SHA-512   HASH  ] {hash_sha512.hexdigest()}")
+    Parameters:
+    password (str): The password to hash.
+    hash_methods (list of str): A list of hash methods to use (e.g., ['md5', 'sha256']).
 
-        hash_sha3_224 = hashlib.sha3_224(password.encode())
-        print(f"├─[  sha3-224  HASH  ] {hash_sha3_224.hexdigest()}")
+    For each hash method:
+        - MD2 and MD4 hashes are computed using `pycryptodome`.
+        - NTLM hash is computed using `passlib`.
+        - Adler-32 and CRC32 hashes are computed using `zlib`.
+        - For other hash methods, the `hashlib` library is used.
+    """
+    for method in hash_methods:
+        if method == 'md2':
+            h = MD2.new()
+        elif method == 'md4':
+            h = MD4.new()
+        elif method == 'ntlm':
+            print_hash('NTLM HASH', nthash.hash(password))
+            continue
+        elif method == 'adler32':
+            print_hash('Adler-32', adler32_hash(password))
+            continue
+        elif method == 'crc32':
+            print_hash('CRC32     ', crc32_hash(password))
+            continue
+        else:
+            try:
+                h = hashlib.new(method)
+            except ValueError:
+                print(f"Unsupported hash method: {method}")
+                continue
+        h.update(bytes_to_str(password))
+        if method in ['shake_128', 'shake_256']:
+            hash_value = h.hexdigest(16)
+        else:
+            hash_value = h.hexdigest()
+        print_hash(f'{method.upper()} HASH', hash_value)
 
-        hash_sha3_256 = hashlib.sha3_256(password.encode())
-        print(f"├─[  SHA3-256  HASH  ] {hash_sha3_256.hexdigest()}")
+def hashgenerator(password: str, hashvalue: str):
+    """
+    Determines which hash methods to use based on the `hashvalue` argument and generates the corresponding hashes.
 
-        hash_sha3_384 = hashlib.sha3_384(password.encode())
-        print(f"├─[  SHA3-384  HASH  ] {hash_sha3_384.hexdigest()}")
+    Args:
+    password (str): The password to hash.
+    hashvalue (str): Specifies which hash methods to use. If "all", hashes for all supported methods are generated.
 
-        hash_sha3_512 = hashlib.sha3_512(password.encode())
-        print(f"├─[  SHA3-512  HASH  ] {hash_sha3_512.hexdigest()}")
-
-        hash_shake_128 = hashlib.shake_128(password.encode())
-        print(f"├─[  SHAKE-128 HASH  ] {hash_shake_128.hexdigest(16)}")
-
-        hash_shake_256 = hashlib.shake_256(password.encode())
-        print(f"├─[  SHAKE-256 HASH  ] {hash_shake_256.hexdigest(16)}")
-
-        hash_blake2b = hashlib.blake2b(password.encode())
-        print(f"├─[  blake2b   HASH  ] {hash_blake2b.hexdigest()}")
-
-        hash_blake2s = hashlib.blake2s(password.encode())
-        print(f"├─[  blake2s   HASH  ] {hash_blake2s.hexdigest()}")
-
-        hash_NTLM = nthash.hash(password)
-        print(f"├─[    NTLM  HASH    ] {hash_NTLM}")
-
-        def adler32_hash(password):
-            setpass = bytes(password, 'utf-8')
-            adler32_checksum = zlib.adler32(setpass)
-            return format(adler32_checksum & 0xFFFFFFFF, '08x')
-        adler32_checksum = adler32_hash(password)
-        print(f"├─[ Adler32 checksum ] {adler32_checksum}")
-
-        def crc32_hash(password):
-            setpass = bytes(password, 'utf-8')
-            crc32_checksum = zlib.crc32(setpass)
-            return format(crc32_checksum & 0xFFFFFFFF, '08x')
-        crc32_checksum = crc32_hash(password)
-        print(f"└─[ CRC-32  checksum ] {crc32_checksum}")
-
+    If `hashvalue` is "all", the function generates hashes using all supported methods. Otherwise, it generates hashes using the specified method.
+    """
+    if hashvalue == "all":
+        hash_methods = [
+            'md2', 'md4', 'md5', 'sha1', 'sha224', 'sha256',
+            'sha384', 'sha512', 'sha3_224', 'sha3_256',
+            'sha3_384', 'sha3_512', 'shake_128', 'shake_256',
+            'blake2b', 'blake2s', 'ntlm', 'adler32', 'crc32'
+        ]
     else:
-        setpass = bytes(password, 'utf-8')
-        h = hashlib.new(hashvalue)
-        h.update(setpass)
-        Hash = h.hexdigest()
-        print(f"└─[{hashvalue} Hash] {Hash}")
-
-
-
+        hash_methods = [hashvalue]
+    generate_hashes(password, hash_methods)

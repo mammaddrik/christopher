@@ -55,6 +55,7 @@ import time
 import hashlib
 import string
 import re
+import secrets
 from datetime import datetime
 from itertools import product
 from hmac import compare_digest
@@ -819,10 +820,61 @@ def christopher():
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            message = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Rot13]\n├─[Enter your text]"+color_banner[1]+"$ "+Color.End)
-            text = rot13(message)
-            print(f"└─[Output: {text}]")
-            again()
+            message = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Rot13]\n├─[Enter your text]"+color_banner[1]+"$ "+Color.End).lower().strip()
+            if len(message) == 0:
+                slowprint("└─["+Color.BRed+"Message cannot be empty"+Color.End+"]")
+                again()
+            elif message.isdigit():
+                slowprint("└─["+Color.BRed+"Message cannot be only number"+Color.End+"]")
+                again()
+            else:
+                print(f"└─[Output: {rot13(message)}]")
+                again()
+
+        # One-Time Pad Cipher
+        elif (select == "15"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
+            pick = input("    [01]Encryption       [02]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Classic Cipher/One-Time Pad Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
+
+            #::::: Encryption :::::
+            if(pick == "1" or pick == "01"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                plaintext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/One-Time Pad Cipher/Encryption]\n├─[Enter your Plaintext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                if len(plaintext) == 0:
+                    slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
+                    again()
+                SYMBOLS = string.ascii_letters
+                key = ""
+                for i in range(len(plaintext)):
+                    key += secrets.choice(SYMBOLS)
+                print(f"├─[Key: {key}]")
+                ciphertext = vigenère_encrypt(plaintext, key)
+                print(f"└─[Ciphertext: {ciphertext}]")
+                again()
+
+            #::::: Decryption :::::
+            elif(pick == "2" or pick == "02"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Classic Cipher/One-Time Pad Cipher/Decryption]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                if len(ciphertext) == 0:
+                    slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
+                    again()
+                key = input("├─[Enter the key]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                plaintext = vigenère_decrypt(ciphertext, key)
+                print(f"└─[Plaintext: {plaintext.lower()}]")
+                again()
+
+            #::::: Back to Main Menu :::::
+            elif (pick == "99"):
+                christopher()
+            else:
+                again()
 
         #::::: Back to Main Menu :::::
         elif select == "99":
@@ -850,7 +902,7 @@ def christopher():
                 time.sleep(0.4)
                 print(Banner.banner)
                 password = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Hash Function/Hash Generator]\n├─[Enter the password]"+color_banner[1]+"$ "+Color.End).lower().strip()
-                hashvalue = input("├───────────────┬───────────────┬───────────────┐\n├─[01]MD2       ├─[2]MD4        ├─[03]MD5       │\n├─[04]SHA1      ├─[05]SHA224    ├─[06]SHA256    │\n├─[07]SHA384    ├─[08]SHA512    ├─[09]sha3-224  │\n├─[10]sha3-256  ├─[11]sha3-384  ├─[12]sha3-512  │\n├─[13]shake-128 ├─[14]shake-256 ├─[15]blake2b   │\n├─[16]blake2s   ├─[17]NTLM      ├─[18]adler32   │\n├─[19]crc32     ├─[20]all       ├─[21]Back      │\n├───────────────┴───────────────┴───────────────┘\n├─[Select the function]"+color_banner[1]+"$ "+Color.End)
+                hashvalue = input("├───────────────┬───────────────┬───────────────┐\n├─[01]MD2       ├─[2]MD4        ├─[03]MD5       │\n├─[04]SHA1      ├─[05]SHA224    ├─[06]SHA256    │\n├─[07]SHA384    ├─[08]SHA512    ├─[09]sha3-224  │\n├─[10]sha3-256  ├─[11]sha3-384  ├─[12]sha3-512  │\n├─[13]shake-128 ├─[14]shake-256 ├─[15]blake2b   │\n├─[16]blake2s   ├─[17]NTLM      ├─[18]adler32   │\n├─[19]crc32     ├─[20]all       ├─[21]Back      │\n├───────────────┴───────────────┴───────────────┘\n└─[Select the function]"+color_banner[1]+"$ "+Color.End)
                 if (hashvalue == "1" or hashvalue == "01"):
                     hashvalue = "md2"
                 elif (hashvalue == "2" or hashvalue == "02"):
@@ -894,7 +946,7 @@ def christopher():
                 elif (hashvalue == "21"):
                     christopher()
                 else:
-                    slowprint(Color.BRed +"Enter the Available Algorithm.")
+                    slowprint("└─["+Color.BRed+"Enter the Available Function"+Color.End+"]")
                     again()
                 hashgenerator(password, hashvalue)
                 again()
