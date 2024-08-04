@@ -901,8 +901,14 @@ def christopher():
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                password = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Hash Function/Hash Generator]\n├─[Enter the password]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                password = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Hash Function/Hash Generator]\n├─[Enter the password]"+color_banner[1]+"$ "+Color.End).strip()
+                if len(password) == 0:
+                    slowprint("└─["+Color.BRed+"Password cannot be empty"+Color.End+"]")
+                    again()
                 hashvalue = input("├───────────────┬───────────────┬───────────────┐\n├─[01]MD2       ├─[2]MD4        ├─[03]MD5       │\n├─[04]SHA1      ├─[05]SHA224    ├─[06]SHA256    │\n├─[07]SHA384    ├─[08]SHA512    ├─[09]sha3-224  │\n├─[10]sha3-256  ├─[11]sha3-384  ├─[12]sha3-512  │\n├─[13]shake-128 ├─[14]shake-256 ├─[15]blake2b   │\n├─[16]blake2s   ├─[17]NTLM      ├─[18]adler32   │\n├─[19]crc32     ├─[20]all       ├─[21]Back      │\n├───────────────┴───────────────┴───────────────┘\n└─[Select the function]"+color_banner[1]+"$ "+Color.End)
+                if len(hashvalue) == 0:
+                    slowprint("└─["+Color.BRed+"Hashvalue cannot be empty"+Color.End+"]")
+                    again()
                 if (hashvalue == "1" or hashvalue == "01"):
                     hashvalue = "md2"
                 elif (hashvalue == "2" or hashvalue == "02"):
@@ -956,68 +962,22 @@ def christopher():
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                pick = input("    [01]All Situations              [02]Custom\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Modern Cipher/Hash Function/Hash Cracker]\n└─"+color_banner[1]+"$ "+Color.End)
-
-                #::::: All Situations :::::
-                if (pick == "1" or pick == "01"):
-                    clearScr()
-                    time.sleep(0.4)
-                    print(Banner.banner)
-                    Hash = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Hash Function/Hash Cracker/All Situations]\n├─[Enter the hash]"+color_banner[1]+"$ "+Color.End).lower().strip()
-                    if len(Hash) == 32:
-                        hashvalue = "md5"
-                    elif len(Hash) == 40:
-                        hashvalue = "sha1"
-                    elif len(Hash) == 64:
-                        hashvalue = "sha256"
-                    elif len(Hash) == 96:
-                        hashvalue = "sha384"
-                    elif len(Hash) == 128:
-                        hashvalue = "sha512"
-                    else:
-                        slowprint("└─["+Color.BRed+"Hash Function: Unknown"+Color.End+"]")
-                        again()
-                    counter = 0
-                    character = string.ascii_letters+string.digits+string.punctuation
-                    t1 = datetime.now()
-                    for i in range(1, 1000):
-                        for j in product(character, repeat=i):
-                            word = "".join(j)
-                            h = hashlib.new(hashvalue)
-                            setpass = bytes(word.strip(), "utf-8")
-                            h.update(setpass)
-                            hashedguess = h.hexdigest()
-                            counter+=1
-                            print(f"├─[Password number {counter}: {word.strip()}]")
-                            if compare_digest(Hash, hashedguess):
-                                t2 = datetime.now()
-                                t3 = t2 - t1
-                                print(f"├─[Finishing Time: {t3}]")
-                                print("└─[Password: "+Color.BGreen+f"{word}"+Color.End+"]")
-                                again()
-                    else:
-                        slowprint("└─["+Color.BRed+"Password Not Found"+Color.End+"]")
-                        again()
-
-                #::::: Custom :::::
-                elif (pick == "2" or pick == "02"):
-                    clearScr()
-                    time.sleep(0.4)
-                    print(Banner.banner)
-                    Hash = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Hash Function/Hash Cracker/Custom]\n├─[Enter the hash]"+color_banner[1]+"$ "+Color.End).lower().strip()
-                    if len(Hash) == 32:
-                        hashvalue = "md5"
-                    elif len(Hash) == 40:
-                        hashvalue = "sha1"
-                    elif len(Hash) == 64:
-                        hashvalue = "sha256"
-                    elif len(Hash) == 96:
-                        hashvalue = "sha384"
-                    elif len(Hash) == 128:
-                        hashvalue = "sha512"
-                    else:
-                        slowprint("└─["+Color.BRed+"Hash Function: Unknown"+Color.End+"]")
-                        again()
+                Hash = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Hash Function/Hash Cracker]\n├─[Enter the hash]"+color_banner[1]+"$ "+Color.End).strip()
+                if len(Hash) == 32:
+                    hashvalue = "md5"
+                elif len(Hash) == 40:
+                    hashvalue = "sha1"
+                elif len(Hash) == 64:
+                    hashvalue = "sha256"
+                elif len(Hash) == 96:
+                    hashvalue = "sha384"
+                elif len(Hash) == 128:
+                    hashvalue = "sha512"
+                else:
+                    slowprint("└─["+Color.BRed+"Hash Function: Unknown"+Color.End+"]")
+                    again()
+                pick = input("├─[Do you have a passwordlist]─[Y/n]"+color_banner[1]+"$ "+Color.End)
+                if (pick.upper() == "Y" or pick == ""):
                     pwfile = input("├─[Enter the password file name]"+color_banner[1]+"$ "+Color.End)
                     try:
                         with open(pwfile, "r") as f:
@@ -1033,13 +993,13 @@ def christopher():
                                 setpass = bytes(password.strip(), "utf-8")
                                 h.update(setpass)
                                 hashedguess = h.hexdigest()
-                                print(f"├─[Password number {counter}: {password.strip()}]")
                                 counter += 1
+                                print(f"├─[Password number {counter}: {password.strip()}]")
                                 if compare_digest(Hash, hashedguess):
                                     t2 = datetime.now()
                                     t3 = t2 - t1
                                     print(f"├─[Finishing Time: {t3}]")
-                                    print("└─[Password: "+Color.BGreen+f"{password}"+Color.End+"]")
+                                    print("└─[Password: "+Color.BGreen+f"{password.strip()}"+Color.End+"]")
                                     again()
                             else:
                                 slowprint("└─["+Color.BRed+"Password Not Found"+Color.End+"]")
@@ -1047,12 +1007,35 @@ def christopher():
                     except FileNotFoundError:
                         slowprint("└─["+Color.BRed+"File Not Found"+Color.End+"]")
                         again()
-
-                #::::: Back to Main Menu :::::
-                elif (pick == "99"):
-                    christopher()
+                    except OSError:
+                        slowprint("└─["+Color.BRed+"File Not Found Check the filename"+Color.End+"]")
+                        again()
+                elif (pick.upper() == "N"):
+                    counter = 0
+                    character = string.ascii_letters+string.digits+string.punctuation
+                    t1 = datetime.now()
+                    for i in range(1, 1000):
+                        for j in product(character, repeat=i):
+                            word = "".join(j)
+                            h = hashlib.new(hashvalue)
+                            setpass = bytes(word.strip(), "utf-8")
+                            h.update(setpass)
+                            hashedguess = h.hexdigest()
+                            counter += 1
+                            print(f"├─[Password number {counter}: {word.strip()}]", end='\r')
+                            if compare_digest(Hash, hashedguess):
+                                t2 = datetime.now()
+                                t3 = t2 - t1
+                                print(f"├─[Password number {counter}: {word.strip()}]")
+                                print(f"├─[Finishing Time: {t3}]")
+                                print("└─[Password: "+Color.BGreen+f"{word}"+Color.End+"]")
+                                again()
+                    else:
+                        slowprint("└─["+Color.BRed+"Password Not Found"+Color.End+"]")
+                        again()
                 else:
-                    again()
+                    clearScr()
+                    christopher()
 
             #::::: Hash Identifier :::::
             elif (pick == "3" or pick == "03"):
