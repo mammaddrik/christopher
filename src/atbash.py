@@ -1,4 +1,4 @@
-def atbash(message: any) -> str:
+def atbash(message: str) -> str:
     """
     Encrypts the given message using the Atbash cipher method.
 
