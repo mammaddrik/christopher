@@ -40,6 +40,11 @@ from src.rot13 import rot13
 #* :::::  Modern Cipher :::::
 from src.hashgenerator import hashgenerator
 from src.hashid import hashid
+from src.keyboard import Keyboard
+from src.plugboard import Plugboard
+from src.rotor import Rotor
+from src.reflector import Reflector
+from src.enigma import Enigma
 
 #* ::::: Tools :::::
 from src.wordlist import wordlist
@@ -799,7 +804,7 @@ def christopher():
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            message = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Morse Code]\n├─"+color_banner[1]+"$ "+Color.End).upper()
+            message = input("\n┌───(christopher)─[~/christopher/Classic Cipher/Morse Code]\n├─[Enter your message]"+color_banner[1]+"$ "+Color.End).upper()
             if len(message) == 0:
                 slowprint("└─["+Color.BRed+"Message cannot be empty"+Color.End+"]")
                 again()
@@ -1050,6 +1055,50 @@ def christopher():
             elif (pick == "99"):
                 christopher()
             else:
+                again()
+
+        #::::: Hash Function :::::
+        if (select == "2" or select == "02"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
+            I = Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q")
+            II = Rotor("AJDKSIRUXBLHWTMCQGZNPYFVOE", "E")
+            III = Rotor("BDFHJLCPRTXVZNYEIWGAKMUSQO", "V")
+            IV = Rotor("ESOVPZJAYQUIRHXLNFTGKDCMWB", "J")
+            V = Rotor("VZBRGITYUPSDNHLXAWMJQOFECK", "Z")
+            A = Reflector("EJMZALYXVBWFCRQUONTSPIKHGD")
+            B = Reflector("YRUHQSLDPXNGOKMIEBFZCWVJAT")
+            C = Reflector("FVPJIAOYEDRZXWGCTKUQSBNMHL")
+            KB = Keyboard()
+            PB = Plugboard(["AB", "CD", "EF"])
+            ENIGMA = Enigma(A, I, II, III, PB, KB)
+            ENIGMA.set_rings((1,1,1))
+            message = input("\n┌───(christopher)─[~/christopher/Modern Cipher/Enigma Machine]\n├─[Enter your message]"+color_banner[1]+"$ "+Color.End).upper().strip()
+            if len(message) == 0:
+                slowprint("└─["+Color.BRed+"Message cannot be empty"+Color.End+"]")
+                again()
+            elif message.isdigit():
+                slowprint("└─["+Color.BRed+"Message cannot be only number"+Color.End+"]")
+                again()
+            message = ''.join(c for c in message if c.isalpha() or c.isspace())
+            key = input("├─[Enter the key]"+color_banner[1]+"$ "+Color.End).upper().strip()
+            if len(key) == 0:
+                slowprint("└─["+Color.BRed+"Key cannot be empty"+Color.End+"]")
+                again()
+            elif key.isdigit():
+                slowprint("└─["+Color.BRed+"Key cannot be only number"+Color.End+"]")
+                again()
+            key = ''.join(c for c in key if c.isalpha() or c.isspace())
+            if len(key) == 3:
+                ENIGMA.set_key(key)
+                ciphertext = ""
+                for letter in message:
+                    ciphertext = ciphertext + ENIGMA.encipher(letter)
+                print(f"└─[Output: {ciphertext}]")
+                again()
+            else:
+                slowprint("└─["+Color.BRed+"The key must be exactly three characters long."+Color.End+"]")
                 again()
 
         #::::: Back to Main Menu :::::

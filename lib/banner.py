@@ -42,7 +42,7 @@ class Banner:
    \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
    /"""+color_banner[2]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
    \__________________________________________/
-   [01]Hash Function        [02]
+   [01]Hash Function        [02]Enigma Machine
    [03]                     [04]
    [05]                     [06]
    [07]                     [08]
