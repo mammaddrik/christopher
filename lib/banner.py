@@ -13,12 +13,10 @@ class Banner:
    \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
    /"""+color_banner[2]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
    \__________________________________________/
-   [01]Classic Cipher         [02]Modern Cipher
-   [03]Steganography          [04]Tools
-   [05]Github                 [99]Exit""")
+   [01]Cryptography          [02]Steganography
+   [03]Tools                 [04]Github""")
 
-    #::::: Classic :::::
-    classic_banner = (Color.End + r"""
+    cipher_banner = (Color.End + r"""
 \ \ """+color_banner[0]+r"""Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee"""+Color.End+r""" / /
  \ \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/ /
   \ """+color_banner[1]+r"""        abcdefghijklm-nopqrstuvwxyz        """+Color.End+r"""/
@@ -32,27 +30,9 @@ class Banner:
    [09]Polybius Square      [10]Columnar Cipher
    [11]Substitution Cipher  [12]Baconian Cipher
    [13]Morse Code           [14]Rot13 Cipher
-   [15]One-Time Pad Cipher  [99]Back to Main Menu""")
-
-    #::::: Modern :::::
-    modern_banner = (Color.End + r"""
-\ \ """+color_banner[0]+r"""Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee"""+Color.End+r""" / /
- \ \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/ /
-  \ """+color_banner[1]+r"""        abcdefghijklm-nopqrstuvwxyz        """+Color.End+r"""/
-   \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
-   /"""+color_banner[2]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
-   \__________________________________________/
-   [01]Hash Function        [02]Enigma Machine
-   [03]AES(CBC)             [04]
-   [05]                     [06]
-   [07]                     [08]
-   [09]                     [10]
-   [11]                     [12]
-   [13]                     [14]
-   [15]                     [16]
-   [17]                     [18]
-   [19]                     [20]
-   [99]Back to Main Menu""")
+   [15]One-Time Pad Cipher  [16]Hash Function
+   [17]Enigma Machine       [18]AES(CBC)
+   [19]Public Key Cipher    [20]RSA""")
 
     #::::: Steganography :::::
     quantum_banner = (Color.End + r"""
