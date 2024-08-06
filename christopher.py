@@ -45,6 +45,7 @@ from src.plugboard import Plugboard
 from src.rotor import Rotor
 from src.reflector import Reflector
 from src.enigma import Enigma
+from src.aes import aes_encrypt, aes_decrypt, generate_key
 
 #* ::::: Tools :::::
 from src.wordlist import wordlist
@@ -1057,7 +1058,7 @@ def christopher():
             else:
                 again()
 
-        #::::: Hash Function :::::
+        #::::: Enigma Machine :::::
         if (select == "2" or select == "02"):
             clearScr()
             time.sleep(0.4)
@@ -1099,6 +1100,65 @@ def christopher():
                 again()
             else:
                 slowprint("└─["+Color.BRed+"The key must be exactly three characters long."+Color.End+"]")
+                again()
+
+        #::::: AES(CBC) :::::
+        if (select == "3" or select == "03"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
+            pick = input("    [01]Encryption              [02]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Modern Cipher/AES(CBC)]\n└─"+color_banner[1]+"$ "+Color.End)
+
+            #::::: Encryption :::::
+            if(pick == "1" or pick == "01"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                plaintext = input("\n┌───(christopher)─[~/christopher/Modern Cipher/AES(CBC)/Encryption]\n├─[Enter your Plaintext]"+color_banner[1]+"$ "+Color.End).strip()
+                if len(plaintext) == 0:
+                    slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
+                    again()
+                key_length = int(input("├─[Enter key length (16, 24, or 32 bytes)]"+color_banner[1]+"$ "+Color.End).strip())
+                if key_length not in [16, 24, 32]:
+                    slowprint("└─["+Color.BRed+"Key length must be 16, 24, or 32 bytes long"+Color.End+"]")
+                    again()
+                key = generate_key(key_length)
+                print(f"├─[Key (hex): {key.hex()}]")
+                iv, ciphertext = aes_encrypt(plaintext, key)
+                print(f"├─[Initialization Vector: {iv}]")
+                print(f"└─[Ciphertext: {ciphertext}]")
+                again()
+
+            #::::: Decryption :::::
+            elif(pick == "2" or pick == "02"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Modern Cipher/AES(CBC)/Decryption]\n├─[Enter the base64 encoded ciphertext]"+color_banner[1]+"$ "+Color.End).strip()
+                if len(ciphertext) == 0:
+                    slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
+                    again()
+                if len(ciphertext) % 4 != 0:
+                    slowprint("└─["+Color.BRed+"The ciphertext is not Base64 encoded"+Color.End+"]")
+                    again()
+                iv = input("├─[Enter the Initialization Vector]"+color_banner[1]+"$ "+Color.End).strip()
+                if len(iv) == 0:
+                    slowprint("└─["+Color.BRed+"Initialization Vector cannot be empty"+Color.End+"]")
+                    again()
+                key_hex = input("├─[Enter the key as a hexadecimal]"+color_banner[1]+"$ "+Color.End).strip()
+                if len(key_hex) == 0:
+                    slowprint("└─["+Color.BRed+"key cannot be empty"+Color.End+"]")
+                    again()
+                try:
+                    key = bytes.fromhex(key_hex)
+                except ValueError:
+                    slowprint("└─["+Color.BRed+"non-hexadecimal number found"+Color.End+"]")
+                    again()
+                if len(key) not in [16, 24, 32]:
+                    slowprint("└─["+Color.BRed+"Key length must be 16, 24, or 32 bytes long"+Color.End+"]")
+                    again()
+                plaintext = aes_decrypt(iv, ciphertext, key)
+                print(f"└─[Plaintext: {plaintext}]")
                 again()
 
         #::::: Back to Main Menu :::::
