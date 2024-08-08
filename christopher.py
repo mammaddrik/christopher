@@ -43,7 +43,8 @@ from src.rotor import Rotor
 from src.reflector import Reflector
 from src.enigma import Enigma
 from src.aes import aes_encrypt, aes_decrypt, generate_key
-
+from src.keygenerator import generateKeys, writeKeysToFile
+from src.publickeycipher import publickey_encrypt, publickey_decrypt, readKeysFromFile
 #::::: Tools :::::
 from src.wordlist import wordlist
 from src.customwordlist import interactive
@@ -1145,6 +1146,80 @@ def christopher():
                 print(f"└─[Plaintext: {plaintext}]")
                 again()
 
+        #::::: Public Key Cipher :::::
+        elif (select == "19"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
+            pick = input("    [01]Encryption       [02]Decryption\n    [03]Key Generator    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Cryptography/Public Key Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
+
+            #::::: Encryption :::::
+            if(pick == "1" or pick == "01"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                plaintext = input("\n┌───(christopher)─[~/christopher/Cryptography/Public Key Cipher/Encryption]\n├─[Enter your Plaintext]"+color_banner[1]+"$ "+Color.End).strip()
+                if len(plaintext) == 0:
+                    slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
+                    again()
+                keyfile = input("├─[Enter the key file]"+color_banner[1]+"$ "+Color.End).strip()
+                if len(keyfile) == 0:
+                    slowprint("└─["+Color.BRed+"key cannot be empty"+Color.End+"]")
+                    again()
+                outputfile = input("├─[Enter the output file]"+color_banner[1]+"$ "+Color.End).strip()
+                if len(outputfile) == 0:
+                    slowprint("└─["+Color.BRed+"output file be empty"+Color.End+"]")
+                    again()
+                public, private = readKeysFromFile(keyfile)
+                publickey_encrypt(plaintext,public,outputfile)
+                print(f"└─[The ciphertext was saved in file {outputfile}]")
+                again()
+
+            #::::: Decryption :::::
+            elif(pick == "2" or pick == "02"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                encrypted_file = input("\n┌───(christopher)─[~/christopher/Cryptography/Public Key Cipher/Encryption]\n├─[Enter your Encrypted file]"+color_banner[1]+"$ "+Color.End).strip()
+                if len(encrypted_file) == 0:
+                    slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
+                    again()
+                keyfile = input("├─[Enter the key file]"+color_banner[1]+"$ "+Color.End).strip()
+                if len(keyfile) == 0:
+                    slowprint("└─["+Color.BRed+"key cannot be empty"+Color.End+"]")
+                    again()
+                public, private = readKeysFromFile(keyfile)
+                print(f"└─[Plaintext: {publickey_decrypt(encrypted_file, private)}]")
+                again()
+
+            #::::: Key Generator :::::
+            elif(pick == "3" or pick == "03"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                try:
+                    keysize = int(input("\n┌───(christopher)─[~/christopher/Cryptography/Public Key Cipher/Key Generator]\n├─[Enter the key size]"+color_banner[1]+"$ "+Color.End))
+                    if keysize <= 1:
+                        slowprint("└─["+Color.BRed+"The key size value must be greater than 1"+Color.End+"]")
+                        again()
+                    filename = input("├─[Enter the name of the file]"+color_banner[1]+"$ "+Color.End).strip()
+                    if len(filename) == 0:
+                        slowprint("└─["+Color.BRed+"File name cannot be empty"+Color.End+"]")
+                        again()
+                    publickey, privatekey = generateKeys(keysize)
+                    writeKeysToFile(keysize, publickey, privatekey, filename)
+                    print(f"└─[Public key and Private key saved on {filename}_Public.key and {filename}_Private.key]")
+                    again()
+                except ValueError:
+                    slowprint("└─["+Color.BRed+"Key Size value must be a number"+Color.End+"]")
+                    again()
+
+            #::::: Back to Main Menu :::::
+            elif (pick == "99"):
+                christopher()
+            else:
+                again()
+
         #::::: Back to Main Menu :::::
         elif select == "99":
             christopher()
@@ -1155,7 +1230,7 @@ def christopher():
     elif (choice == "2" or choice == "02"):
         clearScr()
         time.sleep(0.4)
-        print(Banner.quantum_banner)
+        print(Banner.steganography_banner)
         select = input("\n┌───(christopher)─[~/christopher/Steganography]\n└─"+color_banner[1]+"$ "+Color.End)
         if select == "99":
             christopher()

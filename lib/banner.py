@@ -35,7 +35,7 @@ class Banner:
    [19]Public Key Cipher    [20]RSA""")
 
     #::::: Steganography :::::
-    quantum_banner = (Color.End + r"""
+    steganography_banner = (Color.End + r"""
 \ \ """+color_banner[0]+r"""Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee"""+Color.End+r""" / /
  \ \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/ /
   \ """+color_banner[1]+r"""        abcdefghijklm-nopqrstuvwxyz        """+Color.End+r"""/
