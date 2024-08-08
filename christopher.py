@@ -67,6 +67,7 @@ from hmac import compare_digest
 #::::: Libraries to be installed :::::
 try:
     import pandas as pd
+    import rsa
     from pwinput import pwinput
 except ImportError:
     os.system("pip install -r requirements.txt")
@@ -1180,7 +1181,7 @@ def christopher():
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                encrypted_file = input("\n┌───(christopher)─[~/christopher/Cryptography/Public Key Cipher/Encryption]\n├─[Enter your Encrypted file]"+color_banner[1]+"$ "+Color.End).strip()
+                encrypted_file = input("\n┌───(christopher)─[~/christopher/Cryptography/Public Key Cipher/Decryption]\n├─[Enter your Encrypted file]"+color_banner[1]+"$ "+Color.End).strip()
                 if len(encrypted_file) == 0:
                     slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
                     again()
@@ -1218,6 +1219,85 @@ def christopher():
             elif (pick == "99"):
                 christopher()
             else:
+                again()
+
+        # ::::: RSA :::::
+        elif (select == "20"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
+            pick = input("    [01]Encryption       [02]Decryption\n    [03]Key Generator    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Cryptography/RSA]\n└─"+color_banner[1]+"$ "+Color.End)
+
+            #::::: Encryption :::::
+            if(pick == "1" or pick == "01"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                try:
+                    with open("public.pem", 'rb') as f:
+                        publickey = rsa.PublicKey.load_pkcs1(f.read())
+                        filesize = os.path.getsize((publickey))
+                        if filesize == 0:
+                            slowprint("└─["+Color.BRed+"File is Empty"+Color.End+"]")
+                            again()
+                    with open("private.pem", 'rb') as f:
+                        publickey = rsa.PrivateKey.load_pkcs1(f.read())
+                        filesize = os.path.getsize((publickey))
+                        if filesize == 0:
+                            slowprint("└─["+Color.BRed+"File is Empty"+Color.End+"]")
+                            again()
+                except FileNotFoundError:
+                    slowprint("└─["+Color.BRed+"File Not Found"+Color.End+"]")
+                    again()
+                plaintext = input("\n┌───(christopher)─[~/christopher/Cryptography/RSA/Encryption]\n├─[Enter your Plaintext]"+color_banner[1]+"$ "+Color.End).strip()
+                if len(plaintext) == 0:
+                    slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
+                    again()
+                encrypted_message = rsa.encrypt(plaintext.encode(), publickey)
+                with open("encrypted.message", "wb") as f:
+                    f.write(encrypted_message)
+                print(f"└─[Ciphertext saved on encrypted.message]")
+                again()
+
+            #::::: Decryption :::::
+            elif(pick == "2" or pick == "02"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                try:
+                    with open("public.pem", 'rb') as f:
+                        publickey = rsa.PublicKey.load_pkcs1(f.read())
+                        filesize = os.path.getsize((publickey))
+                        if filesize == 0:
+                            slowprint("└─["+Color.BRed+"File is Empty"+Color.End+"]")
+                            again()
+                    with open("private.pem", 'rb') as f:
+                        publickey = rsa.PrivateKey.load_pkcs1(f.read())
+                        filesize = os.path.getsize((publickey))
+                        if filesize == 0:
+                            slowprint("└─["+Color.BRed+"File is Empty"+Color.End+"]")
+                            again()
+                except FileNotFoundError:
+                    slowprint("└─["+Color.BRed+"File Not Found"+Color.End+"]")
+                    again()
+                encrypted_message = open("encrypted.message", "rb").read()
+                clear_message = rsa.decrypt(encrypted_message, publickey)
+                print("\n┌───(christopher)─[~/christopher/Cryptography/RSA/Decryption]")
+                print(f"Plaintext: {clear_message.decode()}]")
+                again()
+
+            #::::: Key Generator :::::
+            elif(pick == "3" or pick == "03"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                publickey, privatekey = rsa.newkeys(1024)
+                with open("public.pem", 'wb') as f:
+                    f.write(publickey.save_pkcs1("PEM"))
+                with open("private.pem", 'wb') as f:
+                    f.write(privatekey.save_pkcs1("PEM"))
+                print("\n┌───(christopher)─[~/christopher/Cryptography/RSA/Key Generator]")
+                print(f"└─[Public key and Private key saved on public.pem and private.pem]")
                 again()
 
         #::::: Back to Main Menu :::::
