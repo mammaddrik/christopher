@@ -42,8 +42,8 @@ class Banner:
    \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
    /"""+color_banner[2]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
    \__________________________________________/
-   [01]                 [02]
-   [03]Steganography    [99]Back to Main Menu""")
+   [01]Image             [02]Audio
+   [99]Back to Main Menu""")
 
     #::::: Tools :::::
     tool_banner = (Color.End + r"""
@@ -54,8 +54,8 @@ class Banner:
    /"""+color_banner[2]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
    \__________________________________________/
    [01]Password List      [02]Password Manager
-   [03]Password generator [04]Check Password
-   [05]Frequency Analysis [99]Back to Main Menu""")
+   [03]Password generator [04]Frequency Analysis 
+   [99]Back to Main Menu""")
 
     #::::: Main Menu (Empty) :::::
     banner = (Color.End + r"""

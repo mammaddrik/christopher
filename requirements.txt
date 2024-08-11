@@ -3,3 +3,5 @@ pwinput
 pycryptodome
 passlib
 rsa
+stepic
+eyed3

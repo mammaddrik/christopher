@@ -1,4 +1,18 @@
-def gcd(a, b):
+def gcd(a:int, b:int) -> int:
+    """
+    Calculate the Greatest Common Divisor (GCD) of two integers using the Euclidean algorithm
+    
+    Parameters:
+    a(int): The first number.
+    b(int): The second number.
+    
+    Returns:
+    b(int): The Greatest Common Divisor (GCD) of two number.
+    
+    Example:
+    >>> gcd(48,18)
+    6
+    """
     while a != 0:
         a, b = b % a, a
     return b

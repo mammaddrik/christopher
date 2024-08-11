@@ -45,6 +45,9 @@ from src.enigma import Enigma
 from src.aes import aes_encrypt, aes_decrypt, generate_key
 from src.keygenerator import generateKeys, writeKeysToFile
 from src.publickeycipher import publickey_encrypt, publickey_decrypt, readKeysFromFile
+from src.image import image_encrypt, image_decrypt
+from src.audio import audio_encrypt, audio_decrypt
+
 #::::: Tools :::::
 from src.wordlist import wordlist
 from src.customwordlist import interactive
@@ -607,6 +610,12 @@ def christopher():
                 print(f"└─[Plaintext: {plaintext.lower()}]")
                 again()
 
+            #::::: Back to Main Menu :::::
+            elif (pick == "99"):
+                christopher()
+            else:
+                again()
+
         #::::: Columnar Cipher :::::
         elif (select == "10"):
             clearScr()
@@ -674,6 +683,12 @@ def christopher():
                         print(f"├─[Key: "+Color.BGreen+f"{key}"+Color.End+"]")
                         print(f"└─[Plaintext: {plaintext.lower()}]")
                         keep()
+                again()
+
+            #::::: Back to Main Menu :::::
+            elif (pick == "99"):
+                christopher()
+            else:
                 again()
 
         #::::: Simple Substitution  Cipher :::::
@@ -774,6 +789,12 @@ def christopher():
                     again()
                 else:
                     again()
+
+            #::::: Back to Main Menu :::::
+            elif (pick == "99"):
+                christopher()
+            else:
+                again()
 
         #::::: Baconian Cipher :::::
         elif (select == "12"):
@@ -1312,9 +1333,96 @@ def christopher():
         time.sleep(0.4)
         print(Banner.steganography_banner)
         select = input("\n┌───(christopher)─[~/christopher/Steganography]\n└─"+color_banner[1]+"$ "+Color.End)
-        if select == "99":
+
+        #::::: Image :::::
+        if (select == "1" or select == "01"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
+            pick = input("    [01]Encryption              [02]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Steganography/Image]\n└─"+color_banner[1]+"$ "+Color.End)
+
+            #::::: Encryption :::::
+            if (pick == "1" or pick == "01"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                message = input("\n┌───(christopher)─[~/christopher/Steganography/Image/Encryption]\n├─[Enter your message]"+color_banner[1]+"$ "+Color.End).strip()
+                if len(message) == 0:
+                    slowprint("└─["+Color.BRed+"Message cannot be empty"+Color.End+"]")
+                    again()
+                file = input("├─[Enter your image file]"+color_banner[1]+"$ "+Color.End).strip()
+                if len(file) == 0:
+                    slowprint("└─["+Color.BRed+"Image file cannot be empty"+Color.End+"]")
+                    again()
+                image_encrypt(message, file)
+                again()
+
+            #::::: Decryption :::::
+            elif (pick == "2" or pick == "02"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                file = input("\n┌───(christopher)─[~/christopher/Steganography/Image/Decryption]\n├─[Enter your image file]"+color_banner[1]+"$ "+Color.End).strip()
+                if len(file) == 0:
+                    slowprint("└─["+Color.BRed+"Image file cannot be empty"+Color.End+"]")
+                    again()
+                image_decrypt(file)
+                again()
+
+            #::::: Back to Main Menu :::::
+            elif (pick == "99"):
+                christopher()
+            else:
+                again()
+
+        #::::: Audio :::::
+        if (select == "2" or select == "02"):
+            clearScr()
+            time.sleep(0.4)
+            print(Banner.banner)
+            pick = input("    [01]Encryption              [02]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Steganography/Audio]\n└─"+color_banner[1]+"$ "+Color.End)
+
+            #::::: Encryption :::::
+            if (pick == "1" or pick == "01"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                message = input("\n┌───(christopher)─[~/christopher/Steganography/Audio/Encryption]\n├─[Enter your message]"+color_banner[1]+"$ "+Color.End).strip()
+                if len(message) == 0:
+                    slowprint("└─["+Color.BRed+"Message cannot be empty"+Color.End+"]")
+                    again()
+                audiofile = input("├─[Enter your audio file]"+color_banner[1]+"$ "+Color.End).strip()
+                if len(audiofile) == 0:
+                    slowprint("└─["+Color.BRed+"Audio file cannot be empty"+Color.End+"]")
+                    again()
+                imagefile = input("├─[Enter your image file]"+color_banner[1]+"$ "+Color.End).strip()
+                if len(imagefile) == 0:
+                    slowprint("└─["+Color.BRed+"Image file cannot be empty"+Color.End+"]")
+                    again()
+                audio_encrypt(message, audiofile, imagefile)
+                print(f"└─[The audio {audiofile} is saved]")
+                again()
+
+            #::::: Decryption :::::
+            elif (pick == "2" or pick == "02"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                audiofile = input("\n┌───(christopher)─[~/christopher/Steganography/Image/Decryption]\n├─[Enter your audio file]"+color_banner[1]+"$ "+Color.End).strip()
+                if len(audiofile) == 0:
+                    slowprint("└─["+Color.BRed+"Audio file cannot be empty"+Color.End+"]")
+                    again()
+                audio_decrypt(audiofile)
+                again()
+
+            #::::: Back to Main Menu :::::
+            elif (pick == "99"):
+                christopher()
+            else:
+                again()
+
+        elif select == "99":
             christopher()
-        again()
 
     #::::: Tools :::::
     elif (choice == "3" or choice == "03"):
@@ -1536,7 +1644,7 @@ def christopher():
             again()
 
         #::::: Frequency Analysis :::::
-        elif (select == "5" or select == "05"):
+        elif (select == "4" or select == "04"):
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
