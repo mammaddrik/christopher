@@ -31,7 +31,7 @@ def modular_inverse(a: int, m: int) -> int:
     else:
         return x % m
 
-def affine_encryption(plaintext: any, a: int, b: int) -> str:
+def affine_encryption(plaintext: str, a: int, b: int) -> str:
     """
     Encrypts the given plaintext using the Affine cipher method.
 
@@ -88,7 +88,7 @@ def affine_decryption(ciphertext: any, a: int, b: int) -> str:
             plaintext += char
     return plaintext
 
-def affine_crack(ciphertext: any, a: int, b: int) -> str:
+def affine_crack(ciphertext: str, a: int, b: int) -> str:
     """
     Decrypt a message encrypted with the Affine Cipher using the given key components a and b.
     
