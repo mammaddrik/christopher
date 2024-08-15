@@ -150,17 +150,17 @@ python pip install -r requirements.txt
 python christopher.py
 ```
 ### requirements
-| **requirements**  | **Command**  |
-| ------------- | ------------- |
-| pandas  | `python pip install pandas`  |
-| pwinput  | `python pip install pwinput`  |
-| pycryptodome  | `python pip install pycryptodome`  |
-| passlib  | `python pip install passlib`  |
-| rsa  | `python pip install rsa`  |
-| stepic  | `python pip install stepic`  |
-| eyed3  | `python pip install eyed3`  |
+| **Requirements**  | **Command**  | **Link**  | **Version**  |
+| ------------- | ------------- | ------------- | ------------- |
+| pandas  | `python pip install pandas`  | [pypi](https://pypi.org/project/pandas/)  | 2.2.2  |
+| pwinput  | `python pip install pwinput`  | [pypi](https://pypi.org/project/pwinput/)  | 1.0.3  |
+| pycryptodome  | `python pip install pycryptodome`  | [pypi](https://pypi.org/project/pycryptodome/)  | 3.20.0|
+| passlib  | `python pip install passlib`  | [pypi](https://pypi.org/project/passlib/)  | 1.7.4  |
+| rsa  | `python pip install rsa`  | [pypi](https://pypi.org/project/rsa/)  | 4.9  |
+| stepic  | `python pip install stepic`  | [pypi](https://pypi.org/project/stepic/)  | 0.5.0  |
+| eyed3  | `python pip install eyed3`  | [pypi](https://pypi.org/project/eyed3/)  | 0.9.7  |
 
-> **Note:** You may encounter an error while installing this requirements. If an error occurs, use the following command:
+> **Note:** You may encounter an error while installing this requirements. If an error occurs, use the following command.
 ```
 python -m pip install --upgrade pip
 python pip install -r requirements.txt
