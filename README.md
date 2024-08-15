@@ -35,49 +35,51 @@ What is Cryptography? [Here](https://en.wikipedia.org/wiki/Cryptography)<br>
 What is Steganography? [Here](https://en.wikipedia.org/wiki/Steganography)
 
 ## Including
+<details>
+
 1. **Cryptography**
     1. Atbash Cipher
     2. Caesar Cipher
         - Encryption
         - Decryption
         - Crack
-    1. Affine Cipher
+    3. Affine Cipher
        - Encryption
        - Decryption
        - Crack
-    2. Vigenère Cipher
+    4. Vigenère Cipher
        - Encryption
        - Decryption
        - Crack
-    3. Revers Text
-    4. Play Fire Cipher
+    5. Revers Text
+    6. Play Fire Cipher
        - Encryption
        - Decryption
-    5. Rail Fence Cipher
+    7. Rail Fence Cipher
        - Encryption
        - Decryption
        - Crack
-    6. Scytale Cipher
+    8. Scytale Cipher
        - Encryption
        - Decryption
-    7. Polybius Square
+    9. Polybius Square
        - Encryption
        - Decryption
-    8. Columnar Cipher
+    10. Columnar Cipher
         - Encryption
         - Decryption
         - Crack
-    9. Simple Substitution Cipher
+    11. Simple Substitution Cipher
         - Encryption
         - Decryption
         - Crack
-    10. Baconian Cipher
-    11. Morse Code
-    12. Rot13 Cipher
-    13. One-Time Pad Cipher
+    12. Baconian Cipher
+    13. Morse Code
+    14. Rot13 Cipher
+    15. One-Time Pad Cipher
         - Encryption
         - Decryption
-    14. Hash Function
+    16. Hash Function
         - Hash Generator
           - MD2
           - MD4
@@ -135,3 +137,4 @@ What is Steganography? [Here](https://en.wikipedia.org/wiki/Steganography)
         - Delete
     3. Password generator
     4. Frequency Analysis
+</details>
