@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-    <img src="https://i.postimg.cc/X7TWrjkc/christopher.png">
+    <img src="https://i.postimg.cc/Kjb1t7bF/christopher.png">
 </p>
 
 <details>
@@ -30,6 +30,7 @@
 
 <br>
 This is a python script for cryptography and steganography that is compiled from ciphers. Each algorithm includes Encryption and Decryption.
+<br>
 
 What is Cryptography? [Here](https://en.wikipedia.org/wiki/Cryptography)<br>
 What is Steganography? [Here](https://en.wikipedia.org/wiki/Steganography)
@@ -139,18 +140,17 @@ What is Steganography? [Here](https://en.wikipedia.org/wiki/Steganography)
     - Frequency Analysis
 </details>
 
-
 ## Installation
 > **Note:** Christopher isn't compatible with python2, run it with python3 instead.<br>
 > I suggest you definitely use [cmder](https://cmder.app/).
 ```
 git clone https://github.com/mammaddrik/christopher.git
 cd christopher
-pyrhon pip install -r requirements.txt
+python pip install -r requirements.txt
 python christopher.py
 ```
 ### requirements
-| requirements  | Command  |
+| **requirements**  | **Command**  |
 | ------------- | ------------- |
 | pandas  | `python pip install pandas`  |
 | pwinput  | `python pip install pwinput`  |
@@ -163,5 +163,5 @@ python christopher.py
 > **Note:** You may encounter an error while installing this requirements. If an error occurs, use the following command:
 ```
 python -m pip install --upgrade pip
-pyrhon pip install -r requirements.txt
+python pip install -r requirements.txt
 ```
