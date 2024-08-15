@@ -138,3 +138,30 @@ What is Steganography? [Here](https://en.wikipedia.org/wiki/Steganography)
     - Password generator
     - Frequency Analysis
 </details>
+
+
+## Installation
+> **Note:** Christopher isn't compatible with python2, run it with python3 instead.<br>
+> I suggest you definitely use [cmder](https://cmder.app/).
+```
+git clone https://github.com/mammaddrik/christopher.git
+cd christopher
+pyrhon pip install -r requirements.txt
+python christopher.py
+```
+### requirements
+| requirements  | Command  |
+| ------------- | ------------- |
+| pandas  | `python pip install pandas`  |
+| pwinput  | `python pip install pwinput`  |
+| pycryptodome  | `python pip install pycryptodome`  |
+| passlib  | `python pip install passlib`  |
+| rsa  | `python pip install rsa`  |
+| stepic  | `python pip install stepic`  |
+| eyed3  | `python pip install eyed3`  |
+
+> **Note:** You may encounter an error while installing this requirements. If an error occurs, use the following command:
+```
+python -m pip install --upgrade pip
+pyrhon pip install -r requirements.txt
+```
