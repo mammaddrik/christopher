@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-    <img src="https://i.postimg.cc/Kjb1t7bF/christopher.png">
+    <img src="https://i.postimg.cc/VkJkrZtn/christopher.png">
 </p>
 
 <details>
