@@ -36,20 +36,20 @@ What is Steganography? [Here](https://en.wikipedia.org/wiki/Steganography)
 
 ## Including
 - Cryptography
-  - Atbash Cipher
-  - Caesar Cipher
+  - ### Atbash Cipher
+  - ### Caesar Cipher
     - Encryption
     - Decryption
     - Crack
-  - Affine Cipher
+  - ### Affine Cipher
     - Encryption
     - Decryption
     - Crack
-  - Vigenère Cipher
+  - ### Vigenère Cipher
     - Encryption
     - Decryption
     - Crack
-  - Revers Text
+  - ### Revers Text
   - Play Fire Cipher
     - Encryption
     - Decryption
