@@ -171,9 +171,15 @@ Or you can install it
 git clone https://github.com/mammaddrik/christopher.git
 cd christopher
 python pip install -r requirements.txt
-bash ./setup.sh
+sudo bash setup.sh
 christopher
 ```
+> **Note:** If you get a zsh permission denied error, use this comment: `bash christopher`<br>
+
+<p align="center">
+    <img src="https://i.postimg.cc/BQNM0DKj/christopher-Linux.png">
+</p>
+
 ### requirements
 | **Requirements**  | **Command**  | **Link**  | **Version**  |
 | ------------- | ------------- | ------------- | ------------- |
