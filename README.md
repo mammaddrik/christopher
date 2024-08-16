@@ -170,6 +170,7 @@ Or you can install it
 ```
 git clone https://github.com/mammaddrik/christopher.git
 cd christopher
+python pip install -r requirements.txt
 bash ./setup.sh
 christopher
 ```
