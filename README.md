@@ -141,6 +141,7 @@ What is Steganography? [Here](https://en.wikipedia.org/wiki/Steganography)
 </details>
 
 ## Installation
+### <img src="https://i.postimg.cc/nLp4jWx0/Windows.png" width="15" height="15" alt="docker"/> Windows
 > **Note:** Christopher isn't compatible with python2, run it with python3 instead.<br>
 > I suggest you definitely use [cmder](https://cmder.app/).
 ```
@@ -148,6 +149,29 @@ git clone https://github.com/mammaddrik/christopher.git
 cd christopher
 python pip install -r requirements.txt
 python christopher.py
+```
+Or you can download that exe file.
+### <img src="https://cdn.simpleicons.org/docker/2496ED" width="15" height="15" alt="docker"/> Docker
+install docker on your system. [docker](https://www.docker.com/)
+```
+docker build -t christopher .
+docker run -ti christopher
+```
+
+### <img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/linux-colored.svg" width="15" height="15" alt="docker"/> Linux
+> **Note:** Christopher isn't compatible with python2, run it with python3 instead.<br>
+```
+git clone https://github.com/mammaddrik/christopher.git
+cd christopher
+python pip install -r requirements.txt
+python christopher.py
+```
+Or you can install it
+```
+git clone https://github.com/mammaddrik/christopher.git
+cd christopher
+bash ./setup.sh
+christopher
 ```
 ### requirements
 | **Requirements**  | **Command**  | **Link**  | **Version**  |
