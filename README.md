@@ -161,6 +161,9 @@ install docker on your system. [docker](https://www.docker.com/)
 docker build -t christopher .
 docker run -ti christopher
 ```
+<p align="center">
+    <img src="https://i.postimg.cc/Y0vqCQSt/christopher-docker.png">
+</p>
 
 ### <img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/linux-colored.svg" width="15" height="15" alt="docker"/> Linux
 > **Note:** Christopher isn't compatible with python2, run it with python3 instead.<br>
