@@ -1,177 +1,190 @@
-def prepare_text(text: str) -> str:
+def letteronly(text: str)-> str:
     """
-    Prepare the plaintext or ciphertext by removing non-alphabetic characters and converting to uppercase.
-    
-    Parameters:
-    text (str): The plaintext or ciphertext to be prepared.
-    
-    Returns:
-    str: The prepared text with non-alphabetic characters removed and converted to uppercase.
-    """
-    text = ''.join(filter(str.isalpha, text)).upper()
-    return text
+    Filters the input text to include only uppercase letters (A-Z), 
+    excluding the letter 'J', which is replaced with 'I'.
 
-def generate_key_square(key: str) -> list:
-    """
-    Generate the key square for the Playfair Cipher.
-    
     Parameters:
-    key (str): The keyword used for generating the key square.
-    
-    Returns:
-    list: A 5x5 matrix (list of lists) representing the key square.
-    """
-    alphabet = "abcdefghiklmnopqrstuvwxyz".upper()
-    key = prepare_text(key)
-    key = key.replace("J", "I")
-    key_square = []
-    for char in key:
-        if char not in key_square and char in alphabet:
-            key_square.append(char)
-    for char in alphabet:
-        if char not in key_square:
-            key_square.append(char)
-    key_square = [key_square[i:i+5] for i in range(0, 25, 5)]
-    return key_square
+    text (str): The input string from which only uppercase letters will be retained.
 
-def find_position(matrix: list, char: str) -> tuple:
-    """
-    Find the position of a character in the key square matrix.
-    
-    Parameters:
-    matrix (list): The key square matrix.
-    char (str): The character to find.
-    
     Returns:
-    tuple: A tuple containing the row and column index of the character in the matrix.
+    str: A new string consisting of only uppercase letters from the input, 
+        with 'J' replaced by 'I'.
     """
-    for i in range(5):
-        for j in range(5):
-            if matrix[i][j] == char:
-                return i, j
+    output = ''
+    for char in text:
+        if 64 < ord(char) < 91:
+            if char == 'J':
+                char = 'I'
+            output += char
+    return output
 
-def playfair_encrypt(plaintext: str, key: str) -> str:
+def massageKey(txt: str)-> str:
     """
-    Encrypt plaintext using the Playfair Cipher.
-    
+    Processes the input text to create a unique key by retaining only 
+    distinct uppercase letters (A-Z) and removing duplicates.
+
     Parameters:
-    plaintext (str): The plaintext to be encrypted.
-    key (str): The keyword used for generating the key square.
-    
+    txt (str): The input string from which a unique key will be generated.
+
     Returns:
-    str: The encrypted ciphertext.
+    str: A string consisting of distinct uppercase letters from the input, 
+        with duplicates removed and 'J' replaced by 'I'.
+    """
+    user_key=letteronly(txt)
+    key=''
+    for char in user_key:
+        if char not in key:
+            key+=char
+    return(key)
+
+def massageMessage(txt: str)-> str:
+    """
+    Converts the input text into a string with digraphs (two-letter groups), 
+    replacing consecutive duplicate letters with 'X'.
+
+    This function filters the input text using the `letteronly` function to retain 
+    only uppercase letters, replacing 'J' with 'I'. It then processes the text 
+    by:
+    - Adding the first character of each digraph to the result.
+    - Inserting 'X' between consecutive duplicate letters.
+    - Ensuring that every digraph is correctly placed without repeating or upsetting the sequence.
 
     Example:
-        >>> playfair_encrypt("christopher", "key")
-        'DCPMTPITDBSW'
+    - "HELLO" becomes "HE LX LO"
+    - "ALLOWS" becomes "AL LO W"
+
+    Parameters:
+    txt (str): The input string to be processed.
+
+    Returns:
+    str: A string where consecutive duplicate letters are replaced by 'X' and 
+        the text is formatted into digraphs.
     """
-    key_square = generate_key_square(key)
-    plaintext = prepare_text(plaintext)
-    ciphertext = ""
-    for i in range(0, len(plaintext), 2):
-        pair = plaintext[i:i+2]
-        if len(pair) == 1:
-            pair += 'X'
-        row1, col1 = find_position(key_square, pair[0])
-        row2, col2 = find_position(key_square, pair[1])
-        if row1 == row2:
-            ciphertext += key_square[row1][(col1 + 1) % 5] + key_square[row2][(col2 + 1) % 5]
-        elif col1 == col2:
-            ciphertext += key_square[(row1 + 1) % 5][col1] + key_square[(row2 + 1) % 5][col2]
+    user_massage = letteronly(txt)
+    massage = ''
+    First = True
+    for i in range(len(user_massage)):
+        if First:
+            massage += user_massage[i]
+            if i + 1 == len(user_massage):
+                massage += 'X'
+            else:
+                if user_massage[i] == user_massage[i+1]:
+                    massage += 'X'
+                else:
+                    First = False
         else:
-            ciphertext += key_square[row1][col2] + key_square[row2][col1]
-    return ciphertext
+            massage += user_massage[i]
+            First = True
+    return massage
 
-def playfair_decrypt(ciphertext: str, key: str) -> str:
+def showgrid(key: list)-> None:
     """
-    Decrypt ciphertext using the Playfair Cipher.
-    
+    Displays the Playfair cipher grid.
+
     Parameters:
-    ciphertext (str): The ciphertext to be decrypted.
-    key (str): The keyword used for generating the key square.
-    
-    Returns:
-    str: The decrypted plaintext.
+    key (list or str): A sequence of 25 characters representing the Playfair 
+                    cipher grid, which will be displayed in a 5x5 format.
 
-    Example:
-        >>> playfair_decrypt("DCPMTPITDBSW", "key")
-        'CHRISTOPHERX'
+    Returns:
+    None
     """
-    key_square = generate_key_square(key)
-    plaintext = ""
-    for i in range(0, len(ciphertext), 2):
-        pair = ciphertext[i:i+2]
-        row1, col1 = find_position(key_square, pair[0])
-        row2, col2 = find_position(key_square, pair[1])
-        if row1 == row2:
-            plaintext += key_square[row1][(col1 - 1) % 5] + key_square[row2][(col2 - 1) % 5]
-        elif col1 == col2:
-            plaintext += key_square[(row1 - 1) % 5][col1] + key_square[(row2 - 1) % 5][col2]
+    print('\nPlayfair Grid:')
+    for j in range(5):
+        for i in range(5):
+            print(key[i+j*5], '', end='')
+        print()
+    print()
+    return
+
+def showmassage(massage: str)-> None:
+    """
+    Displays the input string formatted into digraphs.
+
+    Parameters:
+    massage (str): The input string to be formatted and displayed.
+
+    Returns:
+    None
+    """
+    space = True
+    for char in massage:
+        print(char, end='')
+        space = not space
+        if space:
+            print(' ', end='')
+    print()
+    return
+
+def playfair(enc: bool, massage: str, key: str)-> str:
+    """
+    Encrypts or decrypts a message using the Playfair cipher.
+
+    This function applies the Playfair cipher to the input message based on 
+    the provided key. It processes the message in digraphs (two-letter groups) 
+    and performs encryption or decryption depending on the `enc` flag. 
+
+    - If `enc` is True, the function performs encryption.
+    - If `enc` is False, the function performs decryption.
+
+    The function handles digraphs differently based on their positions in the 
+    Playfair cipher grid. It adjusts the coordinates of the letters according 
+    to Playfair cipher rules: same row, same column, or rectangle.
+
+    Parameters:
+    enc (bool): A flag indicating whether to encrypt (True) or decrypt (False).
+    massage (str): The input string to be encrypted or decrypted, which should 
+                be formatted into digraphs.
+    key (str): A 25-character string representing the Playfair cipher grid.
+
+    Returns:
+    str: The resulting string after applying the Playfair cipher, either 
+        encrypted or decrypted based on the `enc` flag.
+    """
+    offset =- 1
+    if enc:
+        offset =+ 1
+    output = ''
+    for i in range(0,len(massage),2):
+        lett1 = massage[i]
+        lett2 = massage[i+1]
+        pos1 = key.find(lett1)
+        pos2 = key.find(lett2)
+        coord1 = [pos1 % 5, pos1 // 5]
+        coord2 = [pos2 % 5, pos2 // 5]
+        if coord1[0] == coord2[0]:
+            coord1[1] = (coord1[1] + offset) % 5
+            coord2[1] = (coord2[1] + offset) % 5
+        elif coord1[1] == coord2[1]:
+            coord1[0] = (coord1[0] + offset) % 5
+            coord2[0] = (coord2[0] + offset) % 5
         else:
-            plaintext += key_square[row1][col2] + key_square[row2][col1]
-    return plaintext
+            tmp = coord2[0]
+            coord2[0] = coord1[0]
+            coord1[0] = tmp
+        pos1 = coord1[0] + 5 * coord1[1]
+        pos2 = coord2[0] + 5 * coord2[1]
+        lett1 = key[pos1]
+        lett2 = key[pos2]
+        output += lett1
+        output += lett2
+    return output
 
-def generate_playfair_matrix(key: str) -> list:
+def showres(massage1: str, massage2: str)-> None:
     """
-    Generates a Playfair cipher matrix based on the given key.
+    Displays two messages side by side, with each message split into lines of 
+    a specified length.
 
     Parameters:
-        key (str): The keyword used to generate the matrix. It is converted to uppercase, and any 'J's are replaced with 'I'. Duplicate letters are removed.
+    massage1 (str): The first message to be displayed.
+    massage2 (str): The second message to be displayed.
 
     Returns:
-        list of list of str: A 5x5 matrix represented as a list of lists, where each inner list contains 5 characters.
-
-    Example:
-        >>> generate_playfair_matrix("KEYWORD")
-        [['K', 'E', 'Y', 'W', 'O'],
-         ['R', 'D', 'A', 'B', 'C'],
-         ['F', 'G', 'H', 'I', 'L'],
-         ['M', 'N', 'P', 'Q', 'R'],
-         ['S', 'T', 'U', 'V', 'X']]
+    None
     """
-    alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ"
-    key = key.upper().replace("J", "I")
-    key = "".join(dict.fromkeys(key))
-    matrix = []
-    for char in key + alphabet:
-        if char not in matrix:
-            matrix.append(char)
-    matrix = [matrix[i:i+5] for i in range(0, 25, 5)]
-    return matrix
-
-def encrypt_playfair(plaintext: str, key: str) -> str:
-    """
-    Encrypts the given plaintext using the Playfair cipher.
-
-    Parameters:
-    plaintext (str): The text to be encrypted. All 'J's are replaced with 'I', and the plaintext is converted to uppercase. The text is processed in pairs of characters.
-    key (str): The keyword used to generate the Playfair cipher matrix. It is converted to uppercase, and any 'J's are replaced with 'I'.
-
-    Returns:
-        str: The encrypted ciphertext. Characters are processed in pairs according to the Playfair cipher rules.
-
-    Example:
-        >>> playfair_encrypt("christopher", "key")
-        'DCPMTPITDBSW'
-    """
-    plaintext = plaintext.upper().replace("J", "I")
-    key = key.upper().replace("J", "I")
-    matrix = generate_playfair_matrix(key)
-    ciphertext = ""
-    for i in range(0, len(plaintext), 2):
-        char1 = plaintext[i]
-        char2 = plaintext[i + 1] if i + 1 < len(plaintext) else 'X'
-        if char1 == char2:
-            char2 = 'X'
-        row1, col1 = find_position(matrix, char1)
-        row2, col2 = find_position(matrix, char2)
-        if row1 == row2:
-            ciphertext += matrix[row1][(col1 + 1) % 5]
-            ciphertext += matrix[row2][(col2 + 1) % 5]
-        elif col1 == col2:
-            ciphertext += matrix[(row1 + 1) % 5][col1]
-            ciphertext += matrix[(row2 + 1) % 5][col2]
-        else:
-            ciphertext += matrix[row1][col2]
-            ciphertext += matrix[row2][col1]
-    return ciphertext
+    linesize = 50
+    for i in range(0, len(massage1), linesize):
+        showmassage(massage1[i:i+min(linesize,len(massage1)-i)])
+        showmassage(massage2[i:i+min(linesize,len(massage2)-i)])
+        print()
+    return

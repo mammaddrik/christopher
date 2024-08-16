@@ -9,7 +9,7 @@ def revers(text: str) -> str:
     None: The function does not return any value. It prints the reversed text directly.
 
     Example:
-        >>> revers("christopher")
+        >>> reverse("christopher")
         'rehpotsirhc'
     """
     reversed_text = text[::-1]

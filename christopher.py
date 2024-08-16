@@ -25,7 +25,7 @@ from src.caesar import caesar_encryption, caesar_decryption, caesar_crack
 from src.affine import affine_encryption, affine_decryption, affine_crack, extended_gcd
 from src.vigenère import vigenère_encrypt, vigenère_decrypt
 from src.revers import revers
-from src.playfair import playfair_encrypt, playfair_decrypt
+from src.playfair import massageKey, massageMessage, showgrid, playfair, showres
 from src.railfence import railfence_encrypt, railfence_decrypt
 from src.scytale import scytale_encrypt, scytale_decrypt
 from src.polybiussquare import polybius_square_encrypt, polybius_square_decrypt
@@ -399,25 +399,25 @@ def christopher():
             time.sleep(0.4)
             print(Banner.banner)
             pick = input("    [01]Encryption       [02]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Cryptography/Playfair Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
-
             #::::: Encryption :::::
             if(pick == "1" or pick == "01"):
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                plaintext = input("\n┌───(christopher)─[~/christopher/Cryptography/Playfair Cipher/Encryption]\n├─[Enter your Plaintext]"+color_banner[1]+"$ "+Color.End).lower().strip()
-                if len(plaintext) == 0:
+                enc = True
+                usermassage = input("\n┌───(christopher)─[~/christopher/Cryptography/Playfair Cipher/Encryption]\n├─[Enter your Plaintext]"+color_banner[1]+"$ "+Color.End).upper().strip()
+                if len(usermassage) == 0:
                     slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
                     again()
-                key = input("├─[Enter the key]"+color_banner[1]+"$ "+Color.End)
-                if key.isdigit():
-                    slowprint("└─["+Color.BRed+"Key cannot be number"+Color.End+"]")
-                    again()
-                elif len(key) == 0:
-                    slowprint("└─["+Color.BRed+"Key cannot be empty"+Color.End+"]")
-                    again()
-                ciphertext = playfair_encrypt(plaintext, key)
-                print(f"└─[Ciphertext: {ciphertext}]")
+                massage = massageMessage(usermassage)
+                user_key = (input("└─[Enter the key]"+color_banner[1]+"$ "+Color.End)+'abcdefghijklmnopqrstuvwxyz').upper()
+                key = massageKey(user_key)
+                showgrid(key)
+                newmassage = playfair(enc,massage,key)
+                print('showing digraphs')
+                showres(massage, newmassage)
+                ciphertext = newmassage
+                print(f"[Ciphertext: {ciphertext}]")
                 again()
 
             #::::: Decryption :::::
@@ -425,21 +425,21 @@ def christopher():
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                ciphertext = input("\n┌───(christopher)─[~/christopher/Cryptography/Playfair Cipher/Decryption]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).strip()
-                if len(ciphertext) == 0:
-                    slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
+                enc = False
+                usermassage = input("\n┌───(christopher)─[~/christopher/Cryptography/Playfair Cipher/Decryption]\n├─[Enter your Plaintext]"+color_banner[1]+"$ "+Color.End).upper().strip()
+                if len(usermassage) == 0:
+                    slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
                     again()
-                key = input("├─[Enter the key]"+color_banner[1]+"$ "+Color.End).strip()
-                if key.isdigit():
-                    slowprint("└─["+Color.BRed+"Key cannot be number"+Color.End+"]")
-                    again()
-                elif len(key) == 0:
-                    slowprint("└─["+Color.BRed+"key cannot be empty"+Color.End+"]")
-                    again()
-                plaintext = playfair_decrypt(ciphertext, key)
-                print(f"└─[Plaintext: {plaintext}]")
+                massage = massageMessage(usermassage)
+                user_key = (input("└─[Enter the key]"+color_banner[1]+"$ "+Color.End)+'abcdefghijklmnopqrstuvwxyz').upper()
+                key = massageKey(user_key)
+                showgrid(key)
+                newmassage = playfair(enc,massage,key)
+                print('showing digraphs')
+                showres(massage, newmassage)
+                plaintext = newmassage
+                print(f"[Plaintext: {plaintext}]")
                 again()
-
             #::::: Back to Main Menu :::::
             elif(pick == "99"):
                 christopher()
