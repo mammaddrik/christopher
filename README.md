@@ -151,6 +151,10 @@ python pip install -r requirements.txt
 python christopher.py
 ```
 Or you can download that exe file.
+<p align="center">
+    <img src="https://i.postimg.cc/R0t7NnNQ/christopher-Windows.png">
+</p>
+
 ### <img src="https://cdn.simpleicons.org/docker/2496ED" width="15" height="15" alt="docker"/> Docker
 install docker on your system. [docker](https://www.docker.com/)
 ```
