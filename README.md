@@ -64,8 +64,6 @@ What is Steganography? [Here](https://en.wikipedia.org/wiki/Steganography)
       - Encryption
       - Decryption
     - Polybius Square
-      - Encryption
-      - Decryption
     - Columnar Cipher
       - Encryption
       - Decryption
@@ -158,6 +156,7 @@ Or you can download that exe file.
 ### <img src="https://cdn.simpleicons.org/docker/2496ED" width="15" height="15" alt="docker"/> Docker
 install docker on your system. [docker](https://www.docker.com/)
 ```
+docker build -t christopher .
 docker run -ti christopher
 ```
 <p align="center">
@@ -207,6 +206,6 @@ After installing the script, you can choose options from the script:<br>
 
 
 ## License
-Christopher is licensed under [MIT License](https://github.com/mammaddrik/garns/blob/main/LICENSE).
+Christopher is licensed under [MIT License](https://github.com/mammaddrik/christopher/blob/main/LICENSE).
 
 <p align="right"><a href="#top">back to top</a></p>
