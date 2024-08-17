@@ -201,3 +201,12 @@ christopher
 python -m pip install --upgrade pip
 python pip install -r requirements.txt
 ```
+
+## Usage
+After installing the script, you can choose options from the script:<br>
+
+
+## License
+Christopher is licensed under [MIT License](https://github.com/mammaddrik/garns/blob/main/LICENSE).
+
+<p align="right"><a href="#top">back to top</a></p>
