@@ -158,7 +158,6 @@ Or you can download that exe file.
 ### <img src="https://cdn.simpleicons.org/docker/2496ED" width="15" height="15" alt="docker"/> Docker
 install docker on your system. [docker](https://www.docker.com/)
 ```
-docker build -t christopher .
 docker run -ti christopher
 ```
 <p align="center">

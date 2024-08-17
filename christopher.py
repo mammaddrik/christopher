@@ -575,45 +575,18 @@ def christopher():
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            pick = input("    [01]Encryption              [02]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Cryptography/Polybius Square Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
-
-            #::::: Encryption :::::
-            if(pick == "1" or pick == "01"):
-                clearScr()
-                time.sleep(0.4)
-                print(Banner.banner)
-                plaintext = input("\n┌───(christopher)─[~/christopher/Cryptography/Polybius Square Cipher/Encryption]\n├─[Enter your Plaintext]"+color_banner[1]+"$ "+Color.End).strip()
-                if len(plaintext) == 0:
-                    slowprint("└─["+Color.BRed+"Plaintext cannot be empty"+Color.End+"]")
-                    again()
-                elif plaintext.isdigit():
-                    slowprint("└─["+Color.BRed+"plaintext cannot be only number"+Color.End+"]")
-                    again()
-                ciphertext = polybius_square_encrypt(plaintext)
-                print(f"└─[Ciphertext: {ciphertext}]")
+            message = input("\n┌───(christopher)─[~/christopher/Cryptography/Polybius Square Cipher]\n├─[Enter your message]"+color_banner[1]+"$ "+Color.End).upper().strip()
+            if len(message) == 0:
+                slowprint("└─["+Color.BRed+"Message cannot be empty"+Color.End+"]")
                 again()
-
-            #::::: Decryption :::::
-            elif(pick == "2" or pick == "02"):
-                clearScr()
-                time.sleep(0.4)
-                print(Banner.banner)
-                ciphertext = input("\n┌───(christopher)─[~/christopher/Cryptography/Polybius Square Cipher/Decryption]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
-                ciphertext = ciphertext.replace(' ', '')
-                if len(ciphertext) == 0:
-                    slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
-                    again()
-                elif ciphertext.isdigit() == False:
-                    slowprint("└─["+Color.BRed+"Ciphertext must be only number"+Color.End+"]")
-                    again()
-                plaintext = polybius_square_decrypt(ciphertext)
+            pick = all(char.isdigit() or char.isspace() for char in message)
+            if pick:
+                plaintext = polybius_square_decrypt(message)
                 print(f"└─[Plaintext: {plaintext.lower()}]")
                 again()
-
-            #::::: Back to Main Menu :::::
-            elif (pick == "99"):
-                christopher()
             else:
+                ciphertext = polybius_square_encrypt(message)
+                print(f"└─[Ciphertext: {ciphertext}]")
                 again()
 
         #::::: Columnar Cipher :::::
