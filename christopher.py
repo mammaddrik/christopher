@@ -63,6 +63,7 @@ import hashlib
 import string
 import re
 import secrets
+import webbrowser
 from datetime import datetime
 from itertools import product
 from hmac import compare_digest
@@ -1322,7 +1323,7 @@ def christopher():
         clearScr()
         time.sleep(0.4)
         print(Banner.steganography_banner)
-        select = input("\n┌───(christopher)─[~/christopher/Steganography]\n└─"+color_banner[1]+"$ "+Color.End)
+        select = input("\n┌───(christopher)─[~/christopher/Steganography]─[99]Back to Main Menu\n└─"+color_banner[1]+"$ "+Color.End)
 
         #::::: Image :::::
         if (select == "1" or select == "01"):
@@ -1419,7 +1420,7 @@ def christopher():
         clearScr()
         time.sleep(0.4)
         print(Banner.tool_banner)
-        select = input("\n┌───(christopher)─[~/christopher/Tools]\n└─"+color_banner[1]+"$ "+Color.End)
+        select = input("\n┌───(christopher)─[~/christopher/Tools]─[99]Back to Main Menu\n└─"+color_banner[1]+"$ "+Color.End)
 
         #::::: Password List :::::
         if (select == "1" or select == "01"):
@@ -1655,7 +1656,14 @@ def christopher():
             christopher()
         else:
             again()
-
+    elif (choice == "4" or choice == "04"):
+        clearScr()
+        time.sleep(0.4)
+        print(Banner.github_banner)
+        time.sleep(0.9)
+        url = "https://github.com/mammaddrik"
+        webbrowser.open(url)
+        again()
     #::::: Exit :::::
     elif (choice == "99"):
         print("\n\tGoodBye :)")

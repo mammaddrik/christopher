@@ -1,3 +1,4 @@
+import os
 #::::: Library :::::
 from lib.color import Color, color_banner
 
@@ -17,11 +18,11 @@ class Banner:
    [03]Tools                 [04]Github""")
 
     cipher_banner = (Color.End + r"""
-\ \ """+color_banner[0]+r"""Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee"""+Color.End+r""" / /
+\ \ """+color_banner[3]+r"""Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee"""+Color.End+r""" / /
  \ \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/ /
-  \ """+color_banner[1]+r"""        abcdefghijklm-nopqrstuvwxyz        """+Color.End+r"""/
+  \ """+color_banner[4]+r"""        abcdefghijklm-nopqrstuvwxyz        """+Color.End+r"""/
    \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
-   /"""+color_banner[2]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
+   /"""+color_banner[5]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
    \__________________________________________/
    [01]Atbash Cipher        [02]Caesar Cipher
    [03]Affine Cipher        [04]Vigenère Cipher
@@ -36,32 +37,36 @@ class Banner:
 
     #::::: Steganography :::::
     steganography_banner = (Color.End + r"""
-\ \ """+color_banner[0]+r"""Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee"""+Color.End+r""" / /
+\ \ """+color_banner[5]+r"""Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee"""+Color.End+r""" / /
  \ \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/ /
-  \ """+color_banner[1]+r"""        abcdefghijklm-nopqrstuvwxyz        """+Color.End+r"""/
+  \ """+color_banner[4]+r"""        abcdefghijklm-nopqrstuvwxyz        """+Color.End+r"""/
    \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
-   /"""+color_banner[2]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
+   /"""+color_banner[3]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
    \__________________________________________/
-   [01]Image             [02]Audio
-   [99]Back to Main Menu""")
+   [01]Image             [02]Audio""")
 
     #::::: Tools :::::
     tool_banner = (Color.End + r"""
-\ \ """+color_banner[0]+r"""Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee"""+Color.End+r""" / /
+\ \ """+color_banner[2]+r"""Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee"""+Color.End+r""" / /
  \ \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/ /
   \ """+color_banner[1]+r"""        abcdefghijklm-nopqrstuvwxyz        """+Color.End+r"""/
    \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
-   /"""+color_banner[2]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
+   /"""+color_banner[0]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
    \__________________________________________/
    [01]Password List      [02]Password Manager
-   [03]Password generator [04]Frequency Analysis 
-   [99]Back to Main Menu""")
+   [03]Password generator [04]Frequency Analysis""")
 
+    #:::: Github ::::
+    github_banner = (color_banner[1]+r"""╔══════════════════════════════════════════╗
+║   """+Color.End+r"""["""+color_banner[2]+r"""+"""+Color.End+r"""]Christopher"""+color_banner[1]+r"""                         ║
+║   """+Color.End+r"""["""+color_banner[3]+r"""+"""+Color.End+r"""]Tool for Encryption & Decryption"""+color_banner[1]+r"""    ║
+║   """+Color.End+r"""["""+color_banner[4]+r"""+"""+Color.End+r"""]Version: 1.0"""+color_banner[1]+r"""                        ║
+╚══════════════════════════════════════════╝"""+Color.End)
     #::::: Main Menu (Empty) :::::
     banner = (Color.End + r"""
-\ \ """+color_banner[0]+r"""Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee"""+Color.End+r""" / /
+\ \ """+color_banner[1]+r"""Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee"""+Color.End+r""" / /
  \ \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/ /
-  \ """+color_banner[1]+r"""        abcdefghijklm-nopqrstuvwxyz        """+Color.End+r"""/
+  \ """+color_banner[3]+r"""        abcdefghijklm-nopqrstuvwxyz        """+Color.End+r"""/
    \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
-   /"""+color_banner[2]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
+   /"""+color_banner[5]+r"""Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr"""+Color.End+r"""\
    \__________________________________________/""")

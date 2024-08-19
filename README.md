@@ -176,6 +176,7 @@ Or you can install it
 git clone https://github.com/mammaddrik/christopher.git
 cd christopher
 python pip install -r requirements.txt
+sudo chmod +x setup.sh
 sudo bash setup.sh
 christopher
 ```
