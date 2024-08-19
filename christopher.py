@@ -1656,6 +1656,8 @@ def christopher():
             christopher()
         else:
             again()
+
+    #::::: Github :::::
     elif (choice == "4" or choice == "04"):
         clearScr()
         time.sleep(0.4)
@@ -1664,6 +1666,7 @@ def christopher():
         url = "https://github.com/mammaddrik"
         webbrowser.open(url)
         again()
+
     #::::: Exit :::::
     elif (choice == "99"):
         print("\n\tGoodBye :)")
