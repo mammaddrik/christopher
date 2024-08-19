@@ -15,7 +15,7 @@ def scytale_encrypt(plaintext: str, diameter: int) -> str:
         >>> affine_encryption("christopher", 2)
         'crsohrhitpe|'
     """
-    chars = [c.lower() for c in plaintext if c not in (' ',',','.','?','!',':',';',"'")]
+    chars = [c.lower() for c in plaintext if c not in (',','.','?','!',':',';',"'")]
     chunks = math.ceil(len(chars) / float(diameter))
     inters, i, j = [], 1, 1
     while i <= chunks:

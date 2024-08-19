@@ -526,7 +526,7 @@ def christopher():
             clearScr()
             time.sleep(0.4)
             print(Banner.banner)
-            pick = input("    [01]Encryption              [02]Decryption\n    [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Cryptography/Playfair Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
+            pick = input("    [01]Encryption       [02]Decryption\n    [03]Crack            [99]Back to Main Menu\n\n┌───(christopher)─[~/christopher/Cryptography/Playfair Cipher]\n└─"+color_banner[1]+"$ "+Color.End)
 
             #::::: Encryption :::::
             if(pick == "1" or pick == "01"):
@@ -563,6 +563,23 @@ def christopher():
                 except ValueError:
                     slowprint("├─["+Color.BRed+"diameter value must be a number"+Color.End+"]")
                     again()
+
+            #::::: Crack :::::
+            if(pick == "3" or pick == "03"):
+                clearScr()
+                time.sleep(0.4)
+                print(Banner.banner)
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Cryptography/Scytale Cipher/Crack]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).lower().strip()
+                if len(ciphertext) == 0:
+                    slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
+                    again()
+                for i in range(2, len(ciphertext)):
+                    diameter = i
+                    plaintext = scytale_decrypt(ciphertext, diameter)
+                    if isEnglish(plaintext):
+                        print("├─[Diameter: "+Color.BGreen+f"{i}"+Color.End+f"]\n└─[The plaintext may be this: {plaintext}]")
+                        keep()
+                again()
 
             #::::: Back to Main Menu :::::
             elif(pick == "99"):
