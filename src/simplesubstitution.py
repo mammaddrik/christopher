@@ -188,5 +188,5 @@ def crack(ciphertext: str) -> None:
                 plaintext += "_"
         else:
             plaintext += char
-    print(f"└├─[Plaintext: {plaintext}]")
-    print(f"└─[{letterMapping}]")
+    print(f"└─[Plaintext: {plaintext}]")
+    print(f"\n[{letterMapping}]")

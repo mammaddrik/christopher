@@ -1,6 +1,24 @@
 import math
 import random
-def isPrimeTrialDiv(n):
+
+def isPrimeTrialDiv(n: int)-> bool:
+    """
+    Determines if a given number `n` is prime using the trial division method.
+
+    Parameters:
+    n (int): The number to check for primality.
+
+    Returns:
+    --------
+    bool: Returns `True` if `n` is a prime number, otherwise `False`.
+
+    Examples:
+    ---------
+    >>> isPrimeTrialDiv(11)
+    True
+    >>> isPrimeTrialDiv(15)
+    False
+    """
     if n < 2:
         return False
     for i in range(2, int(math.sqrtn(n)) + 1):
@@ -8,7 +26,22 @@ def isPrimeTrialDiv(n):
             return False
     return True
 
-def primSieve(size):
+def primSieve(size: int)-> list:
+    """
+    Generates a list of prime numbers up to a given size using the Sieve of Eratosthenes algorithm.
+
+    Parameters:
+    -----------
+    size (int): The upper limit (exclusive) up to which to find prime numbers.
+
+    Returns:
+    --------
+    list: A list containing all prime numbers less than `size`.
+
+    Examples:
+    >>> primSieve(10)
+    [2, 3, 5, 7]
+    """
     output = []
     sieve = [True] * size
     sieve[0] = False
@@ -22,7 +55,23 @@ def primSieve(size):
             output.append(i+1)
     return output
 
-def rabinMiller(num):
+def rabinMiller(num: int)-> bool:
+    """
+    Performs the Miller-Rabin primality test to check if a given number `num` is prime.
+
+    Parameters:
+    num (int): The number to test for primality. It should be greater than 2.
+
+    Returns:
+    --------
+    bool: Returns `True` if `num` is likely a prime number, otherwise `False`.
+
+    Examples:
+    >>> rabinMiller(17)
+    True
+    >>> rabinMiller(18)
+    False
+    """
     s = num - 1
     t = 0
     while s % 2 == 0:

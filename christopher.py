@@ -682,7 +682,7 @@ def christopher():
             else:
                 again()
 
-        #::::: Simple Substitution  Cipher :::::
+        #::::: Simple Substitution Cipher :::::
         elif (select == "11"):
             clearScr()
             time.sleep(0.4)
@@ -711,7 +711,7 @@ def christopher():
                 clearScr()
                 time.sleep(0.4)
                 print(Banner.banner)
-                ciphertext = input("\n┌───(christopher)─[~/christopher/Cryptography/Simple Substitution Cipher/Decryption]\n├─[Enter your Plaintext]"+color_banner[1]+"$ "+Color.End).strip()
+                ciphertext = input("\n┌───(christopher)─[~/christopher/Cryptography/Simple Substitution Cipher/Decryption]\n├─[Enter your Ciphertext]"+color_banner[1]+"$ "+Color.End).strip()
                 if len(ciphertext) == 0:
                     slowprint("└─["+Color.BRed+"Ciphertext cannot be empty"+Color.End+"]")
                     again()
@@ -1070,9 +1070,9 @@ def christopher():
             B = Reflector("YRUHQSLDPXNGOKMIEBFZCWVJAT")
             C = Reflector("FVPJIAOYEDRZXWGCTKUQSBNMHL")
             KB = Keyboard()
-            PB = Plugboard(["AB", "CD", "EF"])
-            ENIGMA = Enigma(A, I, II, III, PB, KB)
-            ENIGMA.set_rings((1,1,1))
+            PB = Plugboard(["PI", "KM", "JB", "YU", "QS", "ZA", "GW", "CH", "XF"])
+            ENIGMA = Enigma(A, III, II, IV, PB, KB)
+            ENIGMA.set_rings((22,2,6))
             message = input("\n┌───(christopher)─[~/christopher/Cryptography/Enigma Machine]\n├─[Enter your message]"+color_banner[1]+"$ "+Color.End).upper().strip()
             if len(message) == 0:
                 slowprint("└─["+Color.BRed+"Message cannot be empty"+Color.End+"]")

@@ -180,7 +180,7 @@ sudo chmod +x setup.sh
 sudo bash setup.sh
 christopher
 ```
-> **Note:** If you get a zsh permission denied error, use this comment: `bash christopher`<br>
+> **Note:** If you get a permission denied error, use this comment: `bash christopher`<br>
 
 <p align="center">
     <img src="https://i.postimg.cc/BQNM0DKj/christopher-Linux.png">

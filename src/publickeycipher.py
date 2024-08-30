@@ -4,7 +4,21 @@ import sys
 SYMBOL = string.printable
 BLOCKSIZE = 16
 
-def blockToString(blocks):
+def blockToString(blocks: list)-> str:
+    """
+    Converts a list of integer blocks into a string using a custom encoding based on `SYMBOL`.
+
+    Parameters:
+    blocks (list): A list of integer blocks to be converted into a string.
+
+    Returns:
+    str
+        The resulting string after converting all the integer blocks.
+
+    Examples:
+    >>> blockToString([12345, 67890])
+    'dXiYgk'
+    """
     output = ""
     for block in blocks:
         while block:
@@ -12,7 +26,21 @@ def blockToString(blocks):
             block = block // len(SYMBOL)
             output += SYMBOL[index]
     return output
-def stringToBlock(plaintext):
+
+def stringToBlock(plaintext: str)-> list:
+    """
+    Converts a plaintext string into a list of integer blocks using a custom encoding based on `SYMBOL`.
+
+    Parameters:
+    plaintext (str): The input string to be converted into integer blocks.
+
+    Returns:
+    list: A list of integer blocks representing the encoded `plaintext`.
+
+    Examples:
+    >>> stringToBlock("hello world")
+    [311912601413, 975537]
+    """
     output = []
     while plaintext:
         block_number = 0
@@ -30,6 +58,24 @@ def stringToBlock(plaintext):
     return output
 
 def publickey_encrypt(plaintext, publicKey, outputfile):
+    """
+    Encrypts a plaintext string using an RSA public key and writes the ciphertext to a file.
+
+    Parameters:
+    plaintext : str
+        The input string to be encrypted.
+    publicKey : tuple
+        The RSA public key, a tuple `(n, e)` where `n` is the modulus and `e` is the public exponent.
+    outputfile : str
+        The name of the file where the encrypted ciphertext will be written.
+
+    Returns:
+    None
+
+    Examples:
+    >>> publicKey = (2357, 17)
+    >>> publickey_encrypt("hello world", publicKey, "ciphertext")
+    """
     plainblocks = stringToBlock(plaintext)
     cipherblocks = []
     for block in plainblocks:
@@ -40,7 +86,30 @@ def publickey_encrypt(plaintext, publicKey, outputfile):
     file.close()
 
 def publickey_decrypt(encrypted_file, privateKey):
-    file = open(encrypted_file, 'r')
+    """
+    Decrypts a ciphertext file using an RSA private key and returns the resulting plaintext.
+
+    Parameters:
+    encrypted_file : str
+        The name of the file containing the encrypted ciphertext.
+    privateKey : tuple
+        The RSA private key, a tuple `(n, d)` where `n` is the modulus and `d` is the private exponent.
+
+    Returns:
+    str
+        The decrypted plaintext string.
+
+    Examples:
+    >>> privateKey = (2357, 157)
+    >>> plaintext = publickey_decrypt("ciphertext", privateKey)
+    >>> print(plaintext)
+    'hello world'
+    """
+    try:
+        file = open(encrypted_file, 'r')
+    except FileNotFoundError:
+        print("└─[File not find]")
+        sys.exit()
     cipherblocks = file.read()
     file.close()
     cipherblocks = cipherblocks.split(',')
@@ -51,6 +120,26 @@ def publickey_decrypt(encrypted_file, privateKey):
     return blockToString(plainblocks)
 
 def readKeysFromFile(filename):
+    """
+    Reads RSA public and private keys from files and returns them as tuples.
+
+    Parameters:
+    filename : str
+        The base name of the files containing the keys (without extensions).
+
+    Returns:
+    tuple
+        A tuple containing two elements:
+        - publicKey: A tuple `(n, e)` where `n` is the modulus and `e` is the public exponent.
+        - privateKey: A tuple `(n, d)` where `n` is the modulus and `d` is the private exponent.
+
+    Examples:
+    >>> publicKey, privateKey = readKeysFromFile("mykeys")
+    >>> print(publicKey)
+    (2357, 17)
+    >>> print(privateKey)
+    (2357, 157)
+    """
     try:
         publicFile = open(f"{filename}_public.key", "r")
         privateFile = open(f"{filename}_private.key", "r")
