@@ -1,7 +1,7 @@
 <div id="top"></div>
 <h1 align="center">
     <br>
-    <a href="https://github.com/mammaddrik/christopher"><img src="https://i.postimg.cc/7h9CxC2V/christopher.png" alt="Garns logo" width="200" height="200"></a>
+    <a href="https://github.com/mammaddrik/christopher"><img src="https://i.postimg.cc/7h9CxC2V/christopher.png" alt="christopher logo" width="200" height="200"></a>
     <br>
     Christopher
     <br>
@@ -100,11 +100,11 @@ What is Steganography? [Here](https://en.wikipedia.org/wiki/Steganography)
         - adler32
         - crc32
       - Hash Cracker
-        - md5
-        - sha1
-        - sha256
-        - sha384
-        - sha512
+        - MD5
+        - SHA1
+        - SHA256
+        - SHA384
+        - SHA512
       - Hash Identifier
     - Enigma Machine
     - AES(CBC)
@@ -203,7 +203,7 @@ python pip install -r requirements.txt
 ```
 
 ## Usage
-After installing the script, you can choose options from the script:<br>
+After installing the script, you can choose options from the script.<br>
 
 
 ## License
