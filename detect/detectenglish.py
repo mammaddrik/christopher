@@ -16,14 +16,13 @@ def loadDictionary() -> dict:
     Returns:
     dict: A dictionary where each key is an English word from the file.
     """
-    path = os.getcwd()
     if os.name == "nt":
-        dictionaryFile = open(path+'/detect/dictionary.txt')
+        dictionaryFile = open(r'.\detect\dictionary.txt')
     else:
         try:
-            dictionaryFile = open('/usr/local/sbin/detect/dictionary.txt')
+            dictionaryFile = open(r'/usr/local/sbin/detect/dictionary.txt')
         except FileNotFoundError:
-            dictionaryFile = open(path+'/detect/dictionary.txt')
+            dictionaryFile = open(r'/detect/dictionary.txt')
     englishWords = {}
     for word in dictionaryFile.read().split('\n'):
         englishWords[word] = None
