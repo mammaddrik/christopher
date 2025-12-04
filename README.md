@@ -148,7 +148,7 @@ cd christopher
 python pip install -r requirements.txt
 python christopher.py
 ```
-Or you can download that exe file.
+
 <p align="center">
     <img src="https://i.postimg.cc/R0t7NnNQ/christopher-Windows.png">
 </p>
