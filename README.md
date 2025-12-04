@@ -7,7 +7,7 @@
     <br>
 </h1>
 
-<h3 align="center">Tool for Encryption & Decryption.</h3>
+<h3 align="center">Tool for Encryption & Decryption</h3>
 
 <p align="center">
     <a href="https://github.com/mammaddrik/christopher/releases">
@@ -139,7 +139,7 @@ What is Steganography? [Here](https://en.wikipedia.org/wiki/Steganography)
 </details>
 
 ## Installation
-### <img src="https://i.postimg.cc/nLp4jWx0/Windows.png" width="15" height="15" alt="docker"/> Windows
+### <img src="https://i.postimg.cc/nLp4jWx0/Windows.png" width="15" height="15" alt="Windows"/> Windows
 > **Note:** Christopher isn't compatible with python2, run it with python3 instead.<br>
 > I suggest you definitely use [cmder](https://cmder.app/).
 ```
@@ -163,7 +163,7 @@ docker run -ti christopher
     <img src="https://i.postimg.cc/Y0vqCQSt/christopher-docker.png">
 </p>
 
-### <img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/linux-colored.svg" width="15" height="15" alt="docker"/> Linux
+### <img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/linux-colored.svg" width="15" height="15" alt="Linux"/> Linux
 > **Note:** Christopher isn't compatible with python2, run it with python3 instead.<br>
 ```
 git clone https://github.com/mammaddrik/christopher.git
@@ -171,7 +171,7 @@ cd christopher
 python pip install -r requirements.txt
 python christopher.py
 ```
-Or you can install it
+Or you can install it:
 ```
 git clone https://github.com/mammaddrik/christopher.git
 cd christopher
