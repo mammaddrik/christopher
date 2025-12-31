@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 #
 #    \ \  16  21  05  22  06  07  02  03  21  18  05  / /
-#     \ \ Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee / /
-#      \ \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/ /
-#       \      abcd efgh ijkl m-n opqr stuv wxyz     /
-#        \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/
-#        /Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr\
-#        \__________________________________________/
-#              Tool for Encryption & Decryption
-#                     Github: mammaddrik
+#     \ \ Pp  Uu  Ee  Vv  Ff  Gg  Bb  Cc  Uu  Rr  Ee / / 
+#      \ \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/ /  
+#       \      abcd efgh ijkl m-n opqr stuv wxyz     /   
+#        \__/\__/\__/\__/\__/\__/\__/\__/\__/\__/\__/    
+#        /Cc  Hh  Rr  Ii  Ss  Tt  Oo  Pp  Hh  Ee  Rr\    
+#        \__________________________________________/    
+#              Tool for Encryption & Decryption          
+#                     Github: mammaddrik                 
 
 #::::: Library :::::
 from lib.banner import Banner
